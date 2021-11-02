@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        a[title] {
+            color: hotpink;
+        }
+        a[title]:hover {
+            color: deepskyblue;
+        }
+        input[type="text"] {
+            color: hotpink;
+        }
+        div[class*=font] {
+            color: dodgerblue;
+        }
+        div[class^=news] {
+            color: fuchsia;
+        }
+        div[class$=footer] {
+            color: deeppink;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a href="https://www.baidu.com" title="百度">百度</a>
+        <a href="https://www.tencent.com" title="腾讯">腾讯</a>
+        <a href="https://www.taobao.com" title="淘宝">淘宝</a>
+        <a href="#">字节跳动</a>
+        <a href="#">网易</a>
+    </div>
+    <hr>
+    <div>
+        <input type="text" value="请输入">
+        <input type="button" value="提交">
+        <input type="reset" value="重置">
+    </div>
+    <hr>
+    <div>
+        <div class="font12">123</div>
+        <div class="font12">123</div>
+        <div class="font24">123</div>
+        <div class="font24">123</div>
+        <div class="font24">123</div>
+        <div class="sub-footer">456</div>
+        <div class="jd-footer">456</div>
+        <div class="news-jd-nab">456</div>
+        <div class="news-jd-header">456</div>
+    </div>
+</body>
+
+</html>

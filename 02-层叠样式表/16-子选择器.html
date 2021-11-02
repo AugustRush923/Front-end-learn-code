@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav li { /*后代选择器 可以选择父类下所有对应的子元素*/ 
+            color: gold;
+        }
+        .nav > li { /*子代选择器 只能选择父类下对应的亲子元素*/
+            color: deeppink;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav">
+        <li>
+            后端
+            <ul>
+                <li>Python</li>
+                <li>Java</li>
+                <li>Go</li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            前端
+            <ul>
+                <li>移动端</li>
+                <li>PC端</li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            测试
+            <ul>
+                <li>黑盒测试</li>
+                <li>白盒测试</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
