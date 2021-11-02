@@ -444,3 +444,96 @@ keep-all 只能在半角空格或连字符处换行。
 * element::before       > 在element内部的开始位置创建一个元素，该元素为行内元素，且必须要结合content属性使用。
 * element::after        > 在element内部的结束位置创建一个元素，该元素为行内元素，且必须要结合content属性使用。
 
+## CSS背景（background）
+
+CSS可以添加背景颜色和背景图片，来进行图片设置。
+
+| 属性 | 说明 |
+| --- | --- |
+| background-color | 背景颜色 |
+| background-image | 背景图片 |
+| background-repeat | 是否平铺 |
+| background-position | 背景位置 |
+| background-attachement | 背景固定还是滚动 |
+
+### 背景图片
+
+语法：
+
+```
+background-image:url();
+```
+
+### 背景平铺
+
+指定对象的背景图像如何铺排填充
+
+语法：
+
+```
+background-repeat: repeat-x|repeat-y|repeat|no-repeat
+```
+
+参数：
+
+* repeat-x: 背景图像在x轴上平铺
+* repeat-y: 背景图像在y轴上平铺
+* repeat: 背景图像在x轴和y轴上平铺（默认值）
+* no-repeat: 背景图像不平铺
+
+
+### 背景位置
+
+设置或检索对象的背景图像位置。必须先指定`background-image`属性。默认值为：(0% 0%)。
+
+如果只指定了一个值，该值将用于横坐标。纵坐标将默认为50%。第二个值将用于纵坐标。
+
+语法：
+
+```
+background-position: length || length
+background-position: position || position
+```
+
+参数：
+
+* length：百分数|由浮点数字和单位标识符组成的长度值。
+* position：top|center|bottom|left|center|right
+
+注意：
+1. position后面是x坐标和y坐标。可以使用`方位名次`或者`精确单位`。
+2. 如果和精确单位和方位名字混合使用，则必须是x坐标在前，y坐标后面。
+
+### 背景附着
+
+设置或检索背景图像是随对象内容滚动还是固定的。 
+
+语法:
+
+```
+background-attachement: scroll(默认值) | fixed
+```
+
+参数：
+* scroll： 背景图像是随对象内容滚动
+* fixed：  背景图像固定
+
+### 背景简写
+
+复合属性
+
+```
+background: 背景颜色 背景图片地址 背景平铺 背景滚动 背景位置
+```
+
+### 背景透明（CSS3）
+
+CSS 3支持背景半透明的写法，其基本语法格式如下：
+
+```
+background: rgba(0, 0, 0, 0.3);
+```
+
+最后一个参数是alpha 透明度 取值范围0~1之间
+
+注意：背景半透明是指盒子背景半透明，盒子里面的内容不受影响。
