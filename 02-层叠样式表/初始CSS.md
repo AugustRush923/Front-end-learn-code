@@ -537,3 +537,72 @@ background: rgba(0, 0, 0, 0.3);
 最后一个参数是alpha 透明度 取值范围0~1之间
 
 注意：背景半透明是指盒子背景半透明，盒子里面的内容不受影响。
+
+### 背景缩放（CSS3）
+
+通过`background-size`设置背景图片的尺寸，就像我们设置img的尺寸大小一样，在移动web开发中做屏幕适配应用非常广泛。
+
+其参数设置如下：
+
+1. 可以设置长度单位(px)或百分比
+2. 设置cover时，会自动调整缩放比例，保证图片始终填充满整个盒子，如有溢出部分会被隐藏
+3. 设置为contain时，会自动调整缩放比例，保证图片始终完整显示在盒子内。
+
+```css
+div {
+    background-image: url("images/plmm.jpg");
+    background-size: 300px; /*尽量只改一个值，以防止缩放失真扭曲*/
+    /*
+    background-size: contain;
+    background-size:cover;
+    */
+}
+```
+
+### 多背景图片（CSS3）
+
+以逗号分隔可以设置多个背景，可用于自适应布局。
+
+注意：
+
+* 一个元素可以设置多个重复背景图像
+* 每组属性间使用逗号分隔。
+* 如果设置的多重背景之间存在着交集（即存在重叠关系），前面的背景图会覆盖在后面的背景图之上。
+* 为了避免背景色将图像盖住，背景色通常都定义在最后一组上。
+
+```css
+div {
+    width: 1000px;
+    height: 1000px;
+    background: 
+    url('https://www.wahaotu.com/uploads/allimg/202009/1601459002816578.jpg') no-repeat scroll top left,
+    url("https://www.wahaotu.com/uploads/allimg/202010/1603012753796740.jpg") no-repeat scroll top right,
+    url("https://www.wahaotu.com/uploads/allimg/202009/1601459002738609.jpg") no-repeat scroll bottom left,
+    url("https://www.wahaotu.com/uploads/allimg/202009/1601459003206650.jpg") no-repeat scroll bottom right;
+}
+```
+
+### 凸起凹陷浮雕效果
+
+```css
+a {
+    width: 200px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 50px;
+    font-size: 22px;
+    color: #fff;
+}
+a:hover {
+    background: url("https://game.gtimg.cn/images/yxzj/cp/a20161115tyf/sp.png") no-repeat;
+}
+.nav {
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    background-color: #000;
+}
+```
+
