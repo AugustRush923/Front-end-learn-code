@@ -668,3 +668,133 @@ a:hover {} /*0,0,1,1*/
 
 #nav p {} /*0,1,0,1 */
 ```
+
+## 盒子模型
+
+其实，CSS就三个大模块：盒子模型、浮动、定位，其余的都是细节。
+
+所谓盒子模型就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。每个矩形都由元素的内容、内边距(padding)、边框(border)和外边距(margin)组成。
+
+### 盒子边框（border）
+
+语法：
+
+```
+border: border-width || border-color || border-style
+```
+
+边框宽度(border-width)用于定义页面中边框的粗细；
+
+边框颜色(border-style)用于定义页面中边框的颜色；
+
+边框样式(border-style)用于定义页面中边框的风格，常用属性值如下：
+
+```
+none: 没有边框即忽略所有边框的宽度（默认值）
+
+solid: 边框为单实线（最为常用的）
+
+dashed: 边框为虚线
+
+dotted: 边框为点线
+
+double: 边框为双实线
+```
+
+#### 盒子边框写法总结
+
+| 设置内容 | 样式属性 | 常用属性值 |
+| --- | --- | --- |
+| 上边框 | border-top-style:样式; border-top-width:宽度; border-top-color:颜色; border-top:宽度 样式 颜色; |  |
+| 下边框 | border-bottom-style:样式; border-bottom-width:宽度; border-bottom-color:颜色; border-bottom:宽度 样式 颜色; |  |
+| 左边框 | border-left-style:样式; border-left-width:宽度; border-left-color:颜色; border-left:宽度 样式 颜色; |  |
+| 右边框 | border-right-style:样式; border-right-width:宽度; border-right-color:颜色; border-right:宽度 样式 颜色; |  |
+| 样式综合设定 | border-style:上 [下 左 右] | none, solid, dashed, dotted, double |
+| 宽度综合设定 | border-width:上 [下 左 右] | 像素值 |
+| 颜色综合设定 | border-color:上 [下 左 右] | 颜色值、十六进制值、rgb值 |
+| 边框综合设定 | border:四边宽度 四边样式 四边颜色 |  |
+
+#### 表格的细线边框
+
+table的边框如果设置为1px td又设置边框为1px，当他俩在一起的时候就是2px。边框总体就是2px。但当设置0.5px时 浏览器又会自动转化为1px。
+这时就需要`border-collapse`这个属性来合并边框。
+
+```css
+table {
+    border-collapse: collapse; /*表示边框合并在一起*/
+}
+```
+
+#### 圆角边框（CSS3）
+
+语法格式：
+```
+border-radius: 左上角 右上角 右下角 左下角;
+```
+
+### 内边距（padding）
+
+`padding`属性用于设置内边距。内边距是指`边框与内容之间的距离`。
+
+其语法格式如下：
+
+```
+padding: 上内边距 右内边距 下内边距 左内边距;
+```
+
+* padding-top: 上内边距
+* padding-right: 右内边距
+* padding-bottom: 下内边距
+* padding-left: 左内边距
+
+
+padding后面跟的值的数量不同代表不同意思：
+
+| 值的个数 | 表达的意思 |
+| --- | --- |
+| 1 | 代表设置上下左右内边距都为该值 |
+| 2 | 代表设置上下内边距为第一个值，左右内边距为第二个值 |
+| 3 | 代表设置上内边距为第一个值，左右内边距为第二个值， 下内边距为第三个值 |
+| 4 | 代表设置上内边距为第一个值，右内边距为第二个值，下内边距为第三个值，左内边距为第三个值 |
+
+### 外边距(margin) 
+
+`margin`属性用于设置外边距。设置外边距会在元素之间创建"空白",这段空白通常不能放置其他内容。
+
+其基本语法格式如下：
+
+```
+margin: 上外边距 右外边距 下外边距 左外边距;
+```
+
+* margin-top: 上外边距
+* margin-right: 右外边距
+* margin-bottom: 下外边距
+* margin-left: 左外边距
+
+#### 外边距实现盒子居中
+
+让一个盒子实现水平居中，需要满足以下两个条件：
+
+1. 必须是块级元素。
+2. 盒子必须指定了宽度（width）
+
+然后就给左右的外边距都设置为`auto`,就可使块级元素水平居中。
+
+#### 清除元素的默认内外边距
+
+为了更方便地控制网页中的元素，制作网页时，可使用如下代码清除元素的默认内外边距：
+
+```css
+* {
+    padding: 0; /* 清除内边距 */
+    margin: 0;  /* 清除外边距 */
+}
+```
+
+注意：行内元素是只有左右外边距的，是没有上下外边距的。
+
+### 外边距合并
+
+使用margin定义块元素的垂直外边距时，可能会出现外边距的合并。 
+
