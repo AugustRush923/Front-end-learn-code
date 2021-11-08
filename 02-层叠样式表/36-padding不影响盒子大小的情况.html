@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 40px;
+            border: 1px solid hotpink;
+            padding-left: 100px; /*此时padding-left并不影响盒子的宽度长度*/
+            padding-top: 10px;   /*因为设置了盒子的高度，此时padding-top影响盒子的高度长度*/
+            width: 100%; /*如果设置了此值，则padding-left将影响盒子的宽度长度*/
+        }
+        nav {
+            width: 300px;
+            height: 40px;
+            border: 1px solid deepskyblue;
+        }
+        p {
+            height: 20px;
+            background-color: orange;
+            padding-left: 50px; /*因为没有设置宽度，所以padding-left不会影响盒子的宽度长度*/
+            width: 300px; /*如果设置了此值，则padding-left将影响盒子的宽度长度*/
+        }
+    </style>
+</head>
+<body>
+    <div>我的女朋友是上坂堇</div>
+    <br>
+    <nav>
+        <p>我的女朋友是迪丽热巴</p>
+    </nav>
+</body>
+</html>
