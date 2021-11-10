@@ -839,5 +839,11 @@ width和height的属性值可以为不同单位的数值或相对于父元素的
 2. padding会影响盒子大小，需要进行加减计算，其次考虑使用。
 3. width没有任何问题，经常使用`宽度剩余法 高度剩余法`来做。
 
+### CSS3盒模型
 
+CSS3中可以通过`box-sizing`来指定盒模型，即可指定为`content-box`、`border-box`，这样我们计算盒子大小的方式就发生了改变。
+
+可以分成两种情况：
+1. `box-sizing:cotent-box`: 此值为默认值，其让元素维持W3C的标准盒子模型。盒子大小为`width+padding+border`。
+2. `box-sizing:border-box`: 其让padding和border包含到width里面的。盒子大小为`width`的大小。
 
