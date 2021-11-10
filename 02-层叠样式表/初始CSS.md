@@ -847,3 +847,23 @@ CSS3中可以通过`box-sizing`来指定盒模型，即可指定为`content-box`
 1. `box-sizing:cotent-box`: 此值为默认值，其让元素维持W3C的标准盒子模型。盒子大小为`width+padding+border`。
 2. `box-sizing:border-box`: 其让padding和border包含到width里面的。盒子大小为`width`的大小。
 
+### 盒子阴影
+
+语法格式：
+
+```
+box-shadow: 水平阴影 垂直阴影 模糊距离 阴影尺寸 阴影颜色 内/外阴影;
+```
+
+| 值 | 描述 |
+| --- | --- |
+| h-shadow | 必须。水平阴影的位置，允许负值 |
+| v-shadow | 必须。垂直阴影的位置，允许负值 |
+| blur | 可选，模糊距离。 |
+| spread | 可选，阴影的尺寸。 |
+| color | 可选，阴影的颜色。 |
+| inset | 可选，将外部阴影(outset)改为内部阴影。 |
+
+注意：
+1. 前两个属性是必须写，其余的可以省略。
+2. 外阴影
