@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        section {
+            /* font-size: 0; */
+            margin: auto;
+        }
+        div {
+            width: 200px;
+            height: 100px;
+            /* display: inline-block; */
+            /*转换为行内元素 就可以放在一行上 有宽高 但是每个行内块之间有间隙 不好解决*/
+            /*解决办法：在父元素上设置font-size:0(子元素字体自己管)。*/
+            /*这样设置Safari不兼容还需要设置负外边距来解决(最新版Safari目前没有这个问题 不需要设置负外边距)*/
+            float: left;
+        }
+
+        #d1 {
+            background-color: hotpink;
+        }
+
+        #d2 {
+            background-color: indigo;
+        }
+
+        #d3 {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div id="d1"></div>
+        <div id="d2"></div>
+        <div id="d3"></div>
+    </section>
+</body>
+
+</html>
