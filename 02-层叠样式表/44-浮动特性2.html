@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1.浮动的元素排列位置，跟上一个元素（块级）有关系。 */
+        section {
+            width: 800px;
+            height: 700px;
+            background-color: hotpink;
+        }
+        section div:first-child {
+            width: 200px;
+            height: 300px;
+            background-color: dodgerblue;
+            /* float: left; */
+        }
+        section div:last-child {
+            width: 300px;
+            height: 400px;
+            background-color: orange;
+            float: left; /*2、如果上一个元素有浮动，则A元素顶部会和上一个元素的顶部对齐*/
+            /* 3、如果上一个元素是标准流，则A元素的顶部会和上一个元素的底部对齐。 */
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div>阿基蕾拉--浅仓唯</div>
+        <div>卡尔蜜拉--上坂堇</div>
+    </section>
+</body>
+</html>
