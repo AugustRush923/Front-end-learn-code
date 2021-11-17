@@ -1037,3 +1037,23 @@ W3C推荐的做法，是通过在浮动元素末尾添加一个空的便签。
 
 优点：符合闭合浮动思想 结构语义化正确
 缺点：由于IE6-7不支持`:after`,使用`zoom:1`触发`hasLayout`。
+
+#### 使用before和after双伪元素清除浮动
+
+使用方法：
+
+```css
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table; /*触发BFC BFC可以清除浮动*/
+}
+.clearfix:after {
+    clear:both;
+}
+.clearfix {
+    *zoom:1;
+}
+```
+
+优点：代码更简洁
+缺点：由于IE6-7不支持`:after`,使用`zoom:1`触发`hasLayout`。
