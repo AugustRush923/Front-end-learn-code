@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 960px;
+            /*height: 200px; /*很多情况下，父级盒子不方便给高度 考虑子盒子的内容高度会变 */
+            background-color: pink;
+        }
+        .box1:after {
+            content: "."; /* 追加内容，尽量不要空，否则旧版本浏览器有空隙 */
+            display: block; /* 转换为块级元素 */
+            height: 0; /* 高度为0 */
+            clear: both; /* 清除浮动 */
+            visibility: hidden; /* 隐藏盒子内容 */
+        }
+        .son1 { /* 当son1和son2为标准流时，会撑开盒子 */
+            width: 300px;
+            height: 100px;
+            background-color: skyblue;
+            float: left; /* 当子盒子浮动时，由于浮动特性 不占位置，父盒子又没有高度，造成了兄弟盒子顶了上来。 */
+        }
+        .son2 {
+            width: 600px;
+            height: 100px;
+            background-color: orange;
+            float: right; /* 当子盒子浮动时，由于浮动特性 不占位置，父盒子又没有高度，造成了兄弟盒子顶了上来。 */
+        }
+        .box2 {
+            width: 960px;
+            height: 300px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="son1"></div>
+        <div class="son2"></div>
+    </div>
+    <div class="box2"></div>
+</body>
+</html>
