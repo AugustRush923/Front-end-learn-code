@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div:first-child {
+            width: 200px;
+            height: 200px;
+            background-color: hotpink;
+            position: absolute; /* 完全脱标，完全不占位置 */
+            top: 100px;   /* 它可以通过边偏移移动位置 */
+            left: 100px;  /* 它可以通过边偏移移动位置 */
+        }
+        div:last-child {
+            width: 400px;
+            height: 400px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+</body>
+</html>
