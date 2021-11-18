@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 800px;
+            height: 400px;
+            background-color: hotpink;
+            margin: 0 auto;
+            position: relative;
+            border: 2px solid #004efc;
+        }
+
+        .box div {
+            width: 100px;
+            height: 50px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            position: absolute;
+        }
+
+        .box div:first-child {
+            left: 50%;
+            margin-left: -50px;
+        }
+
+        .box div:nth-child(2) {
+            left: 100%;
+            top: 50%;
+            margin-top: -25px;
+            margin-left: -100px;
+        }
+
+        .box div:nth-child(3) {
+            left: 50%;
+            top: 100%;
+            margin-left: -50px;
+            margin-top: -50px;
+        }
+
+        .box div:nth-child(4) {
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        .box div:last-child {
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div>top</div>
+        <div>right</div>
+        <div>bottom</div>
+        <div>left</div>
+        <div>center</div>
+    </div>
+</body>
+
+</html>
