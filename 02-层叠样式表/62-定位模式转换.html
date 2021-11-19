@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        div {
+            height: 200px;
+        }
+        div:first-child {
+            background-color: gold;
+            display: inline-block;
+        }
+        div:nth-child(2) {
+            background-color: green;
+            float: left;
+        }
+        div:nth-child(3) {
+            background-color: hotpink;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+        div:nth-child(4) {
+            background-color: purple;
+            position: fixed;
+            top: 400px;
+            left: 400px;
+        }
+        div:nth-child(5) {
+            background-color: red;
+            position: relative;
+            top:600px;
+        }
+    </style>
+</head>
+<body>
+    <div>块级元素转行内块元素</div>
+    <div>块级元素通过浮动转行内块元素</div>
+    <div>块级元素通过绝对定位转行内块元素</div>
+    <div>块级元素通过固定定位转行内块元素</div>
+    <div>块级元素无法通过相对定位转换为行内块元素</div>
+</body>
+</html>
