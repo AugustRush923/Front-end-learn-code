@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            border: 0;
+        }
+        .roulous {
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .last,
+        .next {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            line-height: 50px;
+            position: absolute;
+            margin-top: -25px;
+            top: 50%;
+        }
+
+        .last {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .circle {
+            width: 100px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -50px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+        .circle li {
+            width: 10px;
+            height: 10px;
+            background-color: gray;
+            float: left;
+            margin: 5px;
+            border-radius: 50%;
+        }
+        .circle .select {
+            background-color: hotpink; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="roulous">
+        <img src="https://www.wahaotu.com/uploads/allimg/202010/1603012753796740.jpg" alt="">
+        <span class="last">
+            left
+        </span>
+        <span class="next">right</span>
+        <ul class="circle">
+            <li class="select"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+
+</html>
