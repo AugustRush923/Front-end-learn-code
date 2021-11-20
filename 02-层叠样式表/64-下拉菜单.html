@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        div:first-child {
+            background-color: hotpink;
+        }
+        div:first-child div:first-child {
+            background-color: lawngreen;
+            display: none;
+        }
+        div:first-child div:last-child {
+            background-color: deepskyblue;
+        }
+        div:first-child:hover div:first-child {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div>下拉菜单v
+        <div></div>
+        <div></div>
+    </div>   
+</body>
+</html>
