@@ -1318,4 +1318,14 @@ li {
 | text | 文本 |
 | not-allowed | 禁止 |
 
+#### 轮廓线 outline
 
+给表单添加`outline:0;`或者`outline:none;`样式之后，就可以去掉默认的蓝色边框。
+
+outline是外框线，border属于内框线，两个可以同时设置，互不影响。
+
+```css
+input {
+    outline: none;
+}
+```
