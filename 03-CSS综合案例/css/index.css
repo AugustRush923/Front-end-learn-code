@@ -108,6 +108,7 @@ nav {
 }
 
 .user img {
+    vertical-align: middle;
     margin: 0 5px;
 }
 

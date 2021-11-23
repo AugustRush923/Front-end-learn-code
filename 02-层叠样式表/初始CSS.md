@@ -1320,6 +1320,10 @@ li {
 
 #### 轮廓线 outline
 
+```
+outline: outline-color || outline-style || outline-width
+```
+
 给表单添加`outline:0;`或者`outline:none;`样式之后，就可以去掉默认的蓝色边框。
 
 outline是外框线，border属于内框线，两个可以同时设置，互不影响。
@@ -1339,3 +1343,27 @@ input {
     resize: none;
 }
 ```
+
+### vertical-align 垂直对齐
+
+vertical-align用于设置一个元素的垂直对齐方式，但是它只针对于行内元素或者行内块元素有效。
+
+CSS的vertical-align属性使用场景：
+
+经常用于设置`图片`或者`表单`(行内块元素)和文字垂直对齐。
+
+其基本语法如下：
+
+```
+verticla-align: baseline | top | middle | bottom
+```
+
+![](images/1571522040645.png)
+
+| 值 | 描述 |
+| --- | --- |
+| baseline | 默认。元素放置在父元素的基线上 |
+| top | 把元素的顶端与行中最高元素的顶端对齐 |
+| middle | 把此元素放置在父元素的中部 |
+| bottom | 把元素的底端与行中最低的元素的底端对齐 |
+
