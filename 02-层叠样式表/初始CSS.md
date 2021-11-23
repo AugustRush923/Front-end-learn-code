@@ -1382,3 +1382,69 @@ verticla-align: baseline | top | middle | bottom
 
 2. 把图片转换位块级元素`display: block;`
 
+### 溢出的文字隐藏
+
+#### word-break 自动换行
+
+主要处理英文单词
+
+| 值 | 描述 |
+| --- | --- |
+| normal | 使用浏览器默认的换行规则 |
+| break-all | 允许在单词内换行 |
+| keep-all | 只能在半角空格或连字符处换行 |
+
+
+#### white-space
+
+white-space设置或检索对象内文本显示方式。通常我们使用于强制一行显示内容
+
+| 值 | 描述 |
+| --- | --- |
+| normal | 默认处理方式 |
+| nowrap | 强制在同一行内显示所有文本，直到文本结束或者遭遇br标签对象才换行 |
+
+#### text-overflow 文字溢出
+
+text-overflow 设置或检索是否使用一个省略标记(...)标示对象内文本的溢出
+
+| 值 | 描述 |
+| --- | --- |
+| clip | 不显示省略标记(...)，而是简单的裁切 |
+| ellipsis | 当对象内文本溢出时显示省略标记(...) |
+
+注意：一定要首先强制一行内显示，再设置overflow属性，最后设置text-overflow。
+
+#### 单行文本溢出显示省略号
+
+```css
+div {
+    /*1. 先强制一行内显示文本*/
+    white-space: nowrap;
+    /*2. 超出的部分隐藏*/
+    overflow: hidden;
+    /*3. 文字用省略号替代超出的部分*/
+    text-overflow: ellipsis;
+}
+```
+
+#### 多行文本溢出显示省略号
+
+多行文本溢出显示省略号，有较大兼容性问题，适合于`webkit`浏览器或移动端。
+
+```css
+div {
+    /* 1. 超出的部分隐藏 */
+    overflow: hidden;
+    /* 2. 文字用省略号替代超出的部分  */
+    text-overflow: ellipsis;
+    /* 3. 弹性伸缩盒子模型显示 */
+    display: -webkit-box;
+    /* 4. 限制在一个块元素显示的文本的行数 */
+    -webkit-line-clamp: 2;
+    /* 5. 设置或检索伸缩盒对象的子元素的排列方式 */
+    -webkit-box-orient: vertical;
+}
+```
+
+这个效果更偏向让后端来做，因为后端可以设置显示多少个字，操作更简单。
