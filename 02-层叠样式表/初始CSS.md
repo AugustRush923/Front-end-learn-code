@@ -1367,3 +1367,8 @@ verticla-align: baseline | top | middle | bottom
 | middle | 把此元素放置在父元素的中部 |
 | bottom | 把元素的底端与行中最低的元素的底端对齐 |
 
+#### 图片、表单和文字对齐
+
+图片、表单都属于行内块元素，默认的vertical-align是基线对齐(baseline)。
+
+此时可以给图片、表单这些行内块元素的vertical-align属性设置为middle就可以让文字和图片垂直居中对齐了。
