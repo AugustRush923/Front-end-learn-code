@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+                font-family: 'icomoon';
+                src: url('fonts/icomoon.eot?bfm2h8');
+                src: url('fonts/icomoon.eot?bfm2h8#iefix') format('embedded-opentype'),
+                    url('fonts/icomoon.ttf?bfm2h8') format('truetype'),
+                    url('fonts/icomoon.woff?bfm2h8') format('woff'),
+                    url('fonts/icomoon.svg?bfm2h8#icomoon') format('svg');
+                font-weight: normal;
+                font-style: normal;
+                font-display: block;
+            }
+        span {
+            font-family: 'icomoon'; /* 务必保证 这个字体和上面@font-face里面的字体保持一致 */
+            font-size: 50px;
+            color: hotpink;
+        }
+        div {
+            font-family: "icomoon";
+            font-size: 50px;
+            color: deepskyblue;
+        }
+        div::before {
+            content: "\e93e";
+        }
+        .coin-dollor {
+            font-family: "icomoon";
+            font-size: 50px;
+            color: firebrick;
+        }
+        .coin-dollor::before {
+            content: "\e93b";
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 第一种方式 -->
+    <span> 购物车</span>
+    <span> 刷卡支付</span>
+    <hr>
+    <!-- 第二种方式 -->
+    <div> 现金支付</div>
+    <hr>
+    <!-- 第三种方式 -->
+    <div class="coin-dollor"> 美金支付</div>
+</body>
+
+</html>
