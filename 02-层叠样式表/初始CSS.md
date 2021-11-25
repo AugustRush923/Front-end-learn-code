@@ -1507,4 +1507,48 @@ div {
 
 [icomoon](https://icomoon.io/)
 
-[iconfont](https://www.iconfont.cn/  )
+[iconfont](https://www.iconfont.cn/)
+
+
+### 滑动门技术
+
+为了使各种特殊形状的背景能够自适应元素中文本内容的多少，出现了CSS滑动门技术。它从新的角度构建页面，使各种特殊形状的背景能够自由拉伸滑动，以适应元素内部的文本内容，可用性更强。最常见于各种导航栏的滑动门。
+
+**核心技术**
+
+核心技术就是利用CSS精灵（主要是背景位置）和盒子padding撑开宽度，以便能适应不同字数的导航栏。
+
+一般经典布局：
+
+```html
+<li>
+    <a>
+        <span>
+            首页
+        </span>
+    </a>
+</li>
+```
+
+思路：
+1. a设置背景左侧，padding撑开合适宽度。
+2. span设置背景右侧，padding撑开合适宽度，剩下由文字继续撑开宽度。
+3. 之所以a包含span就是因为整个导航都是可以点击的。
+
+```css
+.nav ul li a {
+    height: 33px;
+    display: block;
+    background: url(images/tu.png) no-repeat left;
+    font-size: 14px;
+    color: #fff;
+    padding-left: 15px;
+}
+.nav li a span {
+    /* height: 33px; */
+    display: block;
+    background: url(images/tu.png) no-repeat right center;
+    padding-right: 15px;
+    line-height: 33px; /* 设置line-height可以不用设置height */
+}
+```
