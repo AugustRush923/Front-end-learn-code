@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('fonts/icomoon.eot?bfm2h8');
+            src: url('fonts/icomoon.eot?bfm2h8#iefix') format('embedded-opentype'),
+                url('fonts/icomoon.ttf?bfm2h8') format('truetype'),
+                url('fonts/icomoon.woff?bfm2h8') format('woff'),
+                url('fonts/icomoon.svg?bfm2h8#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        .pic {
+            width: 497px;
+            height: 280px;
+            margin: 100px auto 0 auto;
+            position: relative;
+        }
+
+        .pic img {
+            width: 497px;
+            height: 280px;
+        }
+
+        .pic:hover::before {
+            content: "";
+            display: block;
+            width: 497px;
+            height: 280px;
+            border: 10px solid rgba(255, 105, 180, .4);
+            position: absolute;
+            box-sizing: border-box;
+            background-color: rgba(116, 113, 114, 0.3);
+        }
+
+        .content {
+            width: 497px;
+            height: 140px;
+            border: 10px solid rgba(255, 105, 180, .4);
+            border-top: 0;
+            margin: 0 auto;
+            line-height: 140px;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 40px;
+        }
+        .content::before {
+            content: "\e93e";
+            font-family: "icomoon";
+            color: #000;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pic">
+        <img src="https://pic3.zhimg.com/80/v2-1f6e1523583b15df00913739712aad66_1440w.jpg" alt="">
+    </div>
+    <div class="content">
+        浅仓唯
+    </div>
+</body>
+
+</html>
