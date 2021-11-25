@@ -26,6 +26,9 @@ input {
     border-radius: 0%;
     box-sizing: border-box;
 }
+input[type=submit] {
+    cursor: pointer;
+}
 
 .clearfix:before,
 .clearfix:after {
@@ -222,6 +225,7 @@ nav {
     border: 2px solid #00a4ff;
     color: #00a4ff;
     font-weight: 600;
+    transition: all 0.3s;
 }
 
 .table dd a:hover {
@@ -288,8 +292,13 @@ nav {
     height: 270px;
     float: left;
     margin-right: 15px;
-    margin-bottom: 20px;
+    margin-top: 15px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s;
+}
+.product-li ul li:hover {
+    margin-top: 10px;
+    box-shadow: 0px 7px 5px 5px rgba(0, 0, 0, 0.4);
 }
 .product-li ul li h4,
 .product-li ul li p {
