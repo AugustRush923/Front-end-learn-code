@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 497px;
+            height: 280px;
+        }
+        div {
+            padding: 10px;
+            border: 2px solid hotpink;
+            width: 497px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* 之前的这种做法有两个问题：一是需要自己计算，二是可能碰见除不开的数 导致无法做到绝对的居中
+            margin-left: -248.5px;
+            margin-top: -140px;*/
+            /* translate值如果是% 不是以父级宽度为准，以自己的宽度为准 */
+            transform: translate(-50%, -50%);
+        } 
+    </style>
+</head>
+<body>
+    <div>
+        <img src="https://pic3.zhimg.com/80/v2-1f6e1523583b15df00913739712aad66_1440w.jpg" alt="">
+    </div>
+</body>
+</html>

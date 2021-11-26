@@ -1605,3 +1605,32 @@ transition: 要过渡的属性 花费时间 运动曲线 开始时间,
 * 何时开始：单位是 秒 毫秒（必须写单位） 可以设置延迟触发时间 默认是0s（可以省略）
 * 后面两个属性可以省略
 * 谁做过渡给谁加
+
+### 2D变形（CSS3）transform
+
+transform是CSS3中具有颠覆性的特征之一，可以实现元素的位移、旋转、倾斜、缩放，甚至支持矩阵方式，配合过渡和动画，可以取代大量之前只能靠Flash才可以实现的效果。
+
+#### transform: translate
+
+translate移动平移
+
+其基本语法：
+```
+transform: translate(x, y);
+```
+
+使用translate方法来将文字或图像在水平方向和垂直方向上分别垂直移动指定像素。
+
+可以改变元素的位置，x、y可为负值。
+
+```css
+/* 盒子垂直水平居中效果 */
+div {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+```
