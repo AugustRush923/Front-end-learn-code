@@ -1661,3 +1661,16 @@ rotate 旋转
 ```
 transform: rotate(45deg); # deg是单位：度数
 ```
+
+#### transform-origin
+
+transform-origin 可以调整元素转换变形的原点
+
+其基本语法格式如下：
+```
+/*改变元素原点到左上角*/
+transform-origin: left top;
+/*如果是4个角，可以用left top right bottom这些。*/
+如果想要精确的位置，可以用像素
+transform-origin: 10px 10px;
+```
