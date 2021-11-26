@@ -1612,7 +1612,7 @@ transform是CSS3中具有颠覆性的特征之一，可以实现元素的位移�
 
 #### transform: translate
 
-translate移动平移
+translate 移动平移
 
 其基本语法：
 ```
@@ -1634,3 +1634,22 @@ div {
     transform: translate(-50%, -50%);
 }
 ```
+
+#### transform: scale
+
+scale 缩放
+
+其基本语法：
+```
+使元素水平方向和垂直方向同时缩放（x轴和y轴同时缩放）
+transform: scale(x, y) 
+
+元素仅水平方向缩放（x轴缩放）
+transform: scaleX(x)
+
+元素仅垂直方向缩放（y轴缩放）
+transform: scaleY(y)
+```
+
+scale取值默认值为1，当值设置为0.01到0.99之间的任何值，作用使一个元素缩小；而任何大于或等于1.01的值，作用是让元素放大。
+
