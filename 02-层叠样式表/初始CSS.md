@@ -1653,3 +1653,11 @@ transform: scaleY(y)
 
 scale取值默认值为1，当值设置为0.01到0.99之间的任何值，作用使一个元素缩小；而任何大于或等于1.01的值，作用是让元素放大。
 
+#### transform: rotate
+
+rotate 旋转
+
+其基本语法：
+```
+transform: rotate(45deg); # deg是单位：度数
+```
