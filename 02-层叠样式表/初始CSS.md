@@ -1674,3 +1674,16 @@ transform-origin: left top;
 如果想要精确的位置，可以用像素
 transform-origin: 10px 10px;
 ```
+
+#### transform: skew
+
+skew 倾斜
+
+其基本语法格式如下：
+
+```
+可以使元素按一定的角度进行倾斜，可为负值，第二个参数不写默认为0.
+transform: skew(水平方向deg, 垂直方向deg)
+```
+
+
