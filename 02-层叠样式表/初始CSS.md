@@ -1686,4 +1686,23 @@ skew 倾斜
 transform: skew(水平方向deg, 垂直方向deg)
 ```
 
+### 3D变形(CSS3) transform
 
+![](images/3D变形.png)
+
+简单来说：
+x坐标屏幕左边是负的，屏幕右边是正的
+y坐标屏幕上边是负的，屏幕下面是正的
+z坐标屏幕里面是负的，屏幕外面是正的
+
+#### rotateX
+
+rotateX就是沿着x轴立体旋转。
+
+
+#### rotateY
+rotateY就是沿着y轴立体旋转。
+
+
+#### rotateZ
+rotateZ就是沿着z轴立体旋转。
