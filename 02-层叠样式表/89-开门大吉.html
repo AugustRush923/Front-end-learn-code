@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 450px;
+            height: 450px;
+            background: url(https://tse1-mm.cn.bing.net/th/id/R-C.54fd04f18a37dfdefa4394d4c02a6dc9?rik=qLD75OTCrOQB7w&amp;riu=http%3a%2f%2fscimg.jianbihuadq.com%2ftouxiang%2f202004%2f202004012005566.jpg&amp;ehk=OxGJEnMT%2bMlXcavYEQS0L8I%2bucjuQbVoGsP5a3xaJPQ%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0) no-repeat;
+            margin: 100px auto;
+            position: relative;
+            perspective: 500px;
+        }
+        .box:hover .left{
+            transform: rotateY(-180deg);
+        }
+        .box:hover .right {
+            transform:rotateY(180deg);
+        }
+        .left,
+        .right {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            transition: all 1s;
+            top: 0;
+
+        }
+        .left {
+            background-color: lawngreen;
+            transform-origin: left;
+            left: 0;
+        }
+        .right {
+            background-color: skyblue;
+            transform-origin: right;
+            right: 0;
+
+        }
+        .left::before,
+        .right::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .left::before {
+            right: 0;
+            margin-right: 5px;
+        }
+        .right::before {
+            left: 0;
+            margin-left: 5px;
+        }
+        /* .circle-left,
+        .circle-right {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        } 
+        .circle-left {
+            right: 0;
+            margin-right: 5px;
+        }
+        .circle-right {
+            left: 0;
+            margin-left: 5px;
+        }*/
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left">
+            <!-- <div class="circle-left"></div> -->
+        </div>
+        <div class="right">
+            <!-- <div class="circle-right"></div> -->
+        </div>
+
+    </div>
+</body>
+</html>
