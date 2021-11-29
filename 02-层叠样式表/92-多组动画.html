@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            width: 497px;
+            height: 280px;
+        }
+        div {
+            padding: 10px;
+            border: 2px solid hotpink;
+            width: 497px;
+            animation: horse-around 5s infinite;
+        }
+        @keyframes horse-around {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            25% {
+                transform: translate3d(800px, 0, 0);
+            }
+            50% {
+                transform: translate3d(800px, 550px, 0);
+            }
+            75% {
+                transform: translate3d(0, 550px, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="https://pic3.zhimg.com/80/v2-1f6e1523583b15df00913739712aad66_1440w.jpg" alt="">
+    </div>
+</body>
+</html>

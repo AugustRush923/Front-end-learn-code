@@ -1729,3 +1729,57 @@ translateZ的直观表现形式就是大小变化，实质是XY平面相对于�
 backface-visibility属性定义当元素不面向屏幕时是否可见。
 
 **翻转盒子案例**
+
+### 动画（CSS3）animation
+
+动画同样是CSS3中具有颠覆性的特征之一，可通过设置多个节点来精确控制一个或一组动画，常用来实现复杂的动画效果。
+
+语法格式：
+
+```
+animation: 动画名称 动画时间 运动曲线 何时开始 播放次数 是否反方向;
+```
+
+属性：
+
+| 属性 | 描述 |
+| --- | --- |
+| @keyframes | 规定动画 |
+| animation | 所有动画属性的简写属性，除了animation-play-state属性。 |
+| animation-name | 规定@keyframes动画的名称 |
+| animation-duration | 规定动画完成一个周期所花费的秒或毫秒。默认是0 |
+| animation-timing-function | 规定动画的速度曲线。默认是ease |
+| animation-delay | 规定动画何时开始。默认是0 |
+| animation-iteration-count | 规定动画被播放的次数，默认是1，无限是infinite |
+| animation-direction | 规定动画是否在下一周期逆向地播放。默认是normal |
+| animation-play-state| 规定动画是否正在运行或暂停。默认是running，暂停是parse |
+| animation-fill-mode | 规定对象动画时间之外的状态 |
+
+```css
+/* 定义动画  单组动画 */
+@keyframes 动画名称 {
+    from {
+        /* 从哪来 */
+    }
+    to {
+        /* 到哪去*/
+    }
+}  
+/* 定义动画  多组动画 */
+@keyframes 动画名称 {
+    0% {
+        /* 第一组 */
+    }
+    50% {
+        /* 第二组 */
+    }
+    100% {
+        /* 最后一组 */
+    }
+}
+
+
+/* 引用动画 */
+animation: 动画名称 动画时间 运动曲线 何时开始 播放次数 是否反方向;
+
+```
