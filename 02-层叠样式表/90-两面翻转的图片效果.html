@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        section {
+            width: 450px;
+            height: 450px;
+            margin: 50px auto;
+            border: 1px solid #000;
+            position: relative;
+            box-sizing: border-box;
+            perspective: 500px;
+        }
+        section img {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            top: 0;
+            transition: all 1s;
+        }
+        section img:first-child {
+            z-index: 1;
+            backface-visibility: hidden;
+        }
+        
+        section:hover img {
+            transform: rotateY(180deg);
+            /* z-index: 0; 通过设置z-index同样能达到backface-bisibility:hidden的效果*/
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <img src="https://www.wahaotu.com/uploads/allimg/202010/1603012753796740.jpg" alt="">
+        <img src="https://tse1-mm.cn.bing.net/th/id/R-C.54fd04f18a37dfdefa4394d4c02a6dc9?rik=qLD75OTCrOQB7w&amp;riu=http%3a%2f%2fscimg.jianbihuadq.com%2ftouxiang%2f202004%2f202004012005566.jpg&amp;ehk=OxGJEnMT%2bMlXcavYEQS0L8I%2bucjuQbVoGsP5a3xaJPQ%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="">
+    </section>
+</body>
+</html>
