@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+           list-style: none; 
+           animation: roll 5s linear infinite;
+           width: 200%;
+
+        }
+        .box ul img {
+            width: 235px;
+            height: 235px;
+            float: left;
+            transition: all .8s;
+        }
+        .box {
+            width: 1175px;
+            height: 235px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        .box:hover ul{
+            animation-play-state: paused;
+        }
+        @keyframes roll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-1175px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
