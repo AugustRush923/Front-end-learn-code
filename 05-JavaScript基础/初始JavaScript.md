@@ -283,3 +283,321 @@ console.log(a); // 会报错
 
 * 汉语可以作为变量名。但是不建议使用，因为 low。
 
+## 数据类型
+
+JS 的变量数据类型，是在程序运行的过程中，根据等号右边的值来确定的。而且，变量的数据类型是可以变化的。比如说：
+
+```js
+var name = 'qianguyihao';
+
+name = 123; // 强制将变量 name 修改为 数字类型
+```
+
+**JS中一共有六种数据类型**
+
+* **基本数据类型（值类型）**：String 字符串、Number 数值、Boolean 布尔值、Null 空值、Undefined 未定义。
+
+* **引用数据类型（引用类型）**：Object 对象。
+
+注意：内置对象 Function、Array、Date、RegExp、Error等都是属于 Object 类型。也就是说，除了那五种基本数据类型之外，其他的，都称之为 Object类型。
+
+
+**数据类型之间最大的区别：**
+
+* 基本数据类型：参数赋值的时候，传数值。
+
+* 引用数据类型：参数赋值的时候，传地址（修改的同一片内存空间）。
+
+### 基本数据类型
+
+#### 数字型 Number
+
+JavaScript数字类型既可以用来保存整数值，也可以保存小数（浮点数）。
+
+```js
+var age = 22;
+var PI = 3.14;
+```
+
+`isNaN()`这个方法用来判断变量是否是非数字类型，如果是数字类型则返回的是`false`,如果不是数字类型则返回的是`true`。
+
+```js
+console.log(isNaN(12)); // false
+console.log(isNaN('12')); // false
+console.log(isNaN('12a')); // true
+```
+
+#### 字符串型 String
+
+字符串型可以是引号中的任意文本，其语法为：双引号`""`或者单引号 `''`。
+
+**注意事项**：
+
+1. 单引号和双引号不能混用。比如下面这样写是不可以的：
+
+2. 同类引号不能嵌套：双引号里不能再放双引号，单引号里不能再放单引号。
+
+3. 单引号里可以嵌套双引号；双引号里可以嵌套单引号。
+
+
+**转义字符**：
+
+在字符串中我们可以使用`\`作为转义字符，当表示一些特殊符号时可以使用`\`进行转义。
+
+* \" 表示 " 双引号
+
+* \' 表示 ' 单引号
+
+* \\ 表示\
+
+* \r 表示回车
+
+* \n 表示换行。n 的意思是 newline。
+
+* \t 表示缩进。t 的意思是 tab。
+
+* \b 表示空格。b 的意思是 blank。
+
+##### 获取字符串长度
+
+字符串是由若干个字符组成的，这些字符的数量就是字符串的长度。我们可以通过字符串的`length`属性可以获取整个字符串的长度。
+
+```js
+var str1 = '千古壹号';
+var str2 = '千古壹号，永不止步！';
+
+var str3 = 'qianguyihao';
+var str4 = 'qianguyihao, keep moving!';
+
+console.log(str1.length); // 4
+console.log(str2.length); // 10
+console.log(str3.length); // 11
+console.log(str4.length); // 25
+```
+
+由此可见，字符串的 length 属性，在判断字符串的长度时，会认为：
+
+* 一个中文算一个字符，一个英文算一个字符
+
+* 一个标点符号（包括中文标点、英文标点）算一个字符
+
+* 一个空格算一个字符
+
+##### 字符串拼接
+
+多个字符串之间可以使用加号 `+` 进行拼接。
+
+**拼接语法**：
+
+```
+字符串 + 任意数据类型 = 拼接之后的新字符串;
+```
+
+**拼接规则**：拼接前，会把与字符串相加的这个数据类型转成字符串，然后再拼接成一个新的字符串。
+
+```js
+var str1 = '千古壹号' + '永不止步';
+var str2 = '千古壹号' + 666;
+var str3 = '千古壹号' + true;
+var str4 = '千古壹号' + null;
+var str5 = '千古壹号' + undefined;
+
+var obj = { name: '千古壹号', age: 28 };
+var str6 = '千古壹号' + obj;
+
+console.log(str1);
+console.log(str2);
+console.log(str3);
+console.log(str4);
+console.log(str5);
+console.log(str6);
+```
+
+##### 字符串的不可变性
+
+字符串里面的值不可被改变。虽然看上去可以改变内容，但其实是地址变了，内存中新开辟了一个内存空间。
+
+##### 模板字符串（模板字面量）
+
+ES6中引入了模板字符串，让我们省去了字符串拼接的烦恼。下面一起来看看它的特性。
+
+###### 在模板字符串中插入变量
+
+```js
+var name = 'qianguyihao';
+var age = '26';
+
+console.log('我是' + name + ',age:' + age); //传统写法
+
+console.log(`我是${name},age:${age}`); //ES6 写法。注意语法格式
+```
+
+**注意**，上方代码中，倒数第二行用的符号是单引号，最后一行用的符号是反引号（在 tab 键的上方）。
+
+###### 在模板字符串中插入表达式
+
+以前，在字符串中插入表达式的写法必须是这样的：
+
+```js
+const a = 5;
+const b = 10;
+console.log('this is ' + (a + b) + ' and\nnot ' + (2 * a + b) + '.');
+```
+
+现在，通过模板字符串，我们可以使用一种更优雅的方式来表示：
+
+```js
+const a = 5;
+const b = 10;
+
+// 下面这行代码，故意做了换行。
+console.log(`this is ${a + b} and
+not ${2 * a + b}.`);
+```
+
+###### 模板字符串中可以换行
+
+因为模板字符串支持换行，所以可以让代码写得非常美观。
+
+```js
+const result = {
+	name: 'qianguyihao',
+	age: 28,
+	sex: '男',
+};
+
+// 模板字符串支持换行
+const html = `<div>
+	<span>${result.name}</span>
+	<span>${result.age}</span>
+	<span>${result.sex}</span>
+</div>`;
+
+console.log(html); // 打印结果也会换行
+```
+
+###### 模板字符串中可以调用函数
+
+模板字符串中可以调用函数。字符串中调用函数的位置，将会显示函数执行后的返回值。
+
+```js
+function getName() {
+	return 'qianguyihao';
+}
+
+console.log(`www.${getName()}.com`); // 打印结果：www.qianguyihao.com
+```
+
+###### 模板字符串支持嵌套使用
+
+```js
+const nameList = ['千古壹号', '许嵩', '解忧少帅'];
+
+function myTemplate() {
+	// join('') 的意思是，把数组里的内容合并成一个字符串
+	return `<ul>
+	${nameList
+		.map((item) => `<li>${item}</li>`)
+		.join('')}
+	</ul>`;
+}
+document.body.innerHTML = myTemplate();
+```
+
+#### 布尔值：Boolean
+
+布尔型有两个值：true 和 false。主要用来做逻辑判断： true 表示真，false 表示假。
+
+布尔值直接使用就可以了，千万不要加上引号。
+
+```js
+var a = true;
+console.log(typeof a);
+```
+
+布尔型和数字型相加时， true 按 1 来算 ，false 按 0 来算。
+
+#### Null：空对象
+
+null 专门用来定义一个空对象（例如：let a = null）。
+
+如果你想定义一个变量用来保存引用类型，但是还没想好放什么内容，这个时候，可以在初始化时将其设置为 null。
+
+```js
+let myObj = null;
+cosole.log(typeof myObj); // 打印结果：object
+```
+
+总结：
+
+* Null 类型的值只有一个，就是 null。比如 let a = null。
+
+* 使用 typeof 检查一个 null 值时，会返回 object。
+
+#### Undefined
+
+##### case1：变量已声明，未赋值时
+
+声明了一个变量，但没有赋值，此时它的值就是 undefined。举例：
+
+```js
+let name;
+console.log(name); // 打印结果：undefined
+console.log(typeof name); // 打印结果：undefined
+```
+
+##### case2：变量未声明（未定义）时
+
+如果你从未声明一个变量，就去使用它，则会报错（这个大家都知道）；此时，如果用 typeof 检查这个变量时，会返回 undefined。举例：
+
+```js
+console.log(typeof a); // undefined
+console.log(a); // 打印结果：Uncaught ReferenceError: a is not defined
+```
+
+##### case3：函数无返回值时
+
+如果一个函数没有返回值，那么，这个函数的返回值就是 undefined。
+
+或者，也可以这样理解：在定义一个函数时，如果末尾没有 return 语句，那么，其实就是 return undefined。
+
+##### case4：调用函数时，未传参
+
+调用函数时，如果没有传参，那么，这个参数的值就是 undefined。
+
+举例：
+
+```js
+function foo(name) {
+    console.log(name);
+}
+
+foo(); // 调用函数时，未传参。执行函数后的打印结果：undefined
+```
+
+实际开发中，如果调用函数时没有传参，我们可以给形参设置一个默认值：
+
+```js
+function foo(name) {
+    name = name || 'qianguyihao';
+}
+
+foo();
+```
+
+#### Null 与 Undefined的区别
+
+null 和 undefined 有很大的相似性。看看 null == undefined 的结果为 true 也更加能说明这点。
+
+但是 null === undefined 的结果是 false。它们虽然相似，但还是有区别的，其中一个区别是，和数字运算时：
+
+* 10 + null 结果为 10。
+
+* 10 + undefined 结果为 NaN。
+
+规律总结：
+
+* 任何数据类型和 undefined 运算都是 NaN;
+
+* 任何值和 null 运算，null 可看做 0 运算。
+
