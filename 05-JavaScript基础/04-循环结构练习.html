@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        // 练习一：质数相关-判断输入的数是否为质数 
+        var num = parseInt(prompt("请输入一个数"));
+        function func(num) {
+            if (num <= 1) {
+                return false;
+            }
+            if (num === 2) {
+                return true;
+            }
+            for (let index = 2; index < Math.sqrt(num); index++) {
+                if (num % index == 0) {
+                    return false
+                }
+            }
+            return true
+        } 
+        var result = func(num)
+        alert(result); 
+        */
+
+        
+        // 练习二：质数相关-判断1-100之间的所有质数
+        function func(num) {
+            if (num <= 1) {
+                return false;
+            }
+            if (num === 2) {
+                return true;
+            }
+            for (let index = 2; index < Math.sqrt(num); index++) {
+                if (num % index == 0) {
+                    return false
+                }
+            }
+            return true
+        } 
+        for (var i = 1; i <= 100; i++) {
+            var res = func(i);
+            if (res) {
+                console.log(i);
+            }
+        }
+       
+
+        /* 
+        // 九九乘法表
+        for (var j=1; j<=9; j++) {
+            for (var k=1; k<=j; k++) {
+                document.write('<span>' + k + '*' + j + '=' + k*j +'&nbsp;'+ '</span>')
+            }
+            document.write('<br/>')
+        } 
+        */
+    </script>
+</body>
+
+</html>
