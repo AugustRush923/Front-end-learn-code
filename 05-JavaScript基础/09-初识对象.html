@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var dog = {
+            name: '王可可',
+            age: 5,
+            gender: 'male',
+            skill: function () {
+                return "汪汪汪~";
+            }
+        }
+        console.log('I have a dog, name is ' + dog.name + ',It can ' + dog.skill());
+
+        var naruto = new Object();
+        naruto.name = '旋涡鸣人';
+        naruto.gender = 'male';
+        naruto.skill = function () {
+            return '螺旋丸';
+        }
+        console.log(naruto.name + ' 可以释放 ' + naruto.skill());
+
+        function Marvel(name, gender) {
+            this.name = name;
+            this.gender = gender;
+            this.skill = function (skillName) {
+                return '拥有' + skillName;
+            }
+        }
+        var ironman = new Marvel('Tony Stark', 'male');
+        console.log(ironman.name, ironman.gender, ironman.skill('Mark系列装甲'));
+        var captain = new Marvel('Steve Roges', 'male');
+        console.log(captain.name, captain.gender, captain.skill('振金盾牌'));
+    </script>
+</body>
+</html>
