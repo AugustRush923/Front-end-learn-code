@@ -38,6 +38,22 @@
 
         }
         console.log(bubbleSort([2, 6, 1, 77, 52, 25, 7]));
+
+        // 函数中调用另一个函数
+        function monthIsLeap(year) {
+            if (IsLeapYear(year)) {
+                return '今年2月有29天。';
+            }
+            return '今年2月只有28天。';
+        }
+
+        function IsLeapYear(year) {
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+                return true;
+            }
+            return false;
+        }
+        console.log(monthIsLeap(2008));
     </script>
 </body>
 
