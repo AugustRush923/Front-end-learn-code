@@ -2132,3 +2132,312 @@ console.log(123); //123（可以正常打印）
 
 
 
+## 预解析
+
+JavaScript代码是由浏览器中的JavaScript解析器来执行的JavaScript解析器在运行JavaScript代码的时候分为两步：预解析和代码执行。
+
+1. 预解析：js引擎会把js代码里所有的var还有function提升到当前作用域的最前面。
+2. 代码执行：按照代码书写的顺序从上往下执行。
+
+
+
+### 变量预解析(变量的声明提前)
+
+使用var关键字声明的变量（ 比如 `var a = 1`），**会在所有的代码执行之前被声明**（但是不会赋值）。
+
+但是如果声明变量时不是用var关键字（比如直接写`a = 1`），则变量不会被声明提前。
+
+例1：
+
+```js
+console.log(a); // 此时输出为 undefined
+var a = 123; 
+
+/* js引擎执行上述两行代码其实是按照下边的代码运行的
+1. 变量提升
+var a; 
+2. 代码执行
+console.log(a); 
+a = 123;
+*/
+```
+
+
+
+例2：
+
+```js
+console.log(a); // 此时程序将报错：Uncaught ReferenceError: a is not defined
+a = 123; // 此时a相当于window.a
+
+/* js引擎执行上述两行代码其实是按照下边的代码运行的
+1. 变量提升
+
+2. 代码执行
+console.log(a); 
+a = 123;
+*/
+```
+
+
+
+例3：
+
+```js
+foo();
+function foo() {
+    if (false) { // 永远也不会进入这个if语句
+        var i = 123; // 在预编译时 var i; 已被声明
+    }
+    console.log(i); // 所以输出的结果为undefined
+}
+/* js引擎执行上述两行代码其实是按照下边的代码运行的
+1. 变量提升
+function foo(){...};
+var i;
+2. 代码执行
+foo();
+if判断;
+console.log(i)
+*/
+```
+
+**注意：**
+
+既然JS中存在变量提升的现象，那么，在实战开发中，为了避免出错，建议先声明一个变量，然后再使用这个变量。
+
+
+
+### 函数预解析(函数的声明提前)
+
+**函数声明：**
+
+使用`函数声明`的形式创建的函数`function foo(){}`，**会被声明提前**。
+
+也就是说，整个函数会在所有的代码执行之前就被**创建完成**。所以，在代码顺序里，我们可以先调用函数，再定义函数。
+
+代码举例：
+
+```js
+fn1();  // 虽然 函数 fn1 的定义是在后面，但是因为被提前声明了， 所以此处可以调用函数
+
+function fn1() {
+    console.log('我是函数 fn1');
+}
+```
+
+**函数表达式：**
+
+使用`函数表达式`创建的函数`var foo = function(){}`，**不会被声明提前**，所以不能在声明前调用。
+
+很好理解，因为此时foo被声明了（这里只是变量声明），且为undefined，并没有把 `function(){}` 赋值给 foo。
+
+所以说，下面的例子，会报错：
+
+```js
+foo();
+
+var foo = function() {
+    console.log("something.")
+}
+/* js引擎执行上述代码其实是按照下边的代码运行的
+1. 变量提升
+var foo;
+2. 代码执行
+foo();
+foo = function(){...};
+*/
+```
+
+
+
+### 两个规律
+
+1. 任何变量，如果未经过声明就赋值，此变量是属于window的属性，而且不会做变量提升。
+2. 一切声明的全局变量，全是window的属性。
+
+
+
+`var a = b = 100` 这行**连续赋值**的代码等价于 `var a = (b = 100)`，其执行顺序是：
+
+（1）先把 100 赋值给 b；
+
+（2）再声明变量 a；
+
+（3）再把 b 的值赋值给 a。
+
+
+
+
+
+### 预解析面试题
+
+**面试题1：**
+
+```js
+var num = 10;
+fun();
+
+function fun() {
+    console.log(num);
+    var num = 20;
+}
+```
+
+结果：
+
+```
+undefined
+```
+
+
+
+解析：
+
+```js
+/* js引擎执行上述代码其实是按照下边的代码运行的
+    1. 变量提升
+    var num;
+    function fun() {...};
+    在function内部有变量提升 var num;
+    2. 代码执行
+    num = 10;
+	fun();
+	进入函数内部执行 console.log(num); 因为函数内部有变量提升 根据就近原则 取函数内部的num
+	num = 20;
+*/
+```
+
+
+
+**面试题2：**
+
+```js
+var num = 10;
+
+function fn() {
+    console.log(num);
+    var num = 20;
+    console.log(num);
+}
+
+fn();
+```
+
+结果：
+
+```
+undefined
+20
+```
+
+
+
+解析:
+
+```js
+/* js引擎执行上述代码其实是按照下边的代码运行的
+    1. 变量提升
+    var num;
+    function fn() {...};
+    在function内部有变量提升 var num;
+    2. 代码执行
+    num = 10;
+	fn();
+	进入函数内部执行 console.log(num); 因为函数内部有变量提升 根据就近原则 取函数内部的num
+				   num = 20;
+				   console.log(num);
+*/
+```
+
+
+
+**面试题3：**
+
+```js
+var a = 10;
+fn();
+
+function fn() {
+    var b = 9;
+    console.log(a);
+    console.log(b);
+    var a = '123';
+}
+```
+
+结果：
+
+```
+undefined
+9
+```
+
+
+
+解析：
+
+```js
+/* js引擎执行上述代码其实是按照下边的代码运行的 */
+var a;
+function fn() {
+    var b;
+    var a;
+    b = 9;
+    console.log(a);
+    console.log(b);
+    a = '123';
+}
+a = 10;
+fn();
+```
+
+
+
+**面试题4：**
+
+```js
+fn();
+console.log(c);
+console.log(b);
+console.log(a);
+function fn() {
+    var a = b = c = 9;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+```
+
+结果
+
+```
+9
+9
+9
+9
+9
+Uncaught ReferenceError: a is not defined
+```
+
+
+
+解析
+
+```js
+/* js引擎执行上述代码其实是按照下边的代码运行的 */
+function fn() {
+    var a;
+    c = 9;
+    b = c;
+	a = b;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+fn();
+console.log(c);
+console.log(b);
+console.log(a);
+```
+
