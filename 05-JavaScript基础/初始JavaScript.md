@@ -2441,3 +2441,221 @@ console.log(b);
 console.log(a);
 ```
 
+
+
+
+
+## 对象
+
+### 对象的概念
+
+在 JavaScript 中，对象是一组**无序**的相关属性和方法的集合。
+
+**对象的作用是：封装信息**。比如Student类里可以封装学生的姓名、年龄、成绩等。
+
+对象具有**特征**（属性）和**行为**（方法）。
+
+
+
+### 为什么需要对象
+
+保存一个值时，可以使用**变量**，保存多个值（一组值）时，可以使用**数组**。
+
+比如，如果要保存一个人的信息，通过数组的方式可以这样保存：
+
+```js
+var arr = ['王二', 35, '男', '180'];
+```
+
+上面这种表达方式比较乱。而如果用JS中的**对象**来表达，**结构会更清晰**。如下：
+
+```js
+var person = {};
+
+person.name = '王二';
+person.age = 35;
+person.sex = '男';
+person.height = '180';
+```
+
+由此可见，对象里面的属性均是**键值对**：
+
+- 键：相当于属性名。
+- 值：相当于属性值，可以是任意类型的值（数字类型、字符串类型、布尔类型，函数类型等）。
+
+
+
+对象的属性值可以是任何的数据类型，也可以是个**函数**：（也称之为方法）
+
+```js
+var obj = new Object();
+obj.sayName = function () {
+    console.log('smyhvae');
+};
+
+console.log(obj.sayName);  //没加括号，就是获取方法
+console.log('-----------');
+console.log(obj.sayName());  //加了括号，就是调用方法。即：执行函数内容，并执行函数体的内容
+```
+
+
+
+对象中的属性值，也可以是一个**对象**。
+
+举例：
+
+```js
+//创建对象 obj1
+var obj1 = new Object();
+obj1.test = undefined;
+
+//创建对象 obj2
+var obj2 = new Object();
+obj2.name = "smyhvae";
+
+//将整个 obj2 对象，设置为 obj1 的属性
+obj1.test = obj2;
+
+console.log(obj1.test.name);
+```
+
+
+
+### 创建自定义对象的几种方法
+
+
+
+#### 方式一：对象字面量
+
+**对象的字面量**就是一个{}。里面的属性和方法均是**键值对**：
+
+- 键：相当于属性名。
+- 值：相当于属性值，可以是任意类型的值（数字类型、字符串类型、布尔类型，函数类型等）。
+
+使用对象字面量来创建一个对象，非常简洁，举例如下：：
+
+```js
+var obj = {};
+```
+
+使用对象字面量，可以在创建对象时，直接指定对象中的属性。语法：{属性名:属性值,属性名:属性值....}
+
+例 1：（一个简单的对象）
+
+```js
+const obj1 = {
+    name: '千古壹号',
+    age: 28,
+};
+```
+
+例 2：（一个较复杂的对象）
+
+```js
+const obj2 = {
+            name: "千古壹号",
+            age: 26,
+            isBoy: true,
+            // 还可以存放一个嵌套的对象
+            test: {
+                id: 123,
+                tel: 180
+            }
+		    //我们还可以在对象中增加一个方法。以后可以通过obj.sayName()的方式调用这个方法
+            sayName: function() {
+                console.log(this.name);
+            }
+        };
+
+console.log(JSON.stringify(obj));
+```
+
+对象字面量的属性名可以加引号也可以不加，建议不加。如果要使用一些特殊的名字，则必须加引号。
+
+属性名和属性值是一组一组的键值对结构，键和值之间使用`:`连接，多个值对之间使用`,`隔开。
+
+
+
+#### 方式二：工厂模式 new Object()
+
+
+
+通过该方法可以大批量的创建对象。
+
+```js
+/*
+ * 使用工厂方法创建对象
+ *  通过该方法可以大批量的创建对象
+ */
+function createPerson(name, age, gender) {
+    //创建一个新的对象
+    var obj = new Object();
+    //向对象中添加属性
+    obj.name = name;
+    obj.age = age;
+    obj.gender = gender;
+    obj.sayName = function () {
+        alert(this.name);
+    };
+    //将新的对象返回
+    return obj;
+}
+
+var obj2 = createPerson('猪八戒', 28, '男');
+var obj3 = createPerson('白骨精', 16, '女');
+var obj4 = createPerson('蜘蛛精', 18, '女');
+```
+
+第一次看到这种工厂模式时，你可能会觉得陌生。如果简化一下，可以写成下面这种形式，更容易理解：（也就是，利用 new Object 创建对象）
+
+```js
+var obj = new Obect();
+obj.name = '猪八戒';
+obj.age = 28;
+obj.gender = '男';
+obj.sayHi = function () {
+    alert('hello world');
+};
+```
+
+**弊端：**
+
+使用工厂方法创建的对象，使用的构造函数都是 Object。**所以创建的对象都是 Object 这个类型，就导致我们无法区分出多种不同类型的对象**。
+
+
+
+#### 方式三：利用构造函数
+
+```js
+//利用构造函数自定义对象
+var stu1 = new Student('smyh');
+console.log(stu1);
+stu1.sayHi();
+
+var stu2 = new Student('vae');
+console.log(stu2);
+stu2.sayHi();
+
+// 创建一个构造函数
+function Student(name) {
+    this.name = name; //this指的是当前对象实例【重要】
+    this.sayHi = function () {
+        console.log(this.name + '厉害了');
+    };
+}
+```
+
+
+
+**构造函数**是一种特殊的函数，主要用来创建和初始化对象，也就是为对象的成员变量赋初始值。它与 `new` 一起使用才有意义。
+
+我们可以把对象中一些公共的属性和方法抽取出来，然后封装到这个构造函数里面。
+
+
+
+构造函数的创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。
+
+构造函数和普通函数的区别就是**调用方式**的不同：普通函数是直接调用，而构造函数需要使用 new 关键字来调用。
+
+
+
