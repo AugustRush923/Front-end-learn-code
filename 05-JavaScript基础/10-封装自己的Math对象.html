@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var myMath = {
+            Pi: Math.PI,
+            max: function () {
+                var max = arguments[0];
+                for (let index = 1; index < arguments.length; index++) {
+                    if (max < arguments[index]) {
+                        max = arguments[index];
+                    }
+                }
+                return max;
+            },
+            min: function () {
+                var min = arguments[0];
+                for (let index = 1; index < arguments.length; index++) {
+                    if (min > arguments[index]) {
+                        min = arguments[index];
+                    }
+                }
+                return min;
+            }
+        }
+        console.log(myMath.Pi);
+        console.log(myMath.max(1, 99, 4, 5));
+        console.log(myMath.min(1, 99, 4, 5));
+    </script>
+</body>
+
+</html>

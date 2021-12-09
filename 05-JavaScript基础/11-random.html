@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // [0, max)  0到max，但不包括max
+        function getRandom1(max) {
+            return Math.floor(Math.random() * max);
+        }
+        console.log(getRandom1(10));
+
+        // [min, max) min到max，但不包括max
+        function getRandom2(min, max) {
+            return Math.floor(Math.random() * (max-min)) + min;
+        }
+        console.log(getRandom2(10, 20));
+
+        // [min, max] min到max
+        function getRandom3(min, max) {
+            return Math.floor(Math.random() * (max-min+1)) + min;
+        }
+        console.log(getRandom3(1, 50));
+
+        // 猜数字
+        function guessNumber() {
+            var chance = 10;
+            var real_number = getRandom3(1, 50);
+            while (chance>0) {
+                var number = prompt("猜数字：请输入1-50之间的数字（还有" + chance + "次机会）");
+                if (number < real_number) {
+                    alert('小了.');
+                }else if (number > real_number) {
+                    alert('大了.');
+                }else {
+                    alert('猜对了');
+                    break;
+                }
+                chance--;
+            }
+        }
+        guessNumber();
+    </script>
+</body>
+</html>
