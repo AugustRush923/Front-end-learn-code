@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function formatCurrentDate() {
+            // 获取日期对象
+            var time = new Date();
+            // 年 
+            var year = time.getFullYear();
+            // 月（从0开始到11）
+            var month = time.getMonth() + 1;
+            // 日（从1开始到31）
+            var day = time.getDate();
+            // 星期 （从0开始到6）
+            var weekArray = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+            var week = weekArray[time.getDay()];
+            // 组装成子串返回
+            var currentDate = year + '年' + month + '月' + day + '日 ' + week;
+            return currentDate;
+        }
+
+        function formatCurrentTime() {
+            var time = new Date();
+
+            var hours = time.getHours();
+            hours = hours < 10 ? '0' + hours : hours;
+            var minutes = time.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var seconds = time.getSeconds();
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var currentTime = hours + ':' + minutes + ':' + seconds;
+
+            return currentTime;
+        }
+        document.write('<div>' + formatCurrentDate() + '</div>');
+        document.write('<div>' + formatCurrentTime() + '</div>');
+    </script>
+</body>
+
+</html>
