@@ -2979,11 +2979,8 @@ function formatDate() {
 console.log(formatDate());
 ```
 
-
-
 ##### 获取时间戳
 
-### 
 
 ```js
 // 方式一：获取 Date 对象的时间戳（最常用的写法）
