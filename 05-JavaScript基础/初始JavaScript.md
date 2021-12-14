@@ -4265,5 +4265,88 @@ arr.reduce(function (previousValue, currentValue, currentIndex, arr) {}, initial
 
 
 
+为了方便理解 reduce()，我们先来看看下面的简单代码，过渡一下：
+
+```js
+let arr1 = [1, 2, 3, 4, 5, 6];
+
+arr1.reduce((prev, item) => {
+    console.log(prev);
+    console.log(item);
+    console.log('------');
+    return 88;
+}, 0);
+```
+
+打印结果：
+
+```
+0
+1
+------
+88
+2
+------
+88
+3
+------
+88
+4
+------
+88
+5
+------
+88
+6
+------
+```
+
+上面的代码中，由于`return`的是固定值，所以 prev 打印的也是固定值（只有初始值是 0，剩下的遍历中，都是打印 88）。
+
+
+
+**reduce() 的常见应用**
+
+举例一  求和
+
+计算数组中所有元素项的总和。代码实现：
+
+```js
+var arr = [1, 3, 5, 7, 9];
+
+var total = arr.reduce(function(prev, current_value){
+    return prev += current_value;
+})
+console.log(total)
+```
+
+
+
+举例二 统计某元素出现的次数
+
+```js
+function repeatCount(arr, value) {
+    return arr.reduce((prev, curr_v) => {
+        // if (curr_v === value) {
+        //     prev++;
+        // }
+        prev += curr_v === value ? 1:0;
+        return prev;
+    }, 0)
+}
+```
+
+
+
+举例三  求最大值
+
+```js
+function maxValue(arr) {
+    return arr.reduce((prev, curr_v) => {
+        return curr_v > prev ? curr_v : prev;
+    }, 0)
+}
+```
+
 
 
