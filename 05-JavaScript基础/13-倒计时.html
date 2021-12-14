@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function countDown(setTimeOut) {
+            var current_time = +new Date(); // 获取当前时间戳；
+            // console.log(current_time);
+            var settime_timestamp = +new Date(setTimeOut); // 获取设定结束时间戳
+            // console.log(settime_timestamp);
+            var remainder_timestamp = settime_timestamp - current_time; // 获取两者相差时间戳
+            // console.log(remainder_timestamp);
+
+            // 对两者相差时间戳进行格式化转换
+            var day = parseInt(remainder_timestamp / 1000 / 60 / 60 / 24); // 天
+            day = day < 10 ? '0' + day : day;
+            var hour = parseInt((remainder_timestamp / 1000 / 60 / 60) % 24); // 时
+            hour = hour < 10 ? '0' + hour : hour;
+            var minu = parseInt((remainder_timestamp / 1000 / 60) % 60); // 分
+            minu = minu < 10 ? '0' + minu : minu;
+            var sec = parseInt((remainder_timestamp / 1000) % 60); // 秒
+            sec = sec < 10 ? '0' + sec : sec;
+            var millsec = parseInt(remainder_timestamp % 1000); // 毫秒
+            if (millsec < 10) {
+                millsec = '00' + millsec;
+            } else if (millsec < 100) {
+                millsec = '0' + millsec;
+            }
+
+            if (remainder_timestamp < 0) {
+                return '已过时，还有00天00小时00分00秒000毫秒'
+            }
+            // console.log(day, hour, minu, sec, millsec);
+            return '还有' + day + '天' + hour + '小时' + minu + '分' + sec + '秒' + millsec + '毫秒';
+        }
+        console.log(countDown('2021-12-10 12:00:00'));
+    </script>
+</body>
+
+</html>
