@@ -60,7 +60,32 @@
         // 题目：将一个字符串数组的元素的顺序进行反转，使用两种种方式实现。提示：第 i 个和第 length-i-1 个进行交换。
         strArr = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         strArr.reverse();
-        console.log(strArr);        
+        console.log(strArr);
+
+        // 问题：找到数组["c","a","z","a","x","a"]中每一个元素出现的次数。
+        charArr = ["c", "a", "z", "a", "x", "a"];
+        norepeat_charArr = ["c", "a", "z", "a", "x", "a"];
+        for (let i = 0; i < norepeat_charArr.length; i++) {
+            for (let j = i + 1; j < norepeat_charArr.length; j++) {
+                if (norepeat_charArr[i] === norepeat_charArr[j]) {
+                    norepeat_charArr.splice(j, 1);
+                    j--;
+                }
+            }
+        }
+        console.log(norepeat_charArr);
+        var obj = {};
+
+        for (let i = 0; i < norepeat_charArr.length; i++) {
+            obj[norepeat_charArr[i]] = 0;
+            console.log(norepeat_charArr[i]);
+        }
+        console.log(obj);
+        console.log(charArr);
+        for (let i = 0; i < charArr.length; i++) {
+            obj[charArr[i]] += 1;
+        }
+        console.log(obj);
     </script>
 </body>
 
