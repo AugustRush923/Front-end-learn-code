@@ -3158,10 +3158,6 @@ console.log(formatDate());
 
 ##### 获取时间戳
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d80c3c7de42152dbc586ae561fc727146d9c8a18
 ```js
 // 方式一：获取 Date 对象的时间戳（最常用的写法）
 const timestamp1 = +new Date();
@@ -4553,6 +4549,88 @@ function maxValue(arr) {
         return curr_v > prev ? curr_v : prev;
     }, 0)
 }
+```
+
+
+
+
+
+## DOM
+
+
+
+### DOM简介
+
+**DOM**：Document Object Model，文档对象模型。DOM 为文档提供了结构化表示，并定义了如何通过脚本来访问文档结构。目的其实就是为了能让js操作html元素而制定的一个规范。
+
+
+
+DOM就是由节点组成的。
+
+**解析过程**： HTML加载完毕，渲染引擎会在内存中把HTML文档，生成一个DOM树，getElementById是获取内中DOM上的元素节点。然后操作的时候修改的是该元素的**属性**。
+
+
+
+![](images/DOM树.jpg)
+
+**在HTML当中，一切都是节点**（非常重要）。整个html文档就是一个文档节点。所有的节点都是Object。
+
+
+
+**节点**（Node）：构成 HTML 网页的最基本单元。网页中的每一个部分都可以称为是一个节点，比如：html标签、属性、文本、注释、整个文档等都是一个节点。
+
+虽然都是节点，但是实际上他们的具体类型是不同的。常见节点分为四类：
+
+-   文档节点（文档）：整个 HTML 文档。整个 HTML 文档就是一个文档节点。
+-   元素节点（标签）：HTML标签。
+-   属性节点（属性）：元素的属性。
+-   文本节点（文本）：HTML标签中的文本内容（包括标签之间的空格、换行）。
+
+节点的类型不同，属性和方法也都不尽相同。所有的节点都是Object。
+
+
+
+**DOM可以做什么**
+
+-   找对象（元素节点）
+-   设置元素的属性值
+-   设置元素的样式
+-   动态创建和删除元素
+-   事件的触发响应：事件源、事件、事件的驱动程序
+
+
+
+### 元素节点的获取
+
+DOM节点的获取方式其实就是**获取事件源的方式**。
+
+
+
+想要操作元素节点，必须首先要找到该节点。有三种方式可以获取DOM节点：
+
+```js
+var div1 = document.getElementById("box1"); //方式一：通过 id 获取 一个 元素节点（为什么是一个呢？因为 id 是唯一的）
+
+var arr1 = document.getElementsByTagName("div"); //方式二：通过 标签名 获取 元素节点数组，所以有s
+
+// H5新增属性，不兼容IE8以下浏览器
+var arr2 = document.getElementsByClassName("hehe"); //方式三：通过 类名 获取 元素节点数组，所以有s
+
+var element = document.querySelector("选择器"); // 根据指定选择器返回第一个元素对象
+
+var arr3 = document.querySelectorAll('选择器'); // 故居指定选择器返回指定所有元素对象集合
+```
+
+
+
+既然方式二、方式三获取的是标签数组，那么习惯性是**先遍历之后再使用**。
+
+特殊情况：数组中的值只有1个。即便如此，这一个值也是包在数组里的。这个值的获取方式如下：
+
+```js
+document.getElementsByTagName("div1")[0];    //取数组中的第一个元素
+
+document.getElementsByClassName("hehe")[0];  //取数组中的第一个元素
 ```
 
 
