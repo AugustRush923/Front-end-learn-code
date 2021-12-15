@@ -4635,3 +4635,26 @@ document.getElementsByClassName("hehe")[0];  //取数组中的第一个元素
 
 
 
+**获取特殊元素（html，body）**
+
+获取body元素：
+
+```js
+var bodyEle = document.body;
+```
+
+
+
+获取html元素：
+
+```js
+var htmlEle = document.documentElement;
+```
+
+
+
+### 事件
+
+事件就是文档或浏览器窗口中发生的一些特定的交互瞬间。对于 Web 应用来说，有下面这些代表性的事件：点击某个元素、将鼠标移动至某个元素上方、关闭弹窗等等。
+
+JavaScript 是以**事件驱动为核心**的一门语言。JavaScript 与 HTML 之间的交互是通过事件实现的。
