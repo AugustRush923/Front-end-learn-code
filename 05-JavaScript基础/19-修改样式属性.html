@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: deeppink;
+        }
+
+        input {
+            display: block;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: 100px auto 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 500px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .current {
+            background-color: red !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <div style="width: 100px;height: 100px; background-color: hotpink;"></div>
+
+    <hr>
+    <ul>
+        <input type="text">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+    </ul>
+
+    <hr>
+    <div class="wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>课程</th>
+                    <th>成绩</th>
+                </tr>
+            </thead>
+            <tbody id="target">
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>生命壹号</td>
+                    <td>语文</td>
+                    <td>100</td>
+
+                </tr>
+                <tr>
+                    <td>
+                        2
+                    </td>
+                    <td>生命贰号</td>
+                    <td>日语</td>
+                    <td>99</td>
+                </tr>
+                <tr>
+                    <td>
+                        3
+                    </td>
+                    <td>生命叁号</td>
+                    <td>营销学</td>
+                    <td>98</td>
+                </tr>
+                <tr>
+                    <td>
+                        4
+                    </td>
+                    <td>生命伍号</td>
+                    <td>数学</td>
+                    <td>90</td>
+                </tr>
+                <tr>
+                    <td>
+                        5
+                    </td>
+                    <td>许嵩</td>
+                    <td>英语</td>
+                    <td>96</td>
+                </tr>
+                <tr>
+                    <td>
+                        6
+                    </td>
+                    <td>vae</td>
+                    <td>体育</td>
+                    <td>90</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 1、获取元素对象
+        var div = document.querySelector('div');
+
+        // 2、修改样式属性
+        div.onmouseover = function () {
+            // div.style
+            this.style.width = '300px';
+            this.style.height = '300px';
+            this.style.backgroundColor = 'deepskyblue';
+        }
+        div.onmouseout = function () {
+            // this.style.width = '200px';
+            this.style['width'] = '200px';
+            // this.style.height = '200px';
+            this.style['height'] = '200px';
+            // this.style.backgroundColor = 'deeppink';
+            this.style['backgroundColor'] = 'deeppink';
+        }
+
+        var div2 = document.querySelectorAll('div')[1];
+
+        div2.onmouseover = function () {
+            this.style.width = '200px';
+            this.style.height = '200px';
+            this.style.backgroundColor = 'black';
+            this.style.opacity = '0.2';
+        }
+
+        // 让所有的input标签获取焦点后高亮显示
+        var inpArr = document.querySelectorAll('input');
+
+        for (var i = 0; i < inpArr.length; i++) {
+            inpArr[i].onfocus = function () {
+                this.style.border = "2px solid red";
+                this.style.backgroundColor = '#ccc';
+            }
+            inpArr[i].onblur = function () {
+                this.style.border = '';
+                this.style.backgroundColor = '';
+            }
+        }
+
+        // 高级隔行变色、高亮显示
+        var trArr = document.querySelectorAll('tr');
+        for (let i = 0; i < trArr.length; i++) {
+            if (i % 2 === 0) {
+                // 双行
+                trArr[i].style.backgroundColor = "#a3a3a3";
+            } else {
+                // 单行
+                trArr[i].style.backgroundColor = '#ccc';
+            }
+            var color = ''; // 定一个变量做记录
+            trArr[i].onmouseover = function () {
+                // 获取当前背景颜色
+                color = this.style.backgroundColor;
+                // 设置鼠标经过时背景颜色
+                this.style.backgroundColor = '#fff';
+            }
+            
+            trArr[i].onmouseout = function () {
+                // if (i % 2 === 0) {
+                //     trArr[i].style.backgroundColor = "#a3a3a3";
+                // } else {
+                //     trArr[i].style.backgroundColor = '#ccc';
+                // }
+
+                // 还原初始背景颜色
+                this.style.backgroundColor = color;
+            }
+        }
+    </script>
+</body>
+
+</html>

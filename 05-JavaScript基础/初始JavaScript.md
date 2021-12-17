@@ -4658,3 +4658,235 @@ var htmlEle = document.documentElement;
 事件就是文档或浏览器窗口中发生的一些特定的交互瞬间。对于 Web 应用来说，有下面这些代表性的事件：点击某个元素、将鼠标移动至某个元素上方、关闭弹窗等等。
 
 JavaScript 是以**事件驱动为核心**的一门语言。JavaScript 与 HTML 之间的交互是通过事件实现的。
+
+#### 事件的三要素
+
+**事件的三要素：事件源、事件、事件驱动程序**。
+
+- 事件源：引发后续事件的html标签。
+- 事件：js已经定义好了（见下图）。
+- 事件驱动程序：对样式和html的操作。也就是DOM。
+
+也就是说，我们可以在时间对应的属性中写一些js代码，当事件被触发时，这些代码将会执行。
+
+**代码书写步骤如下：**（重要）
+
+- （1）获取事件源：document.getElementById(“box”); 
+- （2）绑定事件： 事件源box.事件onclick = function(){ 事件驱动程序 };
+- （3）书写事件驱动程序：关于DOM的操作。
+
+例：
+
+```html
+<body>
+<div id="box1"></div>
+
+<script type="text/javascript">
+    // 1、获取事件源
+    var div = document.getElementById("box1");
+    // 2、绑定事件
+    div.onclick = function () {
+        // 3、书写事件驱动程序
+        alert("我是弹出的内容");
+    }
+</script>
+
+</body>
+```
+
+#### 常见事件
+
+| 事件名      | 说明                               |
+| ----------- | ---------------------------------- |
+| onclick     | 鼠标点击                           |
+| ondblclick  | 鼠标双击                           |
+| onkeyup     | 按下并释放键盘上的一个键时触发     |
+| onchange    | 文本内容或下拉菜单中的选项发生改变 |
+| onfocus     | 获得焦点，表示文本框等获得鼠标光标 |
+| onblur      | 失去焦点，即鼠标停留在图片等的上方 |
+| onmouseover | 鼠标悬停，即鼠标停留在图片等的上方 |
+| onmouseout  | 鼠标移出，即离开图片等所在的区域   |
+| onload      | 网页文档加载事件                   |
+| onunload    | 关闭网页时                         |
+| onsubmit    | 表单提交事件                       |
+| onreset     | 重置表单时                         |
+
+
+
+### 操作元素
+
+#### 改变元素内容
+
+```js
+element.innerText
+```
+
+从起始位置到终止位置的内容，但它取出html标签，同时空格和换行也会去掉。
+
+
+
+```js
+element.innerHTML
+```
+
+起始位置到终止位置的全部内容，包括html标签，同时保留空格和换行。
+
+
+
+**innerText和innerHTML的区别**
+
+* innerText不识别HTML标签，innerHTML识别HTML标签。
+* innerText去除空格和换行
+
+
+
+
+
+#### 操作元素属性
+
+常见的元素属性有`src`、`href`、`title`、`alt`等
+
+
+
+语法：
+
+```
+元素节点.元素属性 = 值;
+```
+
+
+
+例：
+
+```js
+var buttons = document.querySelectorAll('button');
+var img = document.querySelector('img');
+buttons[1].onclick = function () {
+    img.src = 'https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg';
+    img.title = '老婆二';
+}
+buttons[0].onclick = function () {
+    img.src = 'https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg';
+    img.title = '老婆一';
+}
+```
+
+
+
+#### 操作表单元素属性
+
+常见的表单元素有`type`、`value`、`disabled`等
+
+
+
+获取表单内的文字数据不是使用innerHTML而是使用`元素属性value`来获取的。
+
+
+
+语法：
+
+```
+表单元素节点.表单元素属性 = 值;
+```
+
+
+
+例：
+
+```js
+var show = document.querySelector('#show');
+var pwdInput = document.querySelector('#pwd');
+show.onclick = function () {
+    console.log(pwdInput.type);
+    if (pwdInput.type == 'password') {
+        pwdInput.type = 'text';
+    } else {
+        pwdInput.type = 'password';
+    }
+}
+```
+
+#### 操作元素样式属性
+
+我们可以通过JS修改元素的大小、颜色、位置等样式。在DOM当中，如果想设置样式，有两种形式：
+
+- element.className（针对内嵌样式）
+- element.style（针对行内样式）
+
+
+
+**element.style**
+
+语法：
+
+```
+// 方式一
+元素.style.样式名 = 样式值;
+
+// 方式二
+元素.style['属性'] = 样式值;
+```
+
+
+
+例：
+
+```js
+// 1、获取元素对象
+var div = document.querySelector('div');
+
+// 2、修改样式属性
+div.onmouseover = function() {
+    // div.style
+    this.style.width = '300px';
+    this.style.height = '300px';
+    this.style.backgroundColor = 'deepskyblue';
+}
+div.onmouseout = function() {
+    this.style['width'] = '200px';
+    this.style['height'] = '200px'; 
+    this.style['backgroundColor'] = 'deeppink';
+}
+```
+
+
+
+注意：
+
+1. JS里面的样式采取驼峰命名法
+2. JS修改style样式操作，产生的是行内样式，css权重比较高
+3. element.style只能获取行内样式，不能获取内嵌样式和外链样式
+4. 样式少的时候推荐使用
+5. style是对象。typeof的结果是Object
+6. 值是字符串，没有设置值是""
+
+
+
+**cssText**这个属性，其实就是把行内样式里面的值当做字符串来对待。
+
+```js
+var box1 = document.getElementsByTagName("div")[0];
+
+//通过cssText一次性设置行内样式
+box1.style.cssText = "width: 300px;height: 300px;background-color: green;";
+
+console.log(box1.style.cssText);   //这一行更加可以理解,style是对象
+```
+
+
+
+**element.className**
+
+可以通过修改元素的`className`更改元素的样式，适合于样式较多或者功能复杂的情况
+
+
+
+语法：
+
+```
+元素.className = '类名'
+```
+
+
+
+className会直接更改元素的类名，会覆盖原先的类名。

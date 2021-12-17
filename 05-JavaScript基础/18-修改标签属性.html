@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 235px;
+            height: 235px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>老婆一</button>
+    <button>老婆二</button>
+    <br>
+    <img src="https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg" alt="" title="老婆一">
+    <hr>
+    <p>早上的老婆</p>
+    <img class="second" src="https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg"
+        alt="">
+    <hr>
+    <input type="password" name="" id="pwd">
+    <button id="show">显示密码</button>
+    <script>
+        var buttons = document.querySelectorAll('button');
+        var img = document.querySelector('img');
+        buttons[1].onclick = function () {
+            img.src = 'https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg';
+            img.title = '老婆二';
+        }
+        buttons[0].onclick = function () {
+            img.src = 'https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg';
+            img.title = '老婆一';
+        }
+
+        var p = document.querySelector('p');
+        var secondImg = document.querySelector('.second');
+        var time = new Date();
+        if (time.getHours() <= 12) {
+            p.innerHTML = '早上的老婆';
+            secondImg.src = 'https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg';
+        } else if (time.getHours() > 12 && time.getHours() <= 18) {
+            p.innerHTML = '下午的老婆';
+            secondImg.src = 'https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg';
+        } else if (time.getHours() > 18 && time.getHours() <= 24) {
+            p.innerHTML = '晚上的老婆';
+            secondImg.src = 'https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg';
+        }
+
+        var show = document.querySelector('#show');
+        var pwdInput = document.querySelector('#pwd');
+        show.onclick = function () {
+            console.log(pwdInput.type);
+            if (pwdInput.type == 'password') {
+                pwdInput.type = 'text';
+            } else {
+                pwdInput.type = 'password';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('../02-层叠样式表/fonts/icomoon.eot?bfm2h8');
+            src: url('../02-层叠样式表/fonts/icomoon.eot?bfm2h8#iefix') format('embedded-opentype'),
+                url('../02-层叠样式表/fonts/icomoon.ttf?bfm2h8') format('truetype'),
+                url('../02-层叠样式表/fonts/icomoon.woff?bfm2h8') format('woff'),
+                url('../02-层叠样式表/fonts/icomoon.svg?bfm2h8#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            color: grey;
+            outline: none;
+            border: 1px #d9d9d9 solid;
+        }
+
+        .focus {
+            border: 1px solid pink;
+        }
+
+        .container {
+            width: 100%;
+            height: 80px;
+            background-color: rgb(35, 0, 1);
+            margin-bottom: 5px;
+        }
+
+        .ad {
+            margin: 0 auto;
+            width: 1190px;
+            height: 100%;
+            /* background-color: purple; */
+            background-image: url('https://img14.360buyimg.com/pop/jfs/t1/117997/23/24286/28622/61b36b18Eca7b9e49/54f7b7cc7039195f.jpg.webp');
+            position: relative;
+        }
+
+        i {
+            font-family: 'icomoon';
+            position: absolute;
+            right: 0;
+            top: 5px;
+        }
+
+        i::before {
+            content: '\e93e';
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .xiala {
+            position: relative;
+            left: 50px;
+        }
+
+        ul {
+            list-style: none;
+            display: none;
+        }
+
+        ul li {
+            border: 1px solid #000;
+            width: 100px;
+            line-height: 44px;
+            text-align: center;
+        }
+
+        .xiala div {
+            width: 100px;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="#">
+            <div class="ad">
+                <i></i>
+            </div>
+        </a>
+    </div>
+    <input type="text" value="邮箱/ID/手机号" />
+    <input type="text" value="密码" />
+    <hr>
+    <div class="xiala">
+        <div>xiala</div>
+        <ul>
+            <li>11</li>
+            <li>22</li>
+            <li>33</li>
+            <li>44</li>
+        </ul>
+    </div>
+    <hr>
+    <button>关灯</button>
+    <script>
+        var inpArr = document.querySelectorAll('input');
+        for (let i = 0; i < inpArr.length; i++) {
+            var currentValue = '';
+            inpArr[i].onfocus = function () {
+                currentValue = inpArr[i].value;
+                inpArr[i].value = "";
+                inpArr[i].className = 'focus';
+            }
+            inpArr[i].onblur = function () {
+                inpArr[i].value = currentValue;
+                inpArr[i].className = '';
+            }
+        }
+
+        var i = document.querySelector('i');
+        var container = document.querySelector('.container');
+        i.onclick = function () {
+            container.style.display = 'none';
+        }
+
+        var xiala = document.querySelector('.xiala div');
+        var ul = document.querySelector('.xiala ul');
+        console.log(xiala);
+        console.log(ul);
+        xiala.onmouseover = function () {
+            ul.style.display = 'block';
+        }
+        xiala.onmouseout = function () {
+            ul.style.display = 'none';
+        }
+
+        var button = document.querySelector('button');
+        var body = document.querySelector('body');
+        var flag = 0;
+        button.onclick = function () {
+            if (flag === 0) {
+                body.style.backgroundColor = '#000';
+                this.innerHTML = '开灯';
+                flag++;
+            }else {
+                body.style.backgroundColor = '#fff';
+                this.innerHTML = '关灯';
+                flag--;
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

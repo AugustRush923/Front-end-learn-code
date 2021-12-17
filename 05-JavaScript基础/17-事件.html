@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 50px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">点我实现你的愿望</button>
+
+    <button id="timeBtn">获取当前时间</button>
+
+    <div></div>
+
+    <script>
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            alert("给你100w。");
+        }
+        function getDate() {
+            var currentTime = new Date();
+            var year = currentTime.getFullYear();
+            var month = currentTime.getMonth();
+            var date = currentTime.getDate();
+            var day = currentTime.getDay();
+            return '今天是：' + year + '年' + month + '月' + date + '日' + ' ' + '星期' + day;
+        }
+
+        var timeBtn = document.getElementById('timeBtn');
+        timeBtn.onclick = function () {
+            var div = document.querySelector('div');
+            div.innerText = getDate();
+        }
+    </script>
+</body>
+</html>
