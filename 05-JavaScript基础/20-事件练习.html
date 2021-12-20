@@ -71,6 +71,7 @@
         ul {
             list-style: none;
             display: none;
+            position: absolute;
         }
 
         ul li {
@@ -98,8 +99,8 @@
             </div>
         </a>
     </div>
-    <input type="text" value="邮箱/ID/手机号" />
-    <input type="text" value="密码" />
+    <input type="text" value="" placeholder="邮箱/ID/手机号" />
+    <input type="password" value="" placeholder="密码" />
     <hr>
     <div class="xiala">
         <div>xiala</div>
@@ -115,15 +116,21 @@
     <script>
         var inpArr = document.querySelectorAll('input');
         for (let i = 0; i < inpArr.length; i++) {
-            var currentValue = '';
+            var currentPlaceholder = '';
             inpArr[i].onfocus = function () {
-                currentValue = inpArr[i].value;
-                inpArr[i].value = "";
+                currentPlaceholder = inpArr[i].placeholder;
+                inpArr[i].placeholder = "";
                 inpArr[i].className = 'focus';
             }
+            
             inpArr[i].onblur = function () {
-                inpArr[i].value = currentValue;
-                inpArr[i].className = '';
+                if (inpArr[i].value == '') {
+                    inpArr[i].placeholder = currentPlaceholder;
+                    inpArr[i].className = '';
+                }else {
+                    inpArr[i].style.color = '#000';
+                    inpArr[i].className = '';
+                }
             }
         }
 
@@ -135,8 +142,6 @@
 
         var xiala = document.querySelector('.xiala div');
         var ul = document.querySelector('.xiala ul');
-        console.log(xiala);
-        console.log(ul);
         xiala.onmouseover = function () {
             ul.style.display = 'block';
         }
@@ -152,7 +157,7 @@
                 body.style.backgroundColor = '#000';
                 this.innerHTML = '开灯';
                 flag++;
-            }else {
+            } else {
                 body.style.backgroundColor = '#fff';
                 this.innerHTML = '关灯';
                 flag--;

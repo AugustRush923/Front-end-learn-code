@@ -4890,3 +4890,50 @@ console.log(box1.style.cssText);   //这一行更加可以理解,style是对象
 
 
 className会直接更改元素的类名，会覆盖原先的类名。
+
+
+
+#### 操作自定义元素
+
+##### 获取自定义属性值
+
+语法：
+
+```js
+element.getAttribute('属性', '值');
+```
+
+
+
+与`element.属性`的区别：
+
+* `element.属性`获取内置属性（元素本身自带的属性）
+* `element.getAttribute('属性')`主要获得自定义的属性
+
+
+
+##### 设置自定义属性值
+
+语法:
+
+```js
+element.setAttribute('属性');
+```
+
+
+
+与`element.属性=值`的区别：
+
+* `element.属性=值`设置内置属性
+* `element.setAttribute('属性', '值')` 主要设置自定义属性
+
+
+
+##### 移出自定义属性值
+
+语法：
+
+```js
+element.removeAttribute('属性');
+```
+
