@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+            text-align: center;
+        }
+
+        thead th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        tbody th {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" name="" id="">
+        <button>发布</button>
+
+        <ul>
+        </ul>
+    </div>
+
+
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr>
+                <th>上坂堇</th>
+                <th>特利迦奥特曼</th>
+                <th>100</th>
+                <th><a href="javascript:void(0);">删除</a></th>
+            </tr>
+            <tr>
+                <th>浅仓唯</th>
+                <th>假面骑士</th>
+                <th>100</th>
+                <th><a href="javascript:void(0);">删除</a></th>
+            </tr>
+            <tr>
+                <th>明里紬</th>
+                <th>AV女优</th>
+                <th>100</th>
+                <th><a href="javascript:void(0);">删除</a></th>
+            </tr>
+            <tr>
+                <th>山岸逢花</th>
+                <th>AV女优</th>
+                <th>94</th>
+                <th><a href="javascript:void(0);">删除</a></th>
+            </tr> -->
+        </tbody>
+    </table>
+    <script>
+        var btn = document.querySelector('button');
+        var input = btn.previousElementSibling;
+        var ul = btn.nextElementSibling;
+        btn.onclick = function () {
+            if (input.value == '') {
+                alert('不能发布空内容。')
+                return false;
+            }
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            li.innerText = input.value;
+            input.value = '';
+
+            a.innerText = '删除';
+            a.href = 'javascript:;';
+
+            li.appendChild(a);
+            // ul.appendChild(li);
+            ul.insertBefore(li, ul.children[0]);
+
+            var linkArr = document.querySelectorAll('a');
+            for (let i = 0; i < linkArr.length; i++) {
+                linkArr[i].onclick = function () {
+                    // this.parentNode.parentNode.removeChild(this.parentNode);
+                    ul.removeChild(this.parentNode);
+                    console.log(this.parentNode);
+                }
+            }
+
+        }
+
+        var data = [
+            { name: '上坂堇', profession: '特利迦奥特曼', score: 100 },
+            { name: '浅仓唯', profession: '假面骑士', score: 100 },
+            { name: '明里紬', profession: 'AV女优', score: 100 },
+            { name: '三上悠亚', profession: 'AV女优', score: 100 }
+        ];
+        var tbody = document.querySelector('tbody');
+        // 获取data数值中每个对象
+        for (let i = 0; i < data.length; i++) {
+            // 获取当前对象中键的数组             
+            var tr = document.createElement('tr');
+            var objArr = Object.keys(data[i]);
+            // 根据长度遍历
+            for (let j = 0; j < objArr.length; j++) {
+                var th = document.createElement('th');
+                th.innerText = data[i][objArr[j]];
+                tr.appendChild(th);
+            }
+            var th = document.createElement('th');
+            var a = document.createElement('a');
+            a.href = 'javascript:;';
+            a.innerText = '删除';
+            th.appendChild(a)
+            tr.appendChild(th);
+            tbody.appendChild(tr);
+            a.onclick = function () {
+                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -4973,7 +4973,7 @@ H5规定自定义属性要以`data-`开头作为属性名并且赋值。
 
      
 
-### 节点操作
+### 节点
 
 DOM的节点并不是孤立的，因此可以通过DOM节点之间的相对关系对它们进行访问。如下：
 
@@ -4992,6 +4992,35 @@ DOM的节点并不是孤立的，因此可以通过DOM节点之间的相对关�
 
 
 在实际开发总，节点操作主要操作的是**元素节点**
+
+
+
+**nodeType、nodeName、nodeValue**分别对应元素节点、属性节点、文本节点
+
+```js
+var element = document.getElementById("box1");  //获取元素节点（标签）
+var attribute = element.getAttributeNode("id"); //获取box1的属性节点
+var txt = element.firstChild;                   //获取box1的文本节点
+
+//获取nodeType
+console.log(element.nodeType);       //1
+console.log(attribute.nodeType);     //2
+console.log(txt.nodeType);           //3
+
+console.log("--------------");
+
+//获取nodeName
+console.log(element.nodeName);       //DIV
+console.log(attribute.nodeName);     //id
+console.log(txt.nodeName);           //#text
+
+console.log("--------------");
+
+//获取nodeValue
+console.log(element.nodeValue);     //null
+console.log(attribute.nodeValue);   //box1
+console.log(txt.nodeValue);         //生命壹号
+```
 
 
 
@@ -5110,3 +5139,139 @@ JS中的**父子兄**访问关系：
 节点.children[节点.children.length-1];
 ```
 
+
+
+#### 获取兄弟节点
+
+**1、下一个节点 | 下一个元素节点**：
+
+（1）nextSibling：
+
+- 火狐、谷歌、IE9+版本：都指的是下一个节点（包括标签、空文档和换行节点）。
+- IE678版本：指下一个元素节点（标签）。
+
+
+
+（2）nextElementSibling：
+
+- 火狐、谷歌、IE9+版本：都指的是下一个元素节点（标签）。
+
+
+
+**总结**：为了获取下一个**元素节点**，我们可以这样做：在IE678中用nextSibling，在火狐谷歌IE9+以后用nextElementSibling，于是，综合这两个属性，可以这样写：
+
+```js
+下一个兄弟节点 = 节点.nextElementSibling || 节点.nextSibling
+```
+
+
+
+**2、前一个节点 | 前一个元素节点**：
+
+（1）previousSibling：
+
+- 火狐、谷歌、IE9+版本：都指的是前一个节点（包括标签、空文档和换行节点）。
+- IE678版本：指前一个元素节点（标签）。
+
+
+
+（2）previousElementSibling：
+
+- 火狐、谷歌、IE9+版本：都指的是前一个元素节点（标签）。
+
+
+
+**总结**：为了获取前一个**元素节点**，我们可以这样做：在IE678中用previousSibling，在火狐谷歌IE9+以后用previousElementSibling，于是，综合这两个属性，可以这样写：
+
+```js
+前一个兄弟节点 = 节点.previousElementSibling || 节点.previousSibling
+```
+
+
+
+### 节点的操作
+
+#### 创建节点
+
+语法：
+
+```js
+document.createElement('标签名');
+```
+
+
+
+例：
+
+```js
+var a1 = document.createElement("li");   //创建一个li标签
+var a2 = document.createElement("adbc");   //创建一个不存在的标签
+
+console.log(a1);
+console.log(a2);
+
+console.log(typeof a1);
+console.log(typeof a2);
+```
+
+
+
+#### 插入节点
+
+插入节点有两种方式，它们的含义是不同的。
+
+方式1：
+
+```js
+父节点.appendChild(新的子节点);
+```
+
+appendChild是为父节点的**最后**插入一个新的子节点。
+
+方式2：
+
+```js
+父节点.insertBefore(新的子节点, 作为参考的子节点);
+```
+
+insertBefore在参考节点**前**插入一个新的节点。如果参考节点为null，那么他将在父节点里面的最后插入一个子节点。
+
+
+
+#### 删除节点
+
+语法：
+
+```js
+父节点.removeChild(子节点);
+```
+
+
+
+removeChild**用父节点删除子节点**，必须要指定是删除那个子节点。
+
+
+
+如果想删除自己这个节点，可以这么做：
+
+```js
+currentNode.parentNode.removeChild(currentNode);
+```
+
+
+
+#### 复制节点（克隆节点）
+
+语法：
+
+```js
+Node.cloneNode();
+Node.cloneNode(true);
+```
+
+
+
+括号里带不带参数，效果是不同的。
+
+* 不带参数/带参数false：只复制节点本身，不复制子节点。
+* 带参数true：即复制节点本身，也复制其所有的子节点。
