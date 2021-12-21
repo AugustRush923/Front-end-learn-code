@@ -129,22 +129,31 @@
         for (let i = 0; i < data.length; i++) {
             // 获取当前对象中键的数组             
             var tr = document.createElement('tr');
-            var objArr = Object.keys(data[i]);
+            /* var objArr = Object.keys(data[i]);
             // 根据长度遍历
             for (let j = 0; j < objArr.length; j++) {
                 var th = document.createElement('th');
                 th.innerText = data[i][objArr[j]];
                 tr.appendChild(th);
+            } */
+
+            // 遍历当前对象以获取value
+            for (var k in data[i]) {
+                var td = document.createElement('th');
+                td.innerText = data[i][k];
+                tr.appendChild(td);
             }
-            var th = document.createElement('th');
-            var a = document.createElement('a');
-            a.href = 'javascript:;';
-            a.innerText = '删除';
-            th.appendChild(a)
-            tr.appendChild(th);
+            var td = document.createElement('th');
+            // var a = document.createElement('a');
+            // a.href = 'javascript:;';
+            // a.innerText = '删除';
+            // td.appendChild(a)
+            td.innerHTML = '<a href="javascript:;">删除</a>';
+            tr.appendChild(td);
             tbody.appendChild(tr);
+            var a = td.lastElementChild;
             a.onclick = function () {
-                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+                tbody.removeChild(this.parentNode.parentNode);
             }
         }
     </script>

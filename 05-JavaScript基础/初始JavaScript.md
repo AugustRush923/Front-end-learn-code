@@ -5275,3 +5275,30 @@ Node.cloneNode(true);
 
 * 不带参数/带参数false：只复制节点本身，不复制子节点。
 * 带参数true：即复制节点本身，也复制其所有的子节点。
+
+
+
+#### 三种动态创建元素区别
+
+JS中三种动态创建元素方法：
+
+```js
+document.write()
+
+element.innnerHTML
+
+document.createElement()
+```
+
+
+
+**区别：**
+
+1. document.write是直接将内容写入页面的内容流，**但是文档流执行完毕，它则会导致页面全部重绘**
+2. innerHTML是将内容写入某个DOM节点，不会导致页面全部重绘
+3. innerHTML创建多个元素效率更高（前提不要拼接字符串，采取数组形式拼接），结构稍微复杂
+4. createElement() 创建多个元素效率稍微低一点点，但是结构更清晰
+
+总结：
+
+不同浏览器下，innerHTML效率要比createElement高。
