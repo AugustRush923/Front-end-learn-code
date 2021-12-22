@@ -5648,17 +5648,104 @@ event.bubbles
 
 
 
+#### 事件对象
+
+当事件的响应函数被触发时，会产生一个事件对象`event`。浏览器每次都会将这个事件作为实参传进之前的响应函数。
+
+这个对象中包含了与当前事件相关的一切信息。比如谁绑定了这个事件。比如鼠标触发事件的话，会得到鼠标的相关信息。
 
 
 
+简单来说，事件发生后，跟事件相关的一系列信息数据的集合都放到这个对象里面。
 
 
 
+##### 获取event对象
+
+所有浏览器都支持event对象，但支持的方式不同。
+
+**高版本浏览器**
+
+```js
+btn.onclick = function(event) {
+    console.log(event);
+}
+```
 
 
 
+**IE 678**
+
+```js
+btn.onclick = function() {
+    console.log(window.event);
+}
+```
 
 
+
+**兼容性写法**
+
+```
+event = event || window.event;
+```
+
+
+
+##### event常见属性和方法
+
+| event对象属性方法   | 说明                                       |
+| ------------------- | ------------------------------------------ |
+| e.target            | 返回触发事件的对象（标准）                 |
+| e.srcElement        | 返回触发事件的对象（非标准）               |
+| e.type              | 返回事件的类型                             |
+| e.cancelBubble      | 该属性阻止冒泡 非标准 ie678使用            |
+| e.returnValue       | 该属性阻止默认事件（默认行为）非标准       |
+| e.preventDefault()  | 该方法阻止默认事件（默认行为）标准         |
+| e.stopPropagation() | 该方法阻止冒泡 标准                        |
+| e.timeStamp         | 返回事件生成的日期和时间。                 |
+| e.bubbles           | 返回布尔值，指示事件是否是冒泡事件类型     |
+| e.button            | 返回当钱时间被触发时，哪个鼠标按钮被点击   |
+| e.pageX             | 光标相对于该网页的水平位置                 |
+| e.pageY             | 光标相对于该网页的垂直位置                 |
+| e.clientX           | 光标相对于该网页的水平位置（当前可视区域） |
+| e.clientY           | 光标相对于该网页的垂直位置（当前可视区域） |
+| e.screenX           | 光标相对于显示器的水平位置                 |
+| e.screenY           | 光标相对于显示器的垂直位置                 |
+
+
+
+##### 阻止冒泡的方法
+
+标准方法：
+
+```js
+event.stopPropagation();
+```
+
+
+
+非标准(IE10以下):
+
+```js
+event.cancelBubble = true;
+```
+
+
+
+兼容性处理：
+
+```js
+box.onclick = function(event) {
+    event = event || window.event;
+    
+    if (event && event.stopPropagation) {
+        event.stopPropagation();
+    }else {
+        
+    }
+}
+```
 
 
 
