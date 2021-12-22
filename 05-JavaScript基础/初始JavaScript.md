@@ -4696,20 +4696,22 @@ JavaScript 是以**事件驱动为核心**的一门语言。JavaScript 与 HTML 
 
 #### 常见事件
 
-| 事件名      | 说明                               |
-| ----------- | ---------------------------------- |
-| onclick     | 鼠标点击                           |
-| ondblclick  | 鼠标双击                           |
-| onkeyup     | 按下并释放键盘上的一个键时触发     |
-| onchange    | 文本内容或下拉菜单中的选项发生改变 |
-| onfocus     | 获得焦点，表示文本框等获得鼠标光标 |
-| onblur      | 失去焦点，即鼠标停留在图片等的上方 |
-| onmouseover | 鼠标悬停，即鼠标停留在图片等的上方 |
-| onmouseout  | 鼠标移出，即离开图片等所在的区域   |
-| onload      | 网页文档加载事件                   |
-| onunload    | 关闭网页时                         |
-| onsubmit    | 表单提交事件                       |
-| onreset     | 重置表单时                         |
+| 事件名      | 说明                                            |
+| ----------- | ----------------------------------------------- |
+| onclick     | 鼠标点击                                        |
+| ondblclick  | 鼠标双击                                        |
+| onkeyup     | 按下并释放键盘上的一个键时触发                  |
+| onchange    | 文本内容或下拉菜单中的选项发生改变              |
+| onfocus     | 获得焦点，表示文本框等获得鼠标光标              |
+| onblur      | 失去焦点，即鼠标停留在图片等的上方              |
+| onmouseover | 鼠标悬停，即鼠标停留在图片等的上方              |
+| onmouseout  | 鼠标移出，即离开图片等所在的区域                |
+| onload      | 网页文档加载事件                                |
+| onunload    | 关闭网页时                                      |
+| onsubmit    | 表单提交事件                                    |
+| onreset     | 重置表单时                                      |
+| contextmenu | 控制右键菜单（配合event实现禁止鼠标右键菜单）   |
+| selectstart | 控制鼠标点击滑动选中(配合event实现禁止鼠标选中) |
 
 
 
@@ -5592,7 +5594,7 @@ childBox.addEventListener("click", function () {
 
 当一个元素上的事件被触发的时候，同样的事件将会在那个元素的所有祖先元素中被触发。这一过程被称为事件冒泡；这个事件从原始元素开始一直冒泡到DOM树的最上层。
 
-简单来说，**子元素的事件被触发时，父元素的同样的事件也会被触发。**去雄冒泡就是取消这种机制。
+简单来说，**子元素的事件被触发时，父元素的同样的事件也会被触发。**取消冒泡就是取消这种机制。
 
 
 
@@ -5749,7 +5751,85 @@ box.onclick = function(event) {
 
 
 
+### 事件委托
 
+比如说有一个列表 ul，列表之中有大量的列表项 `<a>`标签：
+
+```html
+<ul id="parent-list">
+    <li><a href="javascript:;" class="my_link">超链接一</a></li>
+    <li><a href="javascript:;" class="my_link">超链接二</a></li>
+    <li><a href="javascript:;" class="my_link">超链接三</a></li>
+</ul>
+```
+
+当我们的鼠标移到`<a>`标签上的时候，需要获取此`<a>`的相关信息并飘出悬浮窗以显示详细信息，或者当某个`<a>`被点击的时候需要触发相应的处理事件。我们通常的写法，是为每个`<a>`都绑定类似onMouseOver或者onClick之类的事件监听：
+
+```js
+ window.onload = function(){
+        var parentNode = document.getElementById("parent-list");
+        var aNodes = parentNode.getElementByTagName("a");
+        for(var i=0, l = aNodes.length; i < l; i++){
+
+            aNodes[i].onclick = function() {
+                console.log('我是超链接 a 的单击相应函数');
+            }
+        }
+    }
+```
+
+但是，上面的做法过于消耗内存和性能。**我们希望，只绑定一次事件，即可应用到多个元素上**，即使元素是后来添加的。
+
+因此，比较好的方法就是把这个点击事件绑定到他的父层，也就是 `ul` 上，然后在执行事件函数的时候再去匹配判断目标元素。如下：
+
+```html
+<!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="utf-8" />
+    <title></title>
+<script type="text/javascript">
+  window.onload = function() {
+
+  // 获取父节点，并为它绑定click单击事件。 false 表示事件在冒泡阶段触发（默认）
+  document.getElementById('parent-list').addEventListener('click', function(event) {
+    event = event || window.event;
+
+    // e.target 表示：触发事件的对象
+    //如果触发事件的对象是我们期望的元素，则执行否则不执行
+    if (event.target && event.target.className == 'link') {
+      // 或者写成 if (event.target && event.target.nodeName.toUpperCase() == 'A') {
+      console.log('我是ul的单击响应函数');
+    }
+  }, false);
+};
+</script>
+</head>
+<body>
+  <ul id="parent-list" style="background-color: #bfa;">
+    <li>
+    <p>我是p元素</p>
+</li>
+<li><a href="javascript:;" class="link">超链接一</a></li>
+  <li><a href="javascript:;" class="link">超链接二</a></li>
+    <li><a href="javascript:;" class="link">超链接三</a></li>
+      </ul>
+</body>
+```
+
+上方代码，为父节点注册 click 事件，当子节点被点击的时候，click事件会从子节点开始**向父节点冒泡**。**父节点捕获到事件**之后，开始执行方法体里的内容：通过判断 event.target 拿到了被点击的子节点`<a>`。从而可以获取到相应的信息，并作处理。
+
+换而言之，参数为false，说明事件是在冒泡阶段触发（子元素向父元素传递事件）。而父节点注册了事件函数，子节点没有注册事件函数，此时，会在父节点中执行函数体里的代码。
+
+**总结**：事件委托是利用了冒泡机制，减少了事件绑定的次数，减少内存消耗，提高性能。
+
+
+
+不是每个子节点单独设置事件监听器，而是事件监听器设置在其父节点上，然后利用冒泡原理影响设置每个子节点。
+
+
+
+事件委托的作用：只操作了一次DOM，提高了程序的性能。
 
 
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="images/angel.gif" alt="">
+    <ul id="parent-list" style="background-color: #bfa;">
+        <li>
+            <p>我是一段不愿意分享的文字</p>
+        </li>
+        <li><a href="javascript:;" class="link">超链接一</a></li>
+        <li><a href="javascript:;" class="link">超链接二</a></li>
+        <li><a href="javascript:;" class="link">超链接三</a></li>
+    </ul>
+
+    <script>
+        var ul = document.querySelector('#parent-list');
+        // 获取父节点，并为它绑定click单击事件。 false 表示事件在冒泡阶段触发（默认）
+        ul.addEventListener('click', function(event) {
+            e = event || window.event;
+            // e.target 表示：触发事件的对象
+            console.log(e.target);
+            //如果触发事件的对象是我们期望的元素，则执行否则不执行
+            if (e.target && e.target.className == 'link') {
+                console.log('单击响应事件');
+            }
+        }, false);
+
+        var p = document.querySelector('p');
+        // 禁止鼠标右键菜单
+        p.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+        // 禁止鼠标选中
+        p.addEventListener('selectstart', function (event) {
+            event.preventDefault();
+        });
+
+        // 图片跟随鼠标
+        var pic = document.querySelector('img');
+        // 1. mouseover事件 只要鼠标移动 就会触发这个事件
+        document.addEventListener('mousemove', function (event) {
+            // 获取事件对象
+            event = event || window.event;
+
+            // 获取x坐标y坐标
+            var x = event.pageX;
+            var y = event.pageY;
+
+            // 给图片配置left和top属性
+            pic.style.left = x + 'px';
+            pic.style.top = y + 'px';
+        })
+    </script>
+</body>
+
+</html>
