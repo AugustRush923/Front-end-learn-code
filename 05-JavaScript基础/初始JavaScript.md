@@ -5302,3 +5302,379 @@ document.createElement()
 总结：
 
 不同浏览器下，innerHTML效率要比createElement高。
+
+
+
+### 事件高级
+
+#### 绑定事件的两种方式
+
+##### 1. 传统方式：
+
+```js
+element.事件 = function () {
+    
+}
+```
+
+例：
+
+```js
+var btn = document.querySelector('button');
+
+btn.onclick = function() {
+    console.log('1');
+}
+
+btn.onclick = function() {
+    console.log('2');
+}
+```
+
+
+
+`DOM对象.事件 = 函数`的这种绑定方式，一个元素的一个事件只能绑定一个响应函数。如果绑定多个响应函数，则后者会覆盖前者。
+
+
+
+##### 2. 方法监听注册方式
+
+```js
+element.addEventListener('事件', function() {
+    
+}, false);
+```
+
+
+
+参数解释：
+
+* 参数1：事件名的字符串（没有on）。
+* 参数2：回调函数 当事件触发时，该函数会被执行
+* 参数3：true表示捕获阶段触发，false表示冒泡阶段触发。如果不写，默认为false。
+
+
+
+例：
+
+```js
+var btn = document.querySelector('button');
+
+btn.addEventListener('click', function() {
+   alert(1); 
+});
+btn.addEventListener('click', function() {
+    alert(2);
+});
+```
+
+
+
+`addEventListener()`这种绑定事件方式的特点：
+
+* 一个元素的一个事件，可以绑定多个响应函数。不存在响应函数被覆盖的情况。**其执行顺序是：**事件被触发时，响应函数会按照函数的绑定顺序执行。
+* addEventListener()中的this，指的是绑定事件的对象。
+* addEventListener()不支持IE9以下的浏览器。
+
+
+
+在IE9以下的浏览器使用`attachEvent()`来绑定事件
+
+```js
+element.attachEvent('事件', function() {
+    
+});
+```
+
+
+
+参数解释：
+
+* 参数1：事件名是字符串（注意，有on）
+* 参数2：回调函数 当事件触发时，该函数会被执行
+
+
+
+例：
+
+```js
+var btn = document.querySelector('button');
+btn.attachEvent('onclick', function() {
+    alert(1);
+});
+btn.attachEvent('onclick', function() {
+    alert(2);
+})
+```
+
+
+
+`attachEvent()`这种绑定方式的特点：
+
+* 一个元素的一个事件，可以绑定多个响应函数。不存在响应函数被覆盖的情况。**执行顺序是**，后绑定的先执行。
+* `attachEvent()`中的this，指的是window。
+
+
+
+**兼容性写法**
+
+一般是封装到一个函数内：
+
+```js
+function bindEvent(element, eventStr, callback) {
+    if(element.addEventListener) {
+        element.addEventListener(eventStr, callback, false);
+    }else {
+        element.attachEvent('on' + eventStr, function() {
+            callback.call(element);
+        });
+    }
+}
+```
+
+
+
+#### 解绑事件
+
+##### 1.传统方式
+
+```js
+element.事件 = null;
+```
+
+例：
+
+```js
+var btn = document.querySelector('button');
+
+btn.onclick = function() {
+    alert(1);
+    btn.onclick = null;
+}
+```
+
+
+
+2.方法监听注册方式
+
+```js
+element.removeEventListener(事件类型, 回调函数, [true/false])
+```
+
+
+
+例：
+
+```js
+function fn() {
+    alert(2);
+    divArr[1].removeEventListener('click', fn);
+}
+
+divArr[1].addEventListener('click', fn);
+```
+
+
+
+removeEventListener不支持IE9之前的浏览器
+
+
+
+```js
+element.attachEvent(on事件类型, 回调函数);
+```
+
+
+
+例：
+
+```js
+function fn() {
+    alert(2);
+    divArr[2].detachEvent('onclick', fn);
+}
+
+divArr[2].attachEvent('onclick', fn);
+```
+
+
+
+**解绑事件兼容性解决方案**
+
+```js
+function unbindEvent(element, eventName, callback) {
+    if (element.removeEventListener) {
+        element.removeEventListener(eventName, fn);
+    }else if(element.detachEvent) {
+        element.detachEvent('on' + eventName, fn);
+    }else {
+        element['on' + eventName] = null;
+    }
+}
+```
+
+
+
+#### DOM事件流
+
+事件流描述的是从页面中接收事件的顺序。
+
+
+
+事件发生时会在元素节点之间按照特定的顺序传播，这个传播过程就是DOM事件流。
+
+
+
+DOM事件流分为3个阶段：事件捕获、事件目标和事件冒泡。
+
+![](images/DOM事件流.png)
+
+* 事件捕获阶段：事件从祖先元素往子元素查找(DOM树结构)，直到捕获到事件目标target。在这个过程中，默认情况下，事件相应的监听函数是不会被触发的。
+* 事件目标：当到达目标元素之后，执行目标元素该事件相应的处理函数。如果没有绑定监听函数，则不执行。
+* 事件冒泡阶段：事件从事件目标target开始，从子元素往族元素冒泡，直到页面的最上一级标签。
+
+
+
+JS代码只能执行捕获或冒泡其中的一个阶段。`onclick`和`attachEvent`只能得到冒泡阶段。
+
+
+
+##### 事件捕获
+
+`addEventListener(type, listener, useCapture)`当其第三个参数为true时，表示在事件捕获阶段调用事件处理程序。
+
+
+
+例
+
+```js
+window.addEventListener("click", function () {
+    alert("捕获 window");
+}, true);
+
+document.addEventListener("click", function () {
+    alert("捕获 document");
+}, true);
+
+document.documentElement.addEventListener("click", function () {
+    alert("捕获 html");
+}, true);
+
+document.body.addEventListener("click", function () {
+    alert("捕获 body");
+}, true);
+
+fatherBox.addEventListener("click", function () {
+    alert("捕获 father");
+}, true);
+
+childBox.addEventListener("click", function () {
+    alert("捕获 child");
+}, true);
+
+```
+
+
+
+当处于捕获阶段时，事件一次传递的顺序是：window -> document -> html -> body -> 父元素 -> 子元素 -> 目标元素
+
+
+
+##### 事件冒泡
+
+`onclick`和`attachEvent`只能操作冒泡阶段。
+
+
+
+`addEventListener(type, listener, useCapture)`当其第三个参数为false时，表示在事件冒泡阶段调用事件处理程序。
+
+
+
+当一个元素上的事件被触发的时候，同样的事件将会在那个元素的所有祖先元素中被触发。这一过程被称为事件冒泡；这个事件从原始元素开始一直冒泡到DOM树的最上层。
+
+简单来说，**子元素的事件被触发时，父元素的同样的事件也会被触发。**去雄冒泡就是取消这种机制。
+
+
+
+例：
+
+```js
+//事件冒泡
+box3.onclick = function () {
+    alert("child");
+}
+
+box2.onclick = function () {
+    alert("father");
+}
+
+box1.onclick = function () {
+    alert("grandfather");
+}
+
+document.onclick = function () {
+    alert("body");
+}
+```
+
+
+
+当处于冒泡阶段时，事件一次传递的顺序是：目标元素 -> 子元素 -> 父元素 -> body -> html -> document -> window
+
+
+
+以下事件不冒泡：
+
+* blur
+* focus
+* load
+* unload
+* onmouseenter
+* onmouseleave
+
+
+
+不冒泡就代表不会往父元素那里传递。
+
+
+
+如果想检查一个元素是否会冒泡，可以通过事件的以下参数：
+
+```js
+event.bubbles
+```
+
+如果返回值为true，说明该事件会冒泡；反之则不会。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
