@@ -4696,22 +4696,20 @@ JavaScript 是以**事件驱动为核心**的一门语言。JavaScript 与 HTML 
 
 #### 常见事件
 
-| 事件名      | 说明                                            |
-| ----------- | ----------------------------------------------- |
-| onclick     | 鼠标点击                                        |
-| ondblclick  | 鼠标双击                                        |
-| onkeyup     | 按下并释放键盘上的一个键时触发                  |
-| onchange    | 文本内容或下拉菜单中的选项发生改变              |
-| onfocus     | 获得焦点，表示文本框等获得鼠标光标              |
-| onblur      | 失去焦点，即鼠标停留在图片等的上方              |
-| onmouseover | 鼠标悬停，即鼠标停留在图片等的上方              |
-| onmouseout  | 鼠标移出，即离开图片等所在的区域                |
-| onload      | 网页文档加载事件                                |
-| onunload    | 关闭网页时                                      |
-| onsubmit    | 表单提交事件                                    |
-| onreset     | 重置表单时                                      |
-| contextmenu | 控制右键菜单（配合event实现禁止鼠标右键菜单）   |
-| selectstart | 控制鼠标点击滑动选中(配合event实现禁止鼠标选中) |
+| 事件名      | 说明                               |
+| ----------- | ---------------------------------- |
+| onclick     | 鼠标点击                           |
+| ondblclick  | 鼠标双击                           |
+| onkeyup     | 按下并释放键盘上的一个键时触发     |
+| onchange    | 文本内容或下拉菜单中的选项发生改变 |
+| onfocus     | 获得焦点，表示文本框等获得鼠标光标 |
+| onblur      | 失去焦点，即鼠标停留在图片等的上方 |
+| onmouseover | 鼠标悬停，即鼠标停留在图片等的上方 |
+| onmouseout  | 鼠标移出，即离开图片等所在的区域   |
+| onload      | 网页文档加载事件                   |
+| onunload    | 关闭网页时                         |
+| onsubmit    | 表单提交事件                       |
+| onreset     | 重置表单时                         |
 
 
 
@@ -5833,15 +5831,71 @@ box.onclick = function(event) {
 
 
 
+### 常用的鼠标事件
+
+| 事件           | 说明                                                    |
+| -------------- | ------------------------------------------------------- |
+| onmousedown    | 当鼠标在被拖拽元素上按下时，开始拖拽                    |
+| onmousemove    | 当鼠标移动时被拖拽元素跟随鼠标移动                      |
+| onmouseup      | 当鼠标松开时，被拖拽元素固定在当前位置                  |
+| onmousewheel   | 鼠标滚轮滚动的事件，会在滚轮滚动时触发 火狐不支持该属性 |
+| DOMMouseScroll | 鼠标滚轮滚动的事件，火狐专用。                          |
+| contextmenu    | 控制右键菜单（配合event实现禁止鼠标右键菜单）           |
+| selectstart    | 控制鼠标点击滑动选中(配合event实现禁止鼠标选中)         |
 
 
 
+### 常用的键盘事件
+
+| 事件       | 说明                                     |
+| ---------- | ---------------------------------------- |
+| onkeyup    | 某个键盘按键被松开时触发                 |
+| onkeydown  | 某个键盘按键被按下时触发                 |
+| onkeypress | 某个键盘按键被按下时触发，但不识别功能键 |
 
 
 
+**keydown和keypress的区别：**
+
+* **keydown**可以识别键盘上所有的按键，但不能识别字母的大小写，统一识别成大写。
+* **keypress**只识别键盘上非功能按键，但可以区别识别字母的大小写。
 
 
 
+#### 判断用户按下哪个键
+
+可以通过事件对象(event)来获取特定key来获取对应按下的键盘按键
+
+* event.key：返回的是按键名称（有兼容性问题）
+* event.code：返回的是按键名称（有兼容性问题）
+* event.keyCode：返回的按键的ASCII码
+* event.altKey：判断alt是否被按下，如果按下返回true，反之返回false
+* event.ctrlKey：判断ctrl是否被按下，如果按下返回true，反之返回false
+* event.shiftKey：判断shift是否被按下，如果按下返回true，反之返回false
 
 
+
+**判断用户是否同时按下ctrl+c**
+
+```js
+event = event || window.event;
+if (event.ctrlKey && event.keyCode==67) {
+    console.log('用户同时按下了ctrl+v');
+};
+```
+
+
+
+**input文本框中，禁止输入数字**
+
+```js
+var inp = document.querySelector('#inp');
+inp.addEventListener('keydown', function (event) {
+    console.log(event);
+    if (event.keyCode >= 48 && event.keyCode <= 57) {
+        //在文本框中输入内容，属于onkeydown的默认行为
+        return false; // 如果在onkeydown中取消了默认行为，则输入的内容，不会出现在文本框中
+    }
+});
+```
 

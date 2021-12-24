@@ -24,20 +24,24 @@
     <br>
 
     <script>
+        // 绑定事件 I9及以上
         // var divArr = document.querySelectorAll('div');
         var divArr = document.getElementsByTagName('div');
         divArr[0].onclick = function () {
             alert(1);
+            // 解绑事件 IE9及以上
             divArr[0].onclick = null;
         }
 
         function fn() {
             alert(2);
+            // 绑定事件
             divArr[1].removeEventListener('click', fn);
+            // IE 678 解绑事件
             // divArr[2].detachEvent('onclick', fn);
         }
         divArr[1].addEventListener('click', fn);
-
+        // IE 678 绑定事件
         // divArr[2].attachEvent('onclick', fn);
     </script>
 </body>

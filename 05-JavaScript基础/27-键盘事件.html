@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .search {
+            width: 300px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .boost {
+            width: 178px;
+            height: 20px;
+            border: 2px solid #ccc;
+            font-size: 18px;
+            color: #333;
+            line-height: 20px;
+            /* display: none; */
+            margin-bottom: 5px;
+            position: relative;
+        }
+        em {
+            position: absolute;
+            border: 8px solid #fff;
+            top: 20px;
+            left: 14px;
+            border-bottom: 0;
+            border-color: #fff transparent transparent;
+
+        }
+        ins {
+            position: absolute;
+            border: 8px solid #d8d8d8;
+            top: 20px;
+            left: 14px;
+            border-top-color: transparent;
+            border-bottom: 0;
+            border-color: #d8d8d8 transparent transparent;
+        }
+        #insert {
+            width: 178px;
+            height: 20px;
+            padding: 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="inp">
+    <hr />
+    <input type="text" id="search" placeholder="输入以搜索商品">
+    <hr />
+
+    <div class="search">
+        <div class="boost">
+            <em></em>
+            <ins></ins>
+        </div>
+        <input type="text" id="insert" />
+    </div>
+
+    <script>
+        // document.onkeydown = function (event) {
+        //     console.log(event);
+        //     alert(event.key);
+        //     alert(event.code);
+        //     alert(event.keyCode);
+
+        //     event = event || window.event;
+        //     if (event.ctrlKey && event.keyCode == 67) {
+        //         console.log('用户同时按下了ctrl+v');
+        //     }
+        // }
+
+        var inp = document.querySelector('#inp');
+        inp.addEventListener('keydown', function (event) {
+            console.log(event);
+            if (event.keyCode >= 48 && event.keyCode <= 57) {
+                //在文本框中输入内容，属于onkeydown的默认行为
+                return false; // 如果在onkeydown中取消了默认行为，则输入的内容，不会出现在文本框中
+            }
+        });
+
+        var search = document.querySelector('#search');
+        console.log(search);
+        document.addEventListener('keypress', function (event) {
+            console.log('it worked.');
+            console.log(event.keyCode);
+            if (event.keyCode == 115) {
+                search.focus();
+            }
+        })
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 600px;
+            height: 600px;
+            background-color: gray;
+        }
+
+        .box2 {
+            width: 400px;
+            height: 400px;
+            background-color: green;
+        }
+
+        .box3 {
+            width: 200px;
+            height: 200px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1" id="box1">
+        <div class="box2">
+            <div class="box3"></div>
+        </div>
+    </div>
+    <hr />
+    <div class="box1" id="box2">
+        <div class="box2">
+            <div class="box3"></div>
+        </div>
+    </div>
+    <script>
+        var box1 = document.querySelector('#box1');
+        var box2 = box1.children[0];
+        var box3 = box2.children[0];
+        // 事件捕获 顺序：window -> document -> html -> body -> 父元素 -> 子元素 -> 目标元素
+        box3.addEventListener('click', function () {
+            alert('box3 called');
+        }, true);
+        box2.addEventListener('click', function () {
+            alert('box2 called');
+        }, true);
+        box1.addEventListener('click', function () {
+            alert('box1 called');
+        }, true);
+
+        // 事件冒泡
+        var pbox1 = document.querySelector('#box2');
+        var pbox2 = pbox1.children[0];
+        var pbox3 = pbox2.children[0];
+        // 事件冒泡 顺序：目标元素 -> 子元素 -> 父元素 -> body -> html -> document -> window
+        pbox1.addEventListener('click', function () {
+            alert('pbox1 called');
+        });
+        pbox2.addEventListener('click', function () {
+            alert('pbox2 called');
+        });
+        pbox3.addEventListener('click', function () {
+            alert('pbox3 called');
+        })
+
+    </script>
+</body>
+
+</html>
