@@ -20,29 +20,32 @@
             font-size: 18px;
             color: #333;
             line-height: 20px;
-            /* display: none; */
+            display: none;
             margin-bottom: 5px;
             position: relative;
         }
-        em {
-            position: absolute;
-            border: 8px solid #fff;
-            top: 20px;
-            left: 14px;
-            border-bottom: 0;
-            border-color: #fff transparent transparent;
 
-        }
+        em,
         ins {
             position: absolute;
-            border: 8px solid #d8d8d8;
+            border: 8px solid #000;
+            border-style: solid dashed dashed;
             top: 20px;
             left: 14px;
-            border-top-color: transparent;
             border-bottom: 0;
-            border-color: #d8d8d8 transparent transparent;
         }
-        #insert {
+
+        em {
+            border-color: #d8d8d8 transparent transparent;
+
+        }
+
+        ins {
+            border-color: #fff transparent transparent;
+            top: 18px;
+        }
+
+        #jd_input {
             width: 178px;
             height: 20px;
             padding: 0;
@@ -62,7 +65,7 @@
             <em></em>
             <ins></ins>
         </div>
-        <input type="text" id="insert" />
+        <input type="text" id="jd_input" />
     </div>
 
     <script>
@@ -97,7 +100,24 @@
             }
         })
 
-        
+        var jd_input = document.querySelector('#jd_input');
+        var boost = document.querySelector('.boost');
+        jd_input.addEventListener('focus', function () {
+            if (this.value !== '') {
+                boost.style.display = 'block';
+            }
+        });
+        jd_input.addEventListener('blur', function () {
+            boost.style.display = 'none';
+        });
+        jd_input.addEventListener('keyup', function () {
+            if (this.value == '') {
+                boost.style.display = 'none';
+            } else {
+                boost.style.display = 'block';
+                boost.innerHTML = this.value;
+            }
+        });
     </script>
 </body>
 
