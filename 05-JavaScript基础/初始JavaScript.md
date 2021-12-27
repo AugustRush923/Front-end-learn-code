@@ -6188,3 +6188,51 @@ window对象给我们提供了一个`history`对象，与浏览器历史记录�
 | forward()       | 前进功能                                             |
 | go(n)           | 如果参数为1则前进1个页面，如果参数为-1则后退一个页面 |
 
+
+
+## 网页特效
+
+### 元素偏移量offset系列
+
+通过使用offset系列相关属性可以**动态的**得到该元素的位置(偏移)、大小等。
+
+*   获得元素距离带有**定位**父元素的位置
+*   获得元素自身的大小（宽度高度）
+*   返回的数值都不带单位
+
+
+
+offset系列常用属性：
+
+| offset系列属性       | 作用                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| element.offsetParent | 返回作为该元素带有**定位**的父级元素，如果父级都没有定位则返回body |
+| element.offsetTop    | 返回元素相对带有定位父元素上方的偏移                         |
+| element.offsetLeft   | 返回元素相对带有定位父元素左边框的偏移                       |
+| element.offsetWidth  | 返回自身包括padding、border、content的宽度                   |
+| element.offsetHeight | 返回自身包括padding、border、content的高度                   |
+
+
+
+#### offset与style的区别
+
+**offset**
+
+*   offset可以得到任意样式表中的样式值
+*   offset系列获得的数值是没有单位的
+*   offsetWidth包含padding+border+width
+*   offsetWidth等属性是只读属性，只能获取不能赋值
+*   **当想要获取元素大小位置时，用offset更合适**
+
+
+
+**style**
+
+*   style只能得到行内样式表中的样式值
+*   style.width获得的是带有单位的字符串
+*   style.width获得不包含pading和border的值
+*   style.width是可读写属性，可以获取也可以赋值
+*   当想要给元素更改值时，需要用style改变
+
+
+
