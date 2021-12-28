@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .preview_img {
+            box-sizing: content-box;
+            width: 400px;
+            height: 400px;
+            position: relative;
+            border: 1px solid #ccc;
+            top: 200px;
+            left: 300px;
+        }
+
+        .mask {
+            box-sizing: content-box;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: #FEDE4F;
+            opacity: .5;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+
+        .big {
+            box-sizing: border-box;
+            display: none;
+            position: absolute;
+            left: 410px;
+            top: 0;
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+            z-index: 999;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+
+        .big img {
+            border: 0;
+            vertical-align: middle;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preview_img">
+        <img src="images/s3.png" alt="">
+        <div class="mask"></div>
+        <div class="big">
+            <img src="images/big.jpg" alt="">
+        </div>
+    </div>
+
+
+    <script>
+        var preview = document.querySelector('.preview_img');
+        var mask = document.querySelector('.mask');
+        var big = document.querySelector('.big');
+        var bigImg = document.querySelector('.big img')
+        preview.addEventListener('mouseover', function () {
+            mask.style.display = 'block';
+            big.style.display = 'block';
+        });
+        preview.addEventListener('mouseout', function () {
+            mask.style.display = 'none';
+            big.style.display = 'none';
+        });
+        preview.addEventListener('mousemove', function (event) {
+            e = event || window.event;
+
+            // 获取鼠标在盒子内的位置
+            var inBoxX = e.pageX - this.offsetLeft;
+            var inBoxY = e.pageY - this.offsetTop;
+            // console.log(inBoxX, inBoxY);
+            var maskX = inBoxX - mask.offsetWidth / 2;
+            var maskY = inBoxY - mask.offsetHeight / 2;
+            var maskMaxValue = this.offsetWidth - mask.offsetWidth;
+            // console.log(maskX, maskY);
+            // console.log(big.offsetWidth, bigImg.offsetWidth);
+            var bigMaxValue = bigImg.offsetWidth - big.offsetWidth;
+            // console.log(bigMaxValue);
+            if (maskX <= 0) {
+                maskX = 0;
+            };
+            if (maskX >= maskMaxValue) {
+                maskX = maskMaxValue-1;
+            };
+            if (maskY <= 0) {
+                maskY = 0;
+            };
+            if (maskY >= maskMaxValue) {
+                maskY = maskMaxValue-1;
+            };
+            mask.style.left = maskX + 'px';
+            mask.style.top = maskY + 'px';
+
+            // 大图片的移动距离 = 遮挡层移动距离 * 大图片最大移动距离 / 遮挡层的最大移动距离
+            bigImg.style.left = -(maskX * bigMaxValue / maskMaxValue) + 'px';
+            bigImg.style.top = -(maskY * bigMaxValue / maskMaxValue) + 'px';
+        })
+    </script>
+</body>
+
+</html>
