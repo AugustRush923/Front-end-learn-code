@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: hotpink;
+            position: relative;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+
+    <script>
+        // 1. 获取当前盒子的位置
+        var div = document.querySelector('div');
+        // 3. 利用定时器不断重复这个操作
+        var countdown = setInterval(function () {
+            // 4. 加一个结束定时器的条件
+            if (div.offsetWidth == div.offsetLeft) {
+                clearInterval(countdown);
+            }
+            // 2. 让盒子在当前位置加上1个移动距离(注意此元素需要添加定位)
+            div.style.left = div.offsetLeft + 1 + 'px';
+        }, 30);
+
+    </script>
+</body>
+
+</html>

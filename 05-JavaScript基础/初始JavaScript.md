@@ -6291,7 +6291,7 @@ getScroll().left;
 getScroll().top;
 ```
 
-### 总结
+### offset,client,scroll总结
 
 主要区别：
 
@@ -6320,3 +6320,87 @@ getScroll().top;
 
 
 之所以这样，是因为mouseenter不会冒泡，跟mouseenter搭配鼠标离开的mouseleave同样不会冒泡。
+
+
+
+### 动画函数封装
+
+#### 动画实现原理
+
+**核心原理：**通过定时器`setInterval()`不断移动盒子位置。
+
+
+
+实现步骤：
+
+1. 获取当前盒子的位置
+
+2. 让盒子在当前位置加上1个移动距离(注意此元素需要添加定位)
+
+3. 利用定时器不断重复这个操作
+
+4. 加一个结束定时器的条件
+
+
+#### 动画函数简单封装
+
+函数需要传递2个参数，**动画对象**和**移动到的距离**。
+
+```js
+function moveAround(elementObj, positionY) {
+    // 3. 利用定时器不断重复这个操作
+    elementObj.countdown = setInterval(function () {
+        // 4. 加一个结束定时器的条件
+        if (elementObj.offsetLeft == positionY) {
+            clearInterval(elementObj.countdown);
+            return;
+        }
+        // 2. 让盒子在当前位置加上1个移动距离(注意此元素需要添加定位)
+        elementObj.style.left = elementObj.offsetLeft + 1 + 'px';
+    }, 30);
+}
+```
+
+
+#### 缓动动画效果
+
+缓动动画就是让元素运动速度有所变化，最常见的是让速度慢慢停下来
+
+
+
+思路：
+
+1. 让盒子每次移动的距离慢慢变小，速度就会慢慢落下来。
+
+2. 核心算法： (目标值 - 现在的位置) / 10 作为每次移动的距离步长
+
+3. 停止的条件是：让当前盒子位置等于目标位置就停止定时器
+
+4. 注意步长值需要取整
+
+
+
+**缓动动画公式： (目标值 - 现在的位置) / 10;**
+
+```js
+// 缓动动画公式： (目标值 - 现在的位置) / 10;
+
+function moveAround(elementObj, positionY) {
+
+    // 3. 利用定时器不断重复这个操作
+    elementObj.countdown = setInterval(function () {
+        // 设置一个变化的值，由于除数会有小数，所以向上取整 保证最后能达到目标值
+        lengthPosition = Math.ceil((positionY - elementObj.offsetLeft) / 10);
+        
+        console.log(lengthPosition);
+		// 4. 加一个结束定时器的条件
+        if (elementObj.offsetLeft == positionY) {
+            clearInterval(elementObj.countdown);
+        }
+        // 2. 让盒子在当前位置加上1个移动距离(注意此元素需要添加定位)
+        elementObj.style.left = elementObj.offsetLeft + lengthPosition + 'px';
+    }, 30);
+
+};
+```
+

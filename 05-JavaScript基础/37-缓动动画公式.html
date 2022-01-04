@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: hotpink;
+            position: absolute;
+            left: 0;
+        }
+
+        span {
+            display: block;
+            width: 150px;
+            height: 150px;
+            background-color: yellowgreen;
+            position: absolute;
+            left: 0;
+            top: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+    <span>
+        古丽热巴
+    </span>
+    <script>
+        // 缓动动画公式： (目标值 - 现在的位置) / 10;
+
+        function moveAround(elementObj, positionY) {
+            
+            // 3. 利用定时器不断重复这个操作
+            elementObj.countdown = setInterval(function () {
+                // 4. 加一个结束定时器的条件
+                lengthPosition = Math.ceil((positionY - elementObj.offsetLeft) / 10);
+                console.log(lengthPosition);
+
+                if (elementObj.offsetLeft == positionY) {
+                    clearInterval(elementObj.countdown);
+                }
+                // 2. 让盒子在当前位置加上1个移动距离(注意此元素需要添加定位)
+                elementObj.style.left = elementObj.offsetLeft + lengthPosition + 'px';
+            }, 30);
+
+        };
+
+        var div = document.querySelector('div');
+        moveAround(div, 300);
+        // var span = document.querySelector('span');
+        // moveAround(span, 300);
+    </script>
+</body>
+
+</html>
