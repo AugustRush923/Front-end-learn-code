@@ -6266,3 +6266,57 @@ offset系列常用属性：
 
 
 
+#### 页面被卷去的头部兼容性解决方案
+
+需要注意的是，页面被卷去的头部，有兼容性问题，因此被卷去的头部通常有如下几种写法：
+
+1. 声明了DTD(`<!DOCTYPE html>`)，使用`document.documentElement.scrollTop`
+2. 未声明DTD，使用`document.body.scrollTop`
+3. 新方法`window.pageYOffset`和`window.pageXOffset`,IE9开始支持
+
+
+
+为了解决兼容性，通常把它封装在一个函数内：
+
+```js
+function getScroll() {
+    return {
+        left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    };
+}
+
+// 使用的时候
+getScroll().left;
+getScroll().top;
+```
+
+### 总结
+
+主要区别：
+
+| 名称                | 作用                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| element.offsetWidth | 返回自身包括padding、边框、内容区的宽度，返回数值不带单位    |
+| element.clientWidth | 返回自身包括padding、内容区的宽度，不含边框，返回数值不带单位 |
+| element.scrollWidth | 返回自身实际的宽度，不含边框，返回数值不带单位               |
+
+
+主要用法：
+1. offset系列经常用于获得元素位置 `offsetLeft` 和 `offsetTop`
+
+2. client系列经常用于获取元素大小 `clientWidth` 和 `clientHeight`
+
+3. scroll系列经常用于获取滚动距离 `scrollTop` 和 `scrollLeft`
+
+
+
+**mouseenter和mouseover的区别**
+
+当鼠标移动到元素上时就会触发，但它俩的区别在于：
+
+1. mouseover鼠标经过自身盒子会触发，经过子盒子还会触发。mouseenter只会经过自身盒子触发
+
+
+
+之所以这样，是因为mouseenter不会冒泡，跟mouseenter搭配鼠标离开的mouseleave同样不会冒泡。

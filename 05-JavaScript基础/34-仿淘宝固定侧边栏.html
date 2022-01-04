@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .w {
+            width: 1200px;
+            margin: 10px auto;
+        }
+        .header {
+            height: 150px;
+            background-color: purple;
+        }
+        .banner {
+            height: 250px;
+            background-color: skyblue;
+        }
+        .main {
+            height: 1000px;
+            background-color: yellowgreen;
+        }
+        .sidebar {
+            background-color: pink;
+            width: 45px;
+            height: 130px;
+            position: absolute;
+            top: 300px;
+            left: 50%;
+            margin-left: 600px;
+        }
+        .sidebar span {
+            position: absolute;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header w">头部区域</div>
+    <div class="banner w">banner区域</div>
+    <div class="main w">主体部分</div>
+    <div class="sidebar">
+        <span class="goback">返回顶部</span>
+    </div>
+
+    <script>
+        var sidebar = document.querySelector('.sidebar');
+        var banner = document.querySelector('.banner');
+        var header = document.querySelector('.header');
+        var main = document.querySelector('.main');
+        var gobackSpan = document.querySelector('.goback');
+
+        var bannerTop = banner.offsetTop; // 获取banner到页面顶部的距离 170
+        var siderbarTop = sidebar.offsetTop - banner.offsetTop; // 获取sidebar到banner顶部的距离 130
+        var mainTop = main.offsetTop; // 获取main到页面顶部的距离 430
+        document.addEventListener('scroll', function () {
+            // console.log(11);
+            // console.log(banner.offsetHeight); // 250
+            // console.log(banner.offsetTop); // 170
+            // console.log(banner.clientTop); // 0
+            // console.log(banner.clientHeight); // 250
+            console.log(window.pageYOffset);
+
+            if (window.pageYOffset >= bannerTop) {
+                sidebar.style.position = 'fixed';
+                sidebar.style.top = siderbarTop + 'px';
+            } else {
+                sidebar.style.position = 'absolute';
+                sidebar.style.top = '300px';
+            };
+            if (window.pageYOffset >= mainTop) {
+                gobackSpan.style.display = 'block';
+            } else {
+                gobackSpan.style.display = 'none';
+            }
+        })
+    </script>
+</body>
+</html>
