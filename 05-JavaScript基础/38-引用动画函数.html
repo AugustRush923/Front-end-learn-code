@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .side {
+            position: relative;
+            left: 0;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+        }
+
+        .side span {
+            display: block;
+            width: 40px;
+            background-color: purple;
+            position: absolute;
+
+        }
+
+        .con {
+            width: 200px;
+            background-color: hotpink;
+            position: absolute;
+            z-index: -1;
+            left: -160px;
+        }
+    </style>
+    <script src="js/animate.js"></script>
+</head>
+
+<body>
+    <div class="side">
+        <span>→</span>
+        <div class="con">意见与反馈</div>
+    </div>
+
+    <script>
+        var side = document.querySelector('.side');
+        var span = document.querySelector('.side').firstElementChild;
+        var con = document.querySelector('.con');
+
+        span.addEventListener('mouseenter', function () {
+            // moveAround(elementObj, positionY, callback);
+            moveAround(con, 0, function () {
+                span.innerHTML = '←';
+            });
+        });
+        span.addEventListener('mouseleave', function () {
+            moveAround(con, -160, function () {
+                span.innerHTML = '→';
+            });
+        })
+    </script>
+</body>
+
+</html>
