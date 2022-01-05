@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            content: "";
+            display: table;
+            /*触发BFC BFC可以清除浮动*/
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .box {
+            width: 235px;
+            height: 235px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            /* overflow: hidden; */
+            position: relative;
+        }
+
+        .roulous {
+            width: 1175px;
+            position: absolute;
+            left: 0;
+            z-index: -1;
+        }
+
+        .box ul img {
+            width: 235px;
+            height: 235px;
+            float: left;
+        }
+
+        .left,
+        .right {
+            display: block;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: rgba(204, 204, 204, 0.3);
+            top: 50%;
+            text-align: center;
+            line-height: 50px;
+            transform: translateY(-25px);
+            cursor: pointer;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            right: 0;
+        }
+
+        .circle {
+            width: 100px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -50px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .circle li {
+            width: 10px;
+            height: 10px;
+            background-color: gray;
+            float: left;
+            margin: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .circle .select {
+            background-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box clearfix">
+        <span class="left">←</span>
+        <span class="right">→</span>
+        <ul class="roulous">
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg"
+                    alt="">
+            </li>
+            <li>
+                <img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li>
+        </ul>
+        <ul class="circle">
+            <li class="select"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <script>
+        var left_span = document.querySelector('.left');
+        var right_span = document.querySelector('.right');
+        var roulous = document.querySelector('.roulous');
+        var circle = document.querySelector('.circle');
+
+        left_span.addEventListener('click', function () {
+            var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+            if (current_value == 0) {
+                roulous.style.left = '-940px';
+            } else {
+                roulous.style.left = current_value + 235 + 'px';
+            }
+        });
+        right_span.addEventListener('click', function () {
+            var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+            if (current_value == -940) {
+                roulous.style.left = 0;
+            } else {
+                roulous.style.left = current_value - 235 + 'px';
+            }
+        });
+    </script>
+</body>
+
+</html>
