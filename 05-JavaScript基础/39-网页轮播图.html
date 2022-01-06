@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/animate.js"></script>
     <style>
         * {
             margin: 0;
@@ -36,7 +37,7 @@
             height: 235px;
             margin: 100px auto;
             border: 1px solid #000;
-            /* overflow: hidden; */
+            overflow: hidden;
             position: relative;
         }
 
@@ -126,34 +127,51 @@
             </li>
         </ul>
         <ul class="circle">
-            <li class="select"></li>
+            <!-- <li class="select"></li>
             <li></li>
             <li></li>
             <li></li>
-            <li></li>
+            <li></li> -->
         </ul>
     </div>
 
     <script>
+        // 获取元素
         var left_span = document.querySelector('.left');
         var right_span = document.querySelector('.right');
         var roulous = document.querySelector('.roulous');
         var circle = document.querySelector('.circle');
-
+        var liArr = [];
+        // 根据图片多少动态生成对应圆点
+        for (let i = 0; i < roulous.children.length; i++) {
+            if (i == 0) {
+                liArr.push(`<li class="select" data-index=${i}></li>`)
+            } else {
+                liArr.push(`<li data-index=${i}></li>`);
+            }
+        }
+        circle.innerHTML = liArr.join(' ');
+        // 绑定事件
         left_span.addEventListener('click', function () {
             var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+            // moveAround(elementObj, positionY, callback)
+
             if (current_value == 0) {
-                roulous.style.left = '-940px';
+                // roulous.style.left = '-940px';
+                moveAround(roulous, -940);
             } else {
-                roulous.style.left = current_value + 235 + 'px';
+                // roulous.style.left = current_value + 235 + 'px';
+                moveAround(roulous, current_value + 235);
             }
         });
         right_span.addEventListener('click', function () {
             var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
             if (current_value == -940) {
-                roulous.style.left = 0;
+                // roulous.style.left = 0;
+                moveAround(roulous, 0);
             } else {
-                roulous.style.left = current_value - 235 + 'px';
+                // roulous.style.left = current_value - 235 + 'px';
+                moveAround(roulous, current_value - 235);
             }
         });
     </script>
