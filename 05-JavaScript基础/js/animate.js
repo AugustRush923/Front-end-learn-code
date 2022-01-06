@@ -1,11 +1,11 @@
 function moveAround(elementObj, positionY, callback) {
-
+    clearInterval(elementObj.countdown)
     // 3. 利用定时器不断重复这个操作
     elementObj.countdown = setInterval(function () {
         // 4. 加一个结束定时器的条件
         var lengthPosition = (positionY - elementObj.offsetLeft) / 10;
         lengthPosition = lengthPosition > 0 ? Math.ceil(lengthPosition) : Math.floor(lengthPosition);
-        console.log(lengthPosition);
+        // console.log(lengthPosition);
 
         if (elementObj.offsetLeft == positionY) {
             clearInterval(elementObj.countdown);

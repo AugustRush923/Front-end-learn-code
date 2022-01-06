@@ -212,12 +212,20 @@
             //     // roulous.style.left = current_value - 235 + 'px';
             //     moveAround(roulous, current_value - 235);
             // }
-            console.log(circle.children.length);
             if (num == circle.children.length) {
                 roulous.style.left = 0;
                 num = 0;
             }
+            // 排它思想
+            for (let k = 0; k < circle.children.length; k++) {
+                circle.children[k].className = '';
+            };
             num++;
+            if (num == circle.children.length) {
+                circle.children[0].className = 'select';
+            } else {
+                circle.children[num].className = 'select';
+            }
             moveAround(roulous, -(num * imgWidth));
         });
     </script>
