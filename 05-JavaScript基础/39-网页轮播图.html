@@ -33,17 +33,19 @@
         }
 
         .box {
+            box-sizing: content-box;
             width: 235px;
             height: 235px;
             margin: 100px auto;
             border: 1px solid #000;
-            overflow: hidden;
+            /* overflow: hidden; */
             position: relative;
         }
 
         .roulous {
-            width: 1175px;
+            width: 600%;
             position: absolute;
+            top: 0;
             left: 0;
             z-index: -1;
         }
@@ -140,11 +142,14 @@
 
     <script>
         // 获取元素
+        var num = 0;
         var left_span = document.querySelector('.left');
         var right_span = document.querySelector('.right');
         var roulous = document.querySelector('.roulous');
         var circle = document.querySelector('.circle');
         var box = document.querySelector('.box');
+        var imgWidth = box.clientWidth;
+        console.log(imgWidth);
         // 鼠标经过显示隐藏左右按钮
         box.addEventListener('mouseover', function () {
             left_span.style.display = 'block';
@@ -157,13 +162,34 @@
         var liArr = [];
         // 根据图片多少动态生成对应圆点
         for (let i = 0; i < roulous.children.length; i++) {
-            if (i == 0) {
-                liArr.push(`<li class="select" data-index=${i}></li>`)
-            } else {
-                liArr.push(`<li data-index=${i}></li>`);
-            }
+            // if (i == 0) {
+            //     liArr.push(`<li class="select" data-index=${i}></li>`)
+            // } else {
+            //     liArr.push(`<li data-index=${i}></li>`);
+            // } // 使用数组拼接有一个问题就是不能动态的给li加点击事件
+
+            var li = document.createElement('li'); // 创建一个li标签
+            li.setAttribute('data-index', i); // 通过自定义属性给li添加索引号
+            circle.appendChild(li); // 把刚刚创建的li标签添加到circle
+            // 给每个li动态绑定点击事件
+            li.addEventListener('click', function () {
+                // 获取当前li的索引号
+                var index = this.getAttribute('data-index');
+                // 排它思想
+                for (let k = 0; k < circle.children.length; k++) {
+                    circle.children[k].className = '';
+                };
+                this.className = 'select';
+                // 点击圆点，移动图片
+                // 轮播图的移动距离为 小圆圈的索引号 X 图片的宽度(图片的宽度实际是指盒子的宽度)
+                moveAround(roulous, -(index * imgWidth));
+            });
         }
-        circle.innerHTML = liArr.join(' ');
+        // circle.innerHTML = liArr.join(' ');
+        // 克隆一个第一个li并加入到最后
+        roulous.appendChild(roulous.children[0].cloneNode(true));
+        // 把circle第一个li设置为select
+        circle.children[0].className = 'select';
         // 绑定事件
         left_span.addEventListener('click', function () {
             var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
@@ -178,14 +204,21 @@
             }
         });
         right_span.addEventListener('click', function () {
-            var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
-            if (current_value == -940) {
-                // roulous.style.left = 0;
-                moveAround(roulous, 0);
-            } else {
-                // roulous.style.left = current_value - 235 + 'px';
-                moveAround(roulous, current_value - 235);
+            // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+            // if (current_value == -940) {
+            //     // roulous.style.left = 0;
+            //     moveAround(roulous, 0);
+            // } else {
+            //     // roulous.style.left = current_value - 235 + 'px';
+            //     moveAround(roulous, current_value - 235);
+            // }
+            console.log(circle.children.length);
+            if (num == circle.children.length) {
+                roulous.style.left = 0;
+                num = 0;
             }
+            num++;
+            moveAround(roulous, -(num * imgWidth));
         });
     </script>
 </body>
