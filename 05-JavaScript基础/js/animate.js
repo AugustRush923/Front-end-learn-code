@@ -13,6 +13,8 @@ function moveAround(elementObj, positionY, callback) {
             if (callback) {
                 callback();
             };
+            // 高级写法 在JS中 && 有短路的功能，即如果前一个条件不为真，则不往下执行
+            //callback && callback()
         }
         // 2. 让盒子在当前位置加上1个移动距离(注意此元素需要添加定位)
         elementObj.style.left = elementObj.offsetLeft + lengthPosition + 'px';
