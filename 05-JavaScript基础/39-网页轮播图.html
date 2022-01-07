@@ -38,7 +38,7 @@
             height: 235px;
             margin: 100px auto;
             border: 1px solid #000;
-            /* overflow: hidden; */
+            overflow: hidden;
             position: relative;
         }
 
@@ -142,6 +142,7 @@
 
     <script>
         // 获取元素
+        var flag = true;
         var num = 0;
         var left_span = document.querySelector('.left');
         var right_span = document.querySelector('.right');
@@ -199,57 +200,64 @@
         circle.children[0].className = 'select';
         // 绑定事件
         left_span.addEventListener('click', function () {
-            // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
-            // // moveAround(elementObj, positionY, callback)
+            if (flag) {
+                // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+                // // moveAround(elementObj, positionY, callback)
 
-            // if (current_value == 0) {
-            //     // roulous.style.left = '-940px';
-            //     moveAround(roulous, -940);
-            // } else {
-            //     // roulous.style.left = current_value + 235 + 'px';
-            //     moveAround(roulous, current_value + 235);
-            // }
+                // if (current_value == 0) {
+                //     // roulous.style.left = '-940px';
+                //     moveAround(roulous, -940);
+                // } else {
+                //     // roulous.style.left = current_value + 235 + 'px';
+                //     moveAround(roulous, current_value + 235);
+                // }
+                flag = false;
+                if (num == 0) {
+                    roulous.style.left = -(circle.children.length * imgWidth);
+                    num = circle.children.length;
+                }
+                // 排它思想
+                for (let k = 0; k < circle.children.length; k++) {
+                    circle.children[k].className = '';
+                };
+                num--;
+                circle.children[num].className = 'select';
 
-            if (num == 0) {
-                roulous.style.left = -(circle.children.length * imgWidth);
-                num = circle.children.length;
+                moveAround(roulous, -(num * imgWidth), () => {
+                    flag = true
+                });
             }
-            // 排它思想
-            for (let k = 0; k < circle.children.length; k++) {
-                circle.children[k].className = '';
-            };
-            num--;
-            // if (num == circle.children.length) {
-            //     circle.children[0].className = 'select';
-            // } else {
-            circle.children[num].className = 'select';
-            // }
-            moveAround(roulous, -(num * imgWidth));
         });
         right_span.addEventListener('click', function () {
-            // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
-            // if (current_value == -940) {
-            //     // roulous.style.left = 0;
-            //     moveAround(roulous, 0);
-            // } else {
-            //     // roulous.style.left = current_value - 235 + 'px';
-            //     moveAround(roulous, current_value - 235);
-            // }
-            if (num == circle.children.length) {
-                roulous.style.left = 0;
-                num = 0;
+            // 节流阀
+            if (flag) {
+                // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+                // if (current_value == -940) {
+                //     // roulous.style.left = 0;
+                //     moveAround(roulous, 0);
+                // } else {
+                //     // roulous.style.left = current_value - 235 + 'px';
+                //     moveAround(roulous, current_value - 235);
+                // }
+                flag = false;
+                if (num == circle.children.length) {
+                    roulous.style.left = 0;
+                    num = 0;
+                }
+                // 排它思想
+                for (let k = 0; k < circle.children.length; k++) {
+                    circle.children[k].className = '';
+                };
+                num++;
+                if (num == circle.children.length) {
+                    circle.children[0].className = 'select';
+                } else {
+                    circle.children[num].className = 'select';
+                }
+                moveAround(roulous, -(num * imgWidth), () => {
+                    flag = true
+                });
             }
-            // 排它思想
-            for (let k = 0; k < circle.children.length; k++) {
-                circle.children[k].className = '';
-            };
-            num++;
-            if (num == circle.children.length) {
-                circle.children[0].className = 'select';
-            } else {
-                circle.children[num].className = 'select';
-            }
-            moveAround(roulous, -(num * imgWidth));
         });
 
         // 自动播放功能
