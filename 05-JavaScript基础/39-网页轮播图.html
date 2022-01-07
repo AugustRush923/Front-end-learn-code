@@ -180,6 +180,8 @@
                     circle.children[k].className = '';
                 };
                 this.className = 'select';
+                // 当我们点击了某个小li 就要把这个li 的索引号给 num
+                num = index;
                 // 点击圆点，移动图片
                 // 轮播图的移动距离为 小圆圈的索引号 X 图片的宽度(图片的宽度实际是指盒子的宽度)
                 moveAround(roulous, -(index * imgWidth));
@@ -192,16 +194,32 @@
         circle.children[0].className = 'select';
         // 绑定事件
         left_span.addEventListener('click', function () {
-            var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
-            // moveAround(elementObj, positionY, callback)
+            // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);
+            // // moveAround(elementObj, positionY, callback)
 
-            if (current_value == 0) {
-                // roulous.style.left = '-940px';
-                moveAround(roulous, -940);
-            } else {
-                // roulous.style.left = current_value + 235 + 'px';
-                moveAround(roulous, current_value + 235);
+            // if (current_value == 0) {
+            //     // roulous.style.left = '-940px';
+            //     moveAround(roulous, -940);
+            // } else {
+            //     // roulous.style.left = current_value + 235 + 'px';
+            //     moveAround(roulous, current_value + 235);
+            // }
+
+            if (num == 0) {
+                roulous.style.left = -(circle.children.length * imgWidth);
+                num = circle.children.length;
             }
+            // 排它思想
+            for (let k = 0; k < circle.children.length; k++) {
+                circle.children[k].className = '';
+            };
+            num--;
+            // if (num == circle.children.length) {
+            //     circle.children[0].className = 'select';
+            // } else {
+            circle.children[num].className = 'select';
+            // }
+            moveAround(roulous, -(num * imgWidth));
         });
         right_span.addEventListener('click', function () {
             // var current_value = isNaN(parseInt(roulous.style.left)) ? 0 : parseInt(roulous.style.left);

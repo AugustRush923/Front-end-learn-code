@@ -1,4 +1,5 @@
 function moveAround(elementObj, positionY, callback) {
+    // 先清除以前的定时器，只保留当前的一个定时器执行
     clearInterval(elementObj.countdown)
     // 3. 利用定时器不断重复这个操作
     elementObj.countdown = setInterval(function () {
