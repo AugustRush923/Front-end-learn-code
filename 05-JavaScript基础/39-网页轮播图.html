@@ -152,10 +152,15 @@
         console.log(imgWidth);
         // 鼠标经过显示隐藏左右按钮
         box.addEventListener('mouseover', function () {
+            clearInterval(roulousScroll);
+            roulousScroll = null; // 清空定时器
             left_span.style.display = 'block';
             right_span.style.display = 'block';
         });
         box.addEventListener('mouseleave', function () {
+            roulousScroll = setInterval(() => {
+                right_span.click();
+            }, 2000);
             left_span.style.display = 'none';
             right_span.style.display = 'none';
         })
@@ -246,6 +251,11 @@
             }
             moveAround(roulous, -(num * imgWidth));
         });
+
+        // 自动播放功能
+        var roulousScroll = setInterval(() => {
+            right_span.click();
+        }, 2000);
     </script>
 </body>
 
