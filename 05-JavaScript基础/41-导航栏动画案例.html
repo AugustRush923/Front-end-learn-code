@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .c-nav {
+            width: 900px;
+            height: 42px;
+            background: #fff url(images/rss.png) no-repeat right center;
+            margin: 100px auto;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .c-nav ul {
+            position: absolute;
+        }
+
+        .c-nav li {
+            float: left;
+            width: 83px;
+            text-align: center;
+            line-height: 42px;
+        }
+
+        .c-nav li a {
+            color: #333;
+            text-decoration: none;
+            display: inline-block;
+            height: 42px;
+        }
+
+        .cloud {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+        }
+    </style>
+    <script src="js/animate.js"></script>
+</head>
+
+<body>
+    <div id="c_nav" class="c-nav">
+        <span class="cloud"></span>
+        <ul>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">师资力量</a></li>
+            <li><a href="javascript:;">活动策划</a></li>
+            <li><a href="javascript:;">企业文化</a></li>
+            <li><a href="javascript:;">招聘信息</a></li>
+            <li><a href="javascript:;">公司简介</a></li>
+            <li><a href="javascript:;">我是佩奇</a></li>
+            <li><a href="javascript:;">啥是佩奇</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // 获取对应元素
+        var c_nav = document.querySelector('.c-nav');
+        var cloud = document.querySelector('.cloud');
+        var liArr = document.querySelectorAll('li');
+
+        var current = 0;
+        for (let i = 0; i < liArr.length; i++) {
+            // 给每个li绑定事件
+            liArr[i].addEventListener('mouseenter', function () {
+                // moveAround(elementObj, positionY)
+                moveAround(cloud, this.offsetLeft);
+            })
+
+            liArr[i].addEventListener('mouseleave', function () {
+                moveAround(cloud, current);
+            })
+
+            liArr[i].addEventListener('click', function () {
+                current = this.offsetLeft;
+
+            })
+        }
+    </script>
+</body>
+
+</html>
