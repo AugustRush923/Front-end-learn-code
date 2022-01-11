@@ -6404,3 +6404,45 @@ function moveAround(elementObj, positionY) {
 };
 ```
 
+
+
+## 移动端网页特效
+
+
+
+### 触屏事件
+
+移动端浏览器兼容性较好，我们不需要考虑以前JS的兼容性问题，可以放心的使用原生JS书写效果，但是移动端也有自己独特的地方。比如**触屏事件**（也称触摸事件），Android和IOS都有。
+
+
+
+touch对象代表一个触摸点。触摸点可能是一根手指，也可能是一根触摸笔。触屏事件可响应用户手指（或触控笔）对屏幕或者触控板操作。
+
+
+
+常见的触屏事件如下：
+
+| 触屏touch事件 | 说明                          |
+| ------------- | ----------------------------- |
+| touchstart    | 手指触摸到一个DOM元素时触发   |
+| touchmove     | 手指在一个DOM元素上滑动时触发 |
+| touchend      | 手指从一个DOM元素上移开时触发 |
+
+
+
+```javascript
+var div = document.querySelector('div');
+
+div.addEventListener('touchstart', function() {
+  console.log('touchstart生效');
+})
+
+div.addEventListener('touchmove', function() {
+  console.log('touchmove生效');
+})
+
+div.addEventListener('touchend', function() {
+  console.log('touchend生效');
+})
+```
+
