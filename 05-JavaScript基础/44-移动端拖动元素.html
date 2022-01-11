@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: hotpink;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        // 1. 获取元素
+        var div = document.querySelector('div');
+        var mouseX = 0; // 手指初始坐标
+        var mouseY = 0;
+        var divX = 0; // 盒子初始坐标
+        var divY = 0;
+        // 2. 通过touchstart、touchmove实现拖动元素
+        div.addEventListener('touchstart', function (event) {
+            // 3. 获取手指坐标
+            mouseX = event.targetTouches[0].pageX;
+            mouseY = event.targetTouches[0].pageY;
+            // 4. 获取盒子坐标
+            divX = this.offsetLeft;
+            divY = this.offsetTop;
+        })
+
+        div.addEventListener('touchmove', function (event) {
+            // 5. 计算手指的滑动距离
+            var moveX = event.targetTouches[0].pageX - mouseX;
+            var moveY = event.targetTouches[0].pageY - mouseY;
+            // 6. 移动盒子
+            div.style.left = divX + moveX + 'px';
+            div.style.top = divY + moveY + 'px';
+            // 7.阻止默认的屏幕滚动
+            event.preventDefault();
+        })
+    </script>
+</body>
+
+</html>

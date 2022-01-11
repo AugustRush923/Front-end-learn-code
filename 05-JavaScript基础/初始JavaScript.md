@@ -6464,5 +6464,23 @@ touchstart、touchmove、touchend三个事件都会各自有事件对象。
 
 
 
+#### 移动端拖动元素
 
+**移动端拖动的原理：**手指移动中，计算出手指移动的距离。然后用``盒子原来的位置` + `手指移动的距离`
+
+**手指移动的距离：**`手指滑动中的位置` - `手指刚开始触摸的位置`
+
+1.   touchstart、touchmove、touchend可以实现拖动元素
+2.   但是拖动元素需要当前手指的坐标值，也就是`targetTouches`
+3.   targetTouches为一个列表，需要获取第一个元素也就是`targetTouches[0]`,取到手指对象后需要里面的pageX和pageY
+
+
+
+拖动元素三部曲：
+
+1.   触摸元素touchstart：获取手指初始坐标，同时获得盒子原来的位置
+2.   移动手指touchmove：计算手指的滑动距离，并且移动盒子
+3.   离开手指touchend：
+
+**注意：手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动event.preventDefatult()**
 
