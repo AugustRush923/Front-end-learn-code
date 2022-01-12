@@ -6484,3 +6484,26 @@ touchstart、touchmove、touchend三个事件都会各自有事件对象。
 
 **注意：手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动event.preventDefatult()**
 
+
+
+### 移动端常见特效
+
+#### classList属性
+
+classList属性是HTML5新增的一个属性，返回元素的类名。IE10以上版本支持。
+
+
+
+**常用方法：**
+
+```js
+// 添加类：
+element.classList.add('类名');// 是在后面追加类名不会覆盖以前的类名
+
+// 删除类：
+element.classList.remove('类名');
+
+// 切换类：
+element.classList.toggle('类名'); // 如果有当前类名则去掉，如果没有则
+```
+

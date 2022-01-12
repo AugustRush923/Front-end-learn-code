@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            content: "";
+            display: table;
+            /*触发BFC BFC可以清除浮动*/
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        .focus {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .focus ul {
+            width: 500%;
+            position: absolute;
+            top: 0;
+            left: -100%;
+            z-index: -1;
+        }
+
+        .focus img {
+            width: 400px;
+            height: 400px;
+            float: left;
+        }
+
+        .circle {
+            width: 100px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+        }
+
+        .circle li {
+            width: 8px;
+            height: 8px;
+            margin: 8px 10px;
+            background-color: #fff;
+            border-radius: 2px;
+            /* float: left; */
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .circle .current {
+            width: 33px;
+            margin: 7px 0;
+            background-color: salmon;
+            border-radius: 8px;
+            transition: all .3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="focus clearfix">
+        <ul>
+            <!-- <li><img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg"
+                    alt=""></li> -->
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg"
+                    alt=""></li>
+            <!-- <li><img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li> -->
+        </ul>
+        <div class="circle">
+            <ol>
+                <!-- <li class="current"></li>
+                <li></li>
+                <li></li> -->
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        var focus = document.querySelector('.focus');
+        var ul = focus.children[0];
+        var circle = document.querySelector('.circle');
+        var ol = circle.children[0];
+        var index = 0;
+        var ulWidth = focus.offsetWidth;
+
+        for (let i = 0; i < ul.children.length; i++) {
+            var li = document.createElement('li');
+            ol.appendChild(li);
+        };
+
+        ul.appendChild(ul.children[0].cloneNode(true));
+        ul.insertBefore(ul.children[2].cloneNode(true), ul.children[0]); 
+        ol.children[0].className = 'current';
+
+        var timer = setInterval(function () {
+            index++;
+            ul.style.transition = 'all .3s';
+            ul.style.transform = `translateX(${-ulWidth * index}px)`;
+        }, 2000);
+
+        ul.addEventListener('transitionend', function () {
+            // console.log(index);
+            if (index >= 3) {
+                index = 0;
+                ul.style.transition = 'none';
+                ul.style.transform = `translateX(${-ulWidth * index}px)`;
+            }
+            if (index == -1) {
+                index = 2;
+                ul.style.transition = 'none';
+                ul.style.transform = `translateX(${-ulWidth * index}px)`;
+            }
+            ol.querySelector('.current').classList.remove('current');
+            ol.children[index].classList.add('current');
+        });
+
+
+    </script>
+</body>
+
+</html>
