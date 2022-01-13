@@ -110,42 +110,47 @@
     </div>
 
     <script>
-        var focus = document.querySelector('.focus');
-        var ul = focus.children[0];
-        var circle = document.querySelector('.circle');
-        var ol = circle.children[0];
-        var index = 0;
-        var ulWidth = focus.offsetWidth;
+        // 1. 获取元素
+        var focus = document.querySelector('.focus'); // 轮播图div
+        var ul = focus.children[0]; // 子项第一个为ul
+        var circle = document.querySelector('.circle'); // 小圆点div
+        var ol = circle.children[0]; // 子项第一个为ol
+        var index = 0;  // 定义index控制小圆点
+        var ulWidth = focus.offsetWidth; // 获取轮播图div盒子宽度
 
+        // 2. 动态添加小圆点
         for (let i = 0; i < ul.children.length; i++) {
-            var li = document.createElement('li');
-            ol.appendChild(li);
+            var li = document.createElement('li'); // 创建一个li标签
+            ol.appendChild(li); // 把li追加到ol里
         };
 
-        ul.appendChild(ul.children[0].cloneNode(true));
-        ul.insertBefore(ul.children[2].cloneNode(true), ul.children[0]); 
-        ol.children[0].className = 'current';
+        ul.appendChild(ul.children[0].cloneNode(true)); // 复制ul子项第一个li并加到ul的后面
+        ul.insertBefore(ul.children[2].cloneNode(true), ul.children[0]); // 复制ul子项第三个li 并插入到第一项的前面
+        ol.children[0].className = 'current'; // 给第一个小圆点加类名
 
+        // 3. 定时器
         var timer = setInterval(function () {
             index++;
             ul.style.transition = 'all .3s';
             ul.style.transform = `translateX(${-ulWidth * index}px)`;
         }, 2000);
 
+        // 4. 监听事件 transitionend：当过渡结束时监听
         ul.addEventListener('transitionend', function () {
             // console.log(index);
-            if (index >= 3) {
+            // 无缝滚动
+            if (index >= 3) { // 当index大于等于3时，最后一张后就没了，所以将index归0从新开始
                 index = 0;
                 ul.style.transition = 'none';
                 ul.style.transform = `translateX(${-ulWidth * index}px)`;
             }
-            if (index == -1) {
+            if (index == -1) { // 当index小于0时，第一张前面就没了，所以将index设置为最后一张
                 index = 2;
                 ul.style.transition = 'none';
                 ul.style.transform = `translateX(${-ulWidth * index}px)`;
             }
-            ol.querySelector('.current').classList.remove('current');
-            ol.children[index].classList.add('current');
+            ol.querySelector('.current').classList.remove('current'); // 先把所有有current类名的标签去掉类名（排它思想）
+            ol.children[index].classList.add('current'); // 根据index设置ol下的li加current标签
         });
 
 
