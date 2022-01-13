@@ -6507,3 +6507,58 @@ element.classList.remove('类名');
 element.classList.toggle('类名'); // 如果有当前类名则去掉，如果没有则
 ```
 
+### 本地存储
+
+随着互联网的快速发展，基于网页的应用越来越普遍，同时也变的越来越复杂，为了满足各种各样的需求，会经常性的在本地存储大量的数据，HTML5规范提出了相关解决方案。
+
+**本地存储特性**
+
+1. 数据存储在用户浏览器中
+
+2. 设置、读取方便、甚至页面刷新不会丢失数据
+
+3. 容量较大，sessionStorage约5M、localStorage约20M
+
+3. 只能存储字符串，可以将对象JSON.stringify()编码后存储
+
+#### window.sessionStorage
+
+**sessionStorage特性**
+
+1. 生命周期为关闭浏览器窗口
+
+2. 在同一个窗口（页面）下数据可以共享
+
+3. 以键值对的形式存储使用
+
+##### 存储数据
+
+语法：
+
+```js
+sessionStorage.setItem(key, value);
+```
+
+##### 获取数据
+
+语法：
+
+```js
+sessionStorage.getItem(key);
+```
+
+##### 删除数据
+
+语法：
+
+```js
+sessionStorage.removeItem(key);
+```
+
+##### 删除所有数据
+
+语法：
+
+```js
+sessionStorage.clear();
+```
