@@ -45,7 +45,7 @@
             position: absolute;
             top: 0;
             left: -100%;
-            z-index: -1;
+            /* z-index: -1; */
         }
 
         .focus img {
@@ -153,7 +153,49 @@
             ol.children[index].classList.add('current'); // 根据index设置ol下的li加current标签
         });
 
+        // 5. 手指拖动移动轮播图
+        var flag = false; // 节流阀
+        var mouseX = 0;
+        var moveX = 0;
+        ul.addEventListener('touchstart', function (event) {
+            mouseX = event.targetTouches[0].pageX; // 获取手指当前在盒子内的坐标
+            clearInterval(timer); // 清除定时器
+        })
+        ul.addEventListener('touchmove', function (event) {
+            moveX = event.targetTouches[0].pageX - mouseX; // 获取手指在当前盒子内移动的距离
+            // 移动盒子：盒子原来的位置 + 手指移动的位置
+            var translatex = -(index * ulWidth) + moveX;
+            ul.style.transition = 'none'; // 手指拖动的时候，不需要动画效果，所以取消过渡效果
+            ul.style.transform = `translateX(${translatex}px)`;
+            flag = true;
+        })
 
+        // 6. 手指离开根据条件回弹 or 播放上一张/下一张
+        ul.addEventListener('touchend', function (event) {
+            if (flag) {
+                if (Math.abs(moveX) < 50) {
+                    ul.style.transform = `translateX(${-(index * ulWidth)}px)`;
+                }
+                if (Math.abs(moveX) > 50) {
+                    if (moveX < 0) {
+                        index++;
+                        console.log("播放下一张");
+                    }
+                    if (moveX > 0) {
+                        index--;
+                        console.log("播放上一张");
+                    }
+                    ul.style.transition = 'all .3s';
+                    ul.style.transform = `translateX(${-(ulWidth * index)}px)`;
+                }
+                flag = false;
+            }
+            timer = setInterval(function () {
+                index++;
+                ul.style.transition = 'all .3s';
+                ul.style.transform = `translateX(${-ulWidth * index}px)`;
+            }, 2000);
+        })
     </script>
 </body>
 
