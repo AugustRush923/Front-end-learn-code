@@ -6562,3 +6562,45 @@ sessionStorage.removeItem(key);
 ```js
 sessionStorage.clear();
 ```
+
+#### window.localStorage
+
+**localStorage特性**
+
+1. 生命周期永久生效，除非手动删除 否则关闭页面也会存在
+
+2. 可以多窗口（页面）共享（同一浏览器可以共享）
+
+3. 以键值对的形式存储使用
+
+##### 存储数据
+
+语法：
+
+```js
+localStorage.setItem(key, value);
+```
+
+##### 获取数据
+
+语法：
+
+```js
+localStorage.getItem(key);
+```
+
+##### 删除数据
+
+语法：
+
+```js
+localStorage.removeItem(key);
+```
+
+##### 删除所有数据
+
+语法：
+
+```js
+localStorage.clear();
+```
