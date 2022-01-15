@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="content" id="content">
+    <button class="add" type="button">新增数据</button>
+    <button class="get" type="button">获取数据</button>
+    <button class="delete" type="button">删除数据</button>
+    <button class="deleteAll" type="button">删除所有数据</button>
+
+    <script>
+        var content = document.querySelector('#content');
+        var addButton = document.querySelector('.add');
+        var getButton = document.querySelector('.get');
+        var delButton = document.querySelector('.delete');
+        var delAllButton = document.querySelector('.deleteAll');
+        addButton.addEventListener('click', function () {
+            // console.log(content.value)
+            sessionStorage.setItem('uname', content.value);
+        })
+
+        getButton.addEventListener('click', function () {
+            console.log(sessionStorage.getItem('uname'));
+        })
+
+        delButton.addEventListener('click', function () {
+            sessionStorage.removeItem('uname');
+        })
+        delAllButton.addEventListener('click', function () {
+            sessionStorage.clear();
+        })
+    </script>
+</body>
+</html>
