@@ -276,7 +276,18 @@
                 selectArr[i].checked = $(this).prop("checked");
             }
         });
-        // TODO
+        selectArr.click(function () {
+            var flag = true;
+            for (let i = 0; i < selectArr.length; i++) {
+                if (!selectArr[i].checked) {
+                    flag = false;
+                    break;
+                }
+            }
+            allPress.attr('checked', flag)
+        })
+
+
 
         var tabArr = document.querySelector('.tab_list').querySelectorAll('li');
         var itemArr = document.querySelector('.tab_content').querySelectorAll('.item');
