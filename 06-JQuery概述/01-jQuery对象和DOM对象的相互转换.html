@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <div></div>
+
+    <ul>
+        <li>1111111111111111</li>
+        <li>2222222222222222</li>
+        <li>3333333333333333</li>
+        <li>4444444444444444</li>
+        <li>5555555555555555</li>
+        <li>6666666666666666</li>
+        <li>7777777777777777</li>
+        <li>8888888888888888</li>
+        <li>9999999999999999</li>
+        <li>0000000000000000</li>
+    </ul>
+    <script>
+        // DOM对象 --> jQuery对象
+        // var div = document.querySelector('div');
+        // var jQueryDiv = $(div);
+        // console.dir(jQueryDiv);
+
+        // jQuery对象 --> DOM对象
+        var jQueryDiv = $("div");
+        var div = jQueryDiv[0];
+        console.dir(div);
+
+        // 隔行变色
+        var liArr = $('li');
+        var li = null;
+        console.log(liArr);
+        for (let i = 0; i < liArr.length; i++) {
+            if (i % 2 === 0) {
+                li = liArr[i];
+                li.style.backgroundColor = 'pink';
+            }else {
+                liArr[i].style.backgroundColor = 'skyblue';
+            }
+        }
+    </script>
+</body>
+
+</html>

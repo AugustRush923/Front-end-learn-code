@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .huanfu ul li {
+            float: left;
+        }
+
+        .huanfu {
+            width: 800px;
+            height: 200px;
+            background-color: hotpink;
+            margin: 50px auto;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+        }
+
+        body {
+            background: url('https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg');
+        }
+
+        .selectAll {
+            width: 500px;
+            margin: 50px auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 500px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .tab {
+            width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+        }
+
+        .tab_list ul li {
+            float: left;
+            height: 39px;
+            line-height: 39px;
+            padding: 0 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tab_list {
+            height: 50px;
+        }
+
+        .tab_list .current {
+            background-color: #c81623;
+            color: #fff;
+        }
+
+        .item {
+            display: none;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <button>配置一</button>
+    <button>配置二</button>
+    <button>配置三</button>
+    <button>配置四</button>
+    <button>配置五</button>
+
+    <div class="huanfu">
+        <ul>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg"
+                    alt=""></li>
+        </ul>
+    </div>
+
+    <div class="selectAll">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="" id=""></th>
+                    <th>商品</th>
+                    <th>价格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>iPhone 13</td>
+                    <td>6799</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>iPhone 12</td>
+                    <td>5799</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>iPhone 11</td>
+                    <td>4799</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后保障</li>
+                <li>商品评价</li>
+                <li>手机社区</li>
+            </ul>
+        </div>
+        <div class="tab_content">
+            <class class="item" style="display: block;">商品介绍模块</class>
+            <class class="item">规格与包装模块</class>
+            <class class="item">售后保障模块</class>
+            <class class="item">商品评价模块</class>
+            <class class="item">手机社区模块</class>
+        </div>
+    </div>
+
+    <script>
+        /*
+        // 获取当前所有按钮的数组
+        var btnArr = document.querySelectorAll('button');
+        // var btnArr = document.getElementsByTagName('button');
+
+        // 遍历数组获取单个按钮
+        for (let i = 0; i < btnArr.length; i++) {
+            btnArr[i].onclick = function () {
+                // 清除所有按钮当前样式
+                for (let i = 0; i < btnArr.length; i++) {
+                    btnArr[i].style.backgroundColor = '';
+                }
+                // 给当前元素设置样式
+                this.style.background = 'pink';
+            }
+        }*/
+        var btnArr = $('button');
+        // 隐式迭代
+        btnArr.click(function () {
+            // 清除所有按钮当前样式
+            $(this).siblings('button').css('backgroundColor', '');
+
+            // 给当前元素设置样式
+            $(this).css('backgroundColor', 'pink');
+        });
+
+        /*
+        // 换肤效果
+        // var pressArr = document.querySelectorAll('.huanfu ul li img');
+        var pressArr = document.querySelector('.huanfu').querySelector('ul').querySelectorAll('img');
+
+        for (let i = 0; i < pressArr.length; i++) {
+            pressArr[i].onclick = function () {
+                document.querySelector('body').style.backgroundImage = 'url("' + this.src + '")';
+                // document.body.style.backgroundImage = 'url("' + this.src + '")';
+            }
+        }
+        */
+        var pressArr = $('.huanfu img');
+        pressArr.click(function () {
+            $('body').css('backgroundImage', `url(${$(this)[0].src})`);
+        });
+
+        /*
+        // 全选
+        var allPress = document.querySelector('thead input');
+        var selectArr = document.querySelectorAll('tbody input');
+
+        allPress.onclick = function () {
+            for (let i = 0; i < selectArr.length; i++) {
+                selectArr[i].checked = this.checked;
+            }
+        }
+        // allPress.onclick = function () {
+        //     if (allPress.checked) {
+        //         for (let i = 0; i < selectArr.length; i++) {
+        //             selectArr[i].checked = true;
+        //         }
+        //         return;
+        //     }
+        //     for (let i = 0; i < selectArr.length; i++) {
+        //         selectArr[i].checked = false;
+        //     }
+        // }
+
+        // function allSelect(checkedArr) {
+        //     for (let i = 0; i < checkedArr.length; i++) {
+        //         if (checkedArr[i].checked === false) {
+        //             return false;
+        //         }
+        //     }
+        //     return true;
+        // }
+
+        // for (let i = 0; i < selectArr.length; i++) {
+        //     selectArr[i].onclick = function () {
+        //         var status = allSelect(selectArr);
+        //         console.log(status);
+        //         console.log(typeof status);
+        //         if (status === true) {
+        //             allPress.checked = true;
+        //         } else {
+        //             allPress.checked = false;
+        //         }
+        //     }
+        // }
+
+        for (let i = 0; i < selectArr.length; i++) {
+            selectArr[i].onclick = function () {
+                var flag = true;
+                for (let i = 0; i < selectArr.length; i++) {
+                    console.log(selectArr[i].checked);
+                    if (!selectArr[i].checked) {
+                        flag = false;
+                        break;
+                    }
+                }
+                allPress.checked = flag;
+            }
+        }
+        */
+
+        var allPress = $('.selectAll thead input');
+        var selectArr = $('.selectAll tbody input');
+        allPress.click(function () {
+            for (let i = 0; i < selectArr.length; i++) {
+                selectArr[i].checked = $(this).prop("checked");
+            }
+        });
+        // TODO
+
+        var tabArr = document.querySelector('.tab_list').querySelectorAll('li');
+        var itemArr = document.querySelector('.tab_content').querySelectorAll('.item');
+
+        for (let i = 0; i < tabArr.length; i++) {
+            tabArr[i].onclick = function () {
+                for (let i = 0; i < tabArr.length; i++) {
+                    tabArr[i].className = '';
+                    itemArr[i].style.display = 'none';
+                }
+                tabArr[i].className = 'current';
+                itemArr[i].style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>
