@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 150px;
+            height: 400px;
+            background-color: pink;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>切换</button>
+    <div></div>
+    <script>
+        var btnArr = $('button');
+        var div = $('div');
+
+        btnArr.eq(0).click(function () {
+            div.show(1000, 'linear');
+        })
+        btnArr.eq(1).click(function () {
+            div.hide(1000, 'swing');
+        })
+        btnArr.eq(2).click(function () {
+            div.toggle(1000, 'linear', function() {
+                alert(1);
+            });
+        })
+    </script>
+</body>
+
+</html>
