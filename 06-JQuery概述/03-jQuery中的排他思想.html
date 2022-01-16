@@ -208,10 +208,10 @@
         tabArr.click(function() {
             var index = $(this).index();
             
-            $(this).siblings('li').attr('class', '');
+            $(this).siblings().removeClass('current');
             $(this).addClass('current');
-            $(itemArr[index]).siblings('span').hide();
-            $(itemArr[index]).show();
+            $(itemArr).eq(index).siblings().hide();
+            $(itemArr).eq(index).show();
         })
     </script>
 </body>
