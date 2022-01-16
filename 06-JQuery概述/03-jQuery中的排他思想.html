@@ -158,31 +158,15 @@
             </ul>
         </div>
         <div class="tab_content">
-            <class class="item" style="display: block;">商品介绍模块</class>
-            <class class="item">规格与包装模块</class>
-            <class class="item">售后保障模块</class>
-            <class class="item">商品评价模块</class>
-            <class class="item">手机社区模块</class>
+            <span class="item" style="display: block;">商品介绍模块</span>
+            <span class="item">规格与包装模块</span>
+            <span class="item">售后保障模块</span>
+            <span class="item">商品评价模块</span>
+            <span class="item">手机社区模块</span>
         </div>
     </div>
 
     <script>
-        /*
-        // 获取当前所有按钮的数组
-        var btnArr = document.querySelectorAll('button');
-        // var btnArr = document.getElementsByTagName('button');
-
-        // 遍历数组获取单个按钮
-        for (let i = 0; i < btnArr.length; i++) {
-            btnArr[i].onclick = function () {
-                // 清除所有按钮当前样式
-                for (let i = 0; i < btnArr.length; i++) {
-                    btnArr[i].style.backgroundColor = '';
-                }
-                // 给当前元素设置样式
-                this.style.background = 'pink';
-            }
-        }*/
         var btnArr = $('button');
         // 隐式迭代
         btnArr.click(function () {
@@ -193,85 +177,15 @@
             $(this).css('backgroundColor', 'pink');
         });
 
-        /*
-        // 换肤效果
-        // var pressArr = document.querySelectorAll('.huanfu ul li img');
-        var pressArr = document.querySelector('.huanfu').querySelector('ul').querySelectorAll('img');
-
-        for (let i = 0; i < pressArr.length; i++) {
-            pressArr[i].onclick = function () {
-                document.querySelector('body').style.backgroundImage = 'url("' + this.src + '")';
-                // document.body.style.backgroundImage = 'url("' + this.src + '")';
-            }
-        }
-        */
         var pressArr = $('.huanfu img');
         pressArr.click(function () {
             $('body').css('backgroundImage', `url(${$(this)[0].src})`);
         });
 
-        /*
-        // 全选
-        var allPress = document.querySelector('thead input');
-        var selectArr = document.querySelectorAll('tbody input');
-
-        allPress.onclick = function () {
-            for (let i = 0; i < selectArr.length; i++) {
-                selectArr[i].checked = this.checked;
-            }
-        }
-        // allPress.onclick = function () {
-        //     if (allPress.checked) {
-        //         for (let i = 0; i < selectArr.length; i++) {
-        //             selectArr[i].checked = true;
-        //         }
-        //         return;
-        //     }
-        //     for (let i = 0; i < selectArr.length; i++) {
-        //         selectArr[i].checked = false;
-        //     }
-        // }
-
-        // function allSelect(checkedArr) {
-        //     for (let i = 0; i < checkedArr.length; i++) {
-        //         if (checkedArr[i].checked === false) {
-        //             return false;
-        //         }
-        //     }
-        //     return true;
-        // }
-
-        // for (let i = 0; i < selectArr.length; i++) {
-        //     selectArr[i].onclick = function () {
-        //         var status = allSelect(selectArr);
-        //         console.log(status);
-        //         console.log(typeof status);
-        //         if (status === true) {
-        //             allPress.checked = true;
-        //         } else {
-        //             allPress.checked = false;
-        //         }
-        //     }
-        // }
-
-        for (let i = 0; i < selectArr.length; i++) {
-            selectArr[i].onclick = function () {
-                var flag = true;
-                for (let i = 0; i < selectArr.length; i++) {
-                    console.log(selectArr[i].checked);
-                    if (!selectArr[i].checked) {
-                        flag = false;
-                        break;
-                    }
-                }
-                allPress.checked = flag;
-            }
-        }
-        */
-
         var allPress = $('.selectAll thead input');
         var selectArr = $('.selectAll tbody input');
         allPress.click(function () {
+            console.log(selectArr);
             for (let i = 0; i < selectArr.length; i++) {
                 selectArr[i].checked = $(this).prop("checked");
             }
@@ -285,23 +199,20 @@
                 }
             }
             allPress.attr('checked', flag)
+            console.log(flag);
         })
 
+        var tabArr = $('.tab_list li');
+        var itemArr = $('.item');
 
-
-        var tabArr = document.querySelector('.tab_list').querySelectorAll('li');
-        var itemArr = document.querySelector('.tab_content').querySelectorAll('.item');
-
-        for (let i = 0; i < tabArr.length; i++) {
-            tabArr[i].onclick = function () {
-                for (let i = 0; i < tabArr.length; i++) {
-                    tabArr[i].className = '';
-                    itemArr[i].style.display = 'none';
-                }
-                tabArr[i].className = 'current';
-                itemArr[i].style.display = 'block';
-            }
-        }
+        tabArr.click(function() {
+            var index = $(this).index();
+            
+            $(this).siblings('li').attr('class', '');
+            $(this).addClass('current');
+            $(itemArr[index]).siblings('span').hide();
+            $(itemArr[index]).show();
+        })
     </script>
 </body>
 
