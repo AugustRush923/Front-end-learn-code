@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .wrap {
+            margin: 100px auto;
+            width: 1000px;
+            height: 400px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        .wrap li {
+            float: left;
+            width: 200px;
+            height: 100%;
+        }
+
+        .wrap li img {
+            width: 400px;
+            height: 400px;
+            display: block;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202106/06/20210606122325_68ec7.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202107/16/20210716171320_6bbbd.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202105/20/20210520205826_2a388.thumb.400_0.jpeg"
+                    alt=""></li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202107/18/20210718184859_7a8a9.thumb.400_0.jpg" alt="">
+            </li>
+            <li><img src="https://c-ssl.duitang.com/uploads/blog/202110/31/20211031071601_24124.thumb.400_0.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var liArr = $(".wrap").find('li');
+        liArr.hover(function () {
+            $(this).siblings().stop().animate({
+                width: 150,
+            }, 600)
+            $(this).stop().animate({
+                width: 400,
+            }, 600)
+        }, function () {
+            $(this).stop().animate({
+                width: 200,
+            }, 600).siblings().stop().animate({
+                width: 200,
+            }, 600)
+        })
+    </script>
+</body>
+
+</html>

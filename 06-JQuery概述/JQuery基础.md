@@ -567,9 +567,22 @@ fadeTo(speed, opacity, [easing], [fn])
 
 
 
+#### 自定义动画animate
+
+**语法：**
+
+```js
+animate(params, [speed], [easing], [fn])
+```
 
 
 
+**参数：**
+
+1.   params：想要更改的样式属性，以对象形式传递，必须值。
+2.   speed：三种预订速度之一的字符串('show', 'normal', 'fast')或表示动画时长的**毫秒数值**。
+3.   easing： 用来指定切换效果，默认是"swing", 可用参数“linear”。
+4.   fn：回调函数，在动画完成时执行的函数，每个元素执行一次。
 
 
 
