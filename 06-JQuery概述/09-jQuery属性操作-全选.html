@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .selectAll {
+            width: 500px;
+            margin: 50px auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 500px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <div class="selectAll">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="" id=""></th>
+                    <th>商品</th>
+                    <th>价格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>iPhone 13</td>
+                    <td>6799</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>iPhone 12</td>
+                    <td>5799</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>iPhone 11</td>
+                    <td>4799</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var checkall = $('thead').find("input");
+        console.log(checkall);
+        var checkbox = $("tbody").find("input");
+        console.log(checkbox);
+
+        checkall.click(function () {
+            var status = $(this).prop("checked");
+            // 不用循环 隐式迭代
+            checkbox.prop("checked", status);
+        })
+
+        checkbox.change(function () { 
+            if ($("tbody input:checked").length === checkbox.length) {
+                checkall.prop("checked", true);
+            }else {
+                checkall.prop("checked", false);
+            }
+        })
+    </script>
+</body>
+
+</html>
