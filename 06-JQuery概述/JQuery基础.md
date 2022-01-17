@@ -805,4 +805,14 @@ element.html("") // 情况匹配的元素内容
 
 
 
-### jQuery尺寸、位置操作
+### jQuery尺寸操作
+
+| 语法                               | 用法                                                 |
+| ---------------------------------- | ---------------------------------------------------- |
+| width()/height()                   | 取得匹配元素宽度和高度值 只算width/height            |
+| innerWidth()/innerHeight()         | 取得匹配元素宽度和高度值 包含padding                 |
+| outerWidth()/outerHeight()         | 取得匹配元素宽度和高度值 包含padding、border         |
+| outerWidth(true)/outerHeight(true) | 取得匹配元素宽度和高度值 包含padding、border、margin |
+
+*   以上参数为空，则是获取相应值，返回的是数字型。
+*   如果参数为数字，则是修改相应值。参数可以不必写单位。
