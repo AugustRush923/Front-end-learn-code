@@ -695,40 +695,113 @@ $(element).text("content"); // 设置文本内容
 ```js
 $(element).val(); // 获取表单的值
  
-$(element).val("content"); /
+$(element).val("content"); // 设置表单的值
 ```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### jQuery元素操作
+
+主要是遍历、创建、添加、删除元素操作。
+
+
+
+#### 遍历元素
+
+jQuery隐式迭代是对同一类元素做了同样的操作。如果想要给同一类元素做不同操作，就需要用到遍历。
+
+
+
+**语法1：**
+
+```js
+$(element).each(function(index, DOMElement) {
+    
+})
+```
+
+1. each()方法遍历匹配的每一个元素。主要用DOM处理。
+2. 参数：index是每个元素的索引号；DOMElement是每个**DOM元素对象**，不是jQuery对象
+
+
+
+**语法2：**
+
+```js
+$.each(object, function(index, element) {
+    
+})
+```
+
+1. $.each()方法可用于遍历任何对象。主要用于数据处理，比如数组，对象
+2. 参数：index是每个元素的索引号；element遍历内容
+
+
+
+#### 创建元素
+
+**语法：**
+
+```js
+$("<标签名></标签名>");
+```
+
+
+
+#### 添加元素
+
+**内部添加**
+
+```js
+element.append("内容");
+```
+
+append()方法把内容放入匹配元素内部最后面，类似原生appendChild。
+
+
+
+```js
+element.prepend("内容");
+```
+
+prepend()方法把内容放入匹配元素内部最前面，类似原生insertBefore(0)
+
+
+
+**外部添加**
+
+```js
+element.after("内容");
+```
+
+把内容放入目标元素后面
+
+
+
+```js
+element.before("内容");
+```
+
+把内容放入目标元素前面
+
+
+
+**区别**
+
+1. 内部添加元素，生成之后，它们是父子关系。
+2. 外部添加元素，生成之后，它们是兄弟关系。
+
+
+
+#### 删除元素
+
+```js
+element.remove() //删除匹配的元素（本身）
+
+element.empty() // 删除匹配的元素集合中所有的子节点
+
+element.html("") // 情况匹配的元素内容
+```
 
 
 
