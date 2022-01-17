@@ -660,6 +660,72 @@ $(element).data("name"); // 向被选中元素获取数据
 
 ### jQuery文本属性值
 
+主要针对元素的内容还有表单的值的操作。
+
+
+
+#### 普通元素内容
+
+通过`html()` [相当于原生innerHTML]方法来获取标签元素内容
+
+```js
+$(element).html(); // 获取元素内容
+
+$(element).html("content");  // 设置元素内容
+```
+
+
+
+#### 普通元素文本内容
+
+通过`text()`[相当于原生innerText]方法来获取标签文本内容
+
+```js
+$(element).text(); // 获取文本内容
+
+$(element).text("content"); // 设置文本内容
+```
+
+
+
+#### 表单的值
+
+通过`val()`[相当于原生value]方法来获取表单中的值
+
+```js
+$(element).val(); // 获取表单的值
+ 
+$(element).val("content"); /
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### jQuery元素操作
