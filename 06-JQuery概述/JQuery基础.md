@@ -860,3 +860,109 @@ position方法只能获取坐标不能设置坐标。
 
 scrollTop()方法设置或返回被选元素被卷去的头部。
 
+
+
+## jQuery事件
+
+### jQuery事件注册
+
+**单个事件注册**
+
+```js
+$(element).event(function() {})
+```
+
+
+
+事件名称和原生基本一致。
+
+比如mouseover、mouseout、blur、focus、change、keydown、keyup、resize、scroll等
+
+
+
+#### jQuery事件处理
+
+##### 事件处理on()绑定事件
+
+on()方法在匹配元素上绑定一个或多个事件的时间处理函数
+
+
+
+**语法**：
+
+```js
+$(element).on(events, [selector], fn)
+```
+
+**参数说明**：
+
+1. events：一个或多个用**空格**分隔的事件类型。
+2. selector：元素的子元素选择器。
+3. fn：回调函数 即绑定在元素身上的侦听函数。
+
+
+
+**on()方法优势：**
+
+1. 可以绑定多个事件，多个处理事件处理程序
+
+   ```js
+   $("div").on({
+       mouseover: function() {},
+       mouseout: function() {},
+       click: function() {}
+   })
+   ```
+
+   如果事件处理程序相同
+
+   ```js
+   $("div").on("mouseover mouseout", function() {
+       // 当前两个events共同执行同一个function
+   })
+   ```
+
+2. 可以事件委派操作。事件委派的定义就是，把原来加给子元素身上的事件绑定在父元素身上，就是把事件委派给父元素。
+
+   ```js
+   $("ul").on("click", "li", function() {
+       alert(1);
+   }) // click是绑定在ul身上的，但是触发的对象是ul里面的小li
+   ```
+
+3. on()可以给未来动态创建的元素绑定事件
+
+
+
+##### off()解绑事件
+
+off()方法可以移出通过on()方法添加的事件处理程序。
+
+
+
+**语法：**
+
+```js
+$(element).off([events], [selectors]);
+```
+
+
+
+例：
+
+```js
+$("div").off(); //解绑div元素所有事件处理程序
+
+$("div").off("click"); //解绑div元素上面的点击事件 
+
+$("ul").off("click", "li"); // 解绑事件委托
+```
+
+
+
+如果有的事件只想触发一次，可以使用`one()`来绑定事件。
+
+```js
+$(element).one("ev", function() {})
+```
+
