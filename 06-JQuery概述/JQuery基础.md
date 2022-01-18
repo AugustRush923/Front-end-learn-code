@@ -1,6 +1,6 @@
 
 
-### jQuery
+# jQuery
 
 ## jQuery的概念
 
@@ -880,9 +880,9 @@ $(element).event(function() {})
 
 
 
-#### jQuery事件处理
+### jQuery事件处理
 
-##### 事件处理on()绑定事件
+#### 事件处理on()绑定事件
 
 on()方法在匹配元素上绑定一个或多个事件的时间处理函数
 
@@ -934,7 +934,7 @@ $(element).on(events, [selector], fn)
 
 
 
-##### off()解绑事件
+#### off()解绑事件
 
 off()方法可以移出通过on()方法添加的事件处理程序。
 
@@ -963,6 +963,79 @@ $("ul").off("click", "li"); // 解绑事件委托
 如果有的事件只想触发一次，可以使用`one()`来绑定事件。
 
 ```js
-$(element).one("ev", function() {})
+$(element).one("event", function() {})
 ```
+
+
+
+#### jQuery自动触发事件
+
+有些事件希望自动触发，比如轮播图自动播放功能跟点击右侧按钮一致。可以利用定时器自动触发右侧按钮点击事件，不必鼠标点击触发。
+
+
+
+```js
+$(element).[event](); // 第一种简写
+
+$(element).trigger("[event]"); //第二种自动触发事件
+
+$(element).triggerHandler("[event]"); // 第三种自动触发事件
+```
+
+
+
+**区别：**
+
+1. 前两种方法**会触发元素的默认行为**
+2. triggerHandler**不会触发元素的默认行为**
+
+
+
+### jQuery事件对象
+
+事件被触发，就会有事件对象的产生。当一个元素事件触发时，在回调函数上会接收到event参数。
+
+
+
+## jQuery其他方法
+
+
+
+### jQuery对象拷贝
+
+如果想要把某个对象拷贝（合并）给另外一个对象使用，此时可以使用`extend()`方法
+
+
+
+**语法：**
+
+```js
+$.extend([deep], target, object1, [objectN]);
+```
+
+**参数解读：**
+
+1. deep：如果设定为true为深拷贝，默认为false 浅拷贝
+2. target：要拷贝的目标对象
+3. object：待拷贝到target的对象
+
+
+
+```js
+$(function() {
+    var targetObj = {};
+    var obj = {
+        id: 1,
+        name: "august"
+    };
+    $.extend(targetObj, obj);
+})
+```
+
+
+
+**注意：**
+
+1. 会覆盖target里面原来的数据
+2. 浅拷贝是把被拷贝的对象**复杂数据类型中的地址**拷贝给目标对象，修改目标对象会影响被拷贝对象。
 
